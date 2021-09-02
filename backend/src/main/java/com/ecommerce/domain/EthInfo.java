@@ -1,6 +1,16 @@
 package com.ecommerce.domain;
 
+import jdk.jfr.Enabled;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "ETH_INFO")
+@Entity
 public class EthInfo {
+
+    @Id
     private String ethUrl;
     private String latestBlockNumber;
 

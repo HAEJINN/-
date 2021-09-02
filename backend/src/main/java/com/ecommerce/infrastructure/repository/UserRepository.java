@@ -31,6 +31,7 @@ public class UserRepository implements IUserRepository {
     public List<User> list() {
         StringBuilder sbSql =  new StringBuilder("SELECT * FROM users ");
         try {
+            System.out.println(sbSql);
             return this.jdbcTemplate.query(sbSql.toString(),
                     new Object[]{}, (rs, rowNum) -> UserFactory.create(rs));
         } catch (Exception e) {

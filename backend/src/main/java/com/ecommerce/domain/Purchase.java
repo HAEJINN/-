@@ -2,11 +2,15 @@ package com.ecommerce.domain;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
+@Table(name = "purchases")
+@Entity
 public class Purchase {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long purchaseId; // purchase Id get from contract
     private String state = PurchaseState.I.toString(); // I(Initial-purchased), P(Paid), S(sent), C(confirmed), X(cancelled)

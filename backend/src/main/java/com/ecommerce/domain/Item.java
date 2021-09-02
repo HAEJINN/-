@@ -2,11 +2,16 @@ package com.ecommerce.domain;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-public class Item
-{
+@Table(name = "items")
+@Entity
+public class Item {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
 	private String category;
