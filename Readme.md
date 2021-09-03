@@ -55,8 +55,8 @@
                     "eip150Block": 0,
                     "eip155Block": 0,
                     "eip158Block": 0,
-    								"byzantiumBlock": 0,
-    								"constantinopleBlock": 0
+    				"byzantiumBlock": 0,
+    				"constantinopleBlock": 0
             },
             "alloc": {
                     "0x7fd406124405DA943Def42d8F918F9ed06E45E51": {
