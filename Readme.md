@@ -1,5 +1,6 @@
 # Block Chain Sub1
 
+
 ## 1. 환경 설정
 
 - **VirtaulBox 설치**
@@ -29,6 +30,7 @@
     //eth1
     geth --networkid 921 --datadir ~/dev/eth_localdata --nodiscover --port 30303 --rpc --rpcport "8545" --maxpeers 2 --rpccorsdomain "*" console
     ```
+
 
 ## 2. 이더리움 계정 생성
 
@@ -77,6 +79,7 @@
 
     <img src="https://user-images.githubusercontent.com/59523147/131937788-59c9d040-e81f-45a0-ad3e-2df7e0cba399.png">
 
+
 ## 3. 이더리움 트랜잭션 생성
 
 - **트랜잭션 생성 및 전송**
@@ -100,6 +103,7 @@
     - 확인
 
     <img src="https://user-images.githubusercontent.com/59523147/131937582-2f9e7b64-d1de-4b31-80b0-ad24530bf9a2.png">
+
 
 ## 4. 스마트 컨트랙트 배포
 
