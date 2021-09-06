@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
-    public String handleException(Exception e){
+    public String handleException(Exception e) {
         return e.getMessage();
     }
 }

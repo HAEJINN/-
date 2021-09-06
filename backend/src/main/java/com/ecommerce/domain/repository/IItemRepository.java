@@ -5,18 +5,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface IItemRepository
-{
-	List<Item> list();
-	List<Item> getByUser(final long userId);
-	Item get(long id);
+public interface IItemRepository {
+    List<Item> list();
 
-	@Transactional
-	long create(Item item);
+    List<Item> getByUser(final long userId);
 
-	@Transactional
-	int update(Item item);
+    Item get(long id);
 
-	@Transactional
-	int delete(long id);
+    @Transactional
+    long create(Item item);
+
+    @Transactional
+    int update(Item item);
+
+    @Transactional
+    int delete(long id);
 }

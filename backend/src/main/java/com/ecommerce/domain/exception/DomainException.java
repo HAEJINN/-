@@ -8,17 +8,17 @@ public class DomainException extends RuntimeException {
         super();
     }
 
-    public DomainException(Throwable throwable, String errorMessage){
+    public DomainException(Throwable throwable, String errorMessage) {
         super(errorMessage, throwable);
         this.errorMessage = errorMessage;
     }
 
-    public DomainException(String errorMessage){
+    public DomainException(String errorMessage) {
         super(errorMessage);
         this.errorMessage = errorMessage;
     }
 
-    public DomainException(Throwable throwable){
+    public DomainException(Throwable throwable) {
         super(throwable);
     }
 

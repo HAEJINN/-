@@ -44,6 +44,7 @@ public class PurchaseController {
 
     /**
      * Purchase 등록
+     *
      * @param purchase
      * @return
      */
@@ -55,7 +56,8 @@ public class PurchaseController {
 
     /**
      * Purchase 상태 업데이트
-     * @param pid purchase id
+     *
+     * @param pid   purchase id
      * @param state purchase state
      * @return Item
      */
@@ -67,6 +69,7 @@ public class PurchaseController {
 
     /**
      * check deposit
+     *
      * @param pid purchase id*
      * @return Item
      */
@@ -78,14 +81,15 @@ public class PurchaseController {
 
     /**
      * 내가 판매한 거래 목록
+     *
      * @param id 판매자 id
      */
     @ApiOperation(value = "Fetch purchase list by seller's id")
     @RequestMapping(value = "/purchases/seller/{id}", method = RequestMethod.GET)
-    public List<PurchaseInfo> getSellerPurchases(@PathVariable int id){
+    public List<PurchaseInfo> getSellerPurchases(@PathVariable int id) {
         List<PurchaseInfo> list = this.purchaseService.getBySeller(id);
 
-        if (list == null || list.isEmpty() )
+        if (list == null || list.isEmpty())
             throw new EmptyListException("사용자가 판매한/판매 중인 거래가 없습니다.");
 
         return list;
@@ -93,14 +97,15 @@ public class PurchaseController {
 
     /**
      * 내가 구매한 거래 목록
+     *
      * @param id 구매자의 id
      */
     @ApiOperation(value = "Fetch purchase list by buyer's id")
     @RequestMapping(value = "/purchases/buyer/{id}", method = RequestMethod.GET)
-    public List<PurchaseInfo> getBuyerPurchases(@PathVariable int id){
+    public List<PurchaseInfo> getBuyerPurchases(@PathVariable int id) {
         List<PurchaseInfo> list = this.purchaseService.getByBuyer(id);
 
-        if (list == null || list.isEmpty() )
+        if (list == null || list.isEmpty())
             throw new EmptyListException("사용자 구매한/구매 중인 거래가 없습니다.");
 
         return list;
@@ -108,17 +113,18 @@ public class PurchaseController {
 
     /**
      * 구매 이력 조회
+     *
      * @param pid purchase id
      * @return List<Record> the list of the purchase records
      */
-	@ApiOperation(value = "Fetch record history of purchase_id")
-	@RequestMapping(value = "/purchases/history/{pid}", method = RequestMethod.GET)
-	public List<Record> getHistory(@PathVariable int pid){
+    @ApiOperation(value = "Fetch record history of purchase_id")
+    @RequestMapping(value = "/purchases/history/{pid}", method = RequestMethod.GET)
+    public List<Record> getHistory(@PathVariable int pid) {
         Purchase purchase = this.purchaseService.getByPurchaseId(pid);
         List<Record> records = this.purchaseRecordContractService.getHistory(purchase.getContractAddress());
-        if(records == null || records.isEmpty())
+        if (records == null || records.isEmpty())
             throw new EmptyListException("조회된 구매 이력이 없습니다.");
-		return records;
-	}
+        return records;
+    }
 
 }

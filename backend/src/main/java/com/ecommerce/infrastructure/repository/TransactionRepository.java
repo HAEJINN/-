@@ -28,7 +28,7 @@ public class TransactionRepository implements ITransactionRepository {
 
     @Override
     public List<Transaction> list() {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM transactions ");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM transactions ");
         try {
             return this.jdbcTemplate.query(sbSql.toString(),
                     new Object[]{}, (rs, rowNum) -> TransactionFactory.create(rs));
@@ -39,10 +39,10 @@ public class TransactionRepository implements ITransactionRepository {
 
     @Override
     public Transaction get(String hash) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM transactions WHERE hash=?");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM transactions WHERE hash=?");
         try {
             return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                    new Object[] { hash }, (rs, rowNum) -> TransactionFactory.create(rs) );
+                    new Object[]{hash}, (rs, rowNum) -> TransactionFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -51,12 +51,11 @@ public class TransactionRepository implements ITransactionRepository {
     }
 
     @Override
-    public List<Transaction> getByAddress(final String address)
-    {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM transactions WHERE from_hash=? OR to_hash=?");
+    public List<Transaction> getByAddress(final String address) {
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM transactions WHERE from_hash=? OR to_hash=?");
         try {
             return this.jdbcTemplate.query(sbSql.toString(),
-                                           new Object[] { address, address }, (rs, rowNum) -> TransactionFactory.create(rs) );
+                    new Object[]{address, address}, (rs, rowNum) -> TransactionFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {

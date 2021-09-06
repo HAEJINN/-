@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface IUserService {
     List<User> list();
+
     User get(long id);
+
     User get(String email);
 
     @Transactional

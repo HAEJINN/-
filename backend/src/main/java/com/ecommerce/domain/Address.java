@@ -38,13 +38,11 @@ public class Address {
         this.trans = trans;
     }
 
-    public BigInteger getTxCount()
-    {
+    public BigInteger getTxCount() {
         return txCount;
     }
 
-    public void setTxCount(final BigInteger txCount)
-    {
+    public void setTxCount(final BigInteger txCount) {
         this.txCount = txCount;
     }
 }

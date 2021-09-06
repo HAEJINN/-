@@ -7,8 +7,7 @@ import java.sql.SQLException;
 
 public class PurchaseFactory {
 
-    public static Purchase create(ResultSet rs) throws SQLException
-    {
+    public static Purchase create(ResultSet rs) throws SQLException {
         if (rs == null) return null;
         Purchase purchase = new Purchase();
         purchase.setId(rs.getLong("id"));

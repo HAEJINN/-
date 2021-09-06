@@ -29,7 +29,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> list() {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM users ");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM users ");
         try {
             return this.jdbcTemplate.query(sbSql.toString(),
                     new Object[]{}, (rs, rowNum) -> UserFactory.create(rs));
@@ -40,10 +40,10 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public User get(long id) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM users WHERE id=?");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM users WHERE id=?");
         try {
             return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                    new Object[] { id }, (rs, rowNum) -> UserFactory.create(rs) );
+                    new Object[]{id}, (rs, rowNum) -> UserFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -52,12 +52,11 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User get(final String email)
-    {
+    public User get(final String email) {
         StringBuilder sbSql = new StringBuilder("SELECT * FROM users WHERE email=?");
-        try{
+        try {
             return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                                                    new Object[] {email}, (rs, rowNum) -> UserFactory.create(rs) );
+                    new Object[]{email}, (rs, rowNum) -> UserFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -89,12 +88,12 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public int update(User user) {
-        StringBuilder sbSql =  new StringBuilder("UPDATE users ");
+        StringBuilder sbSql = new StringBuilder("UPDATE users ");
         sbSql.append("SET name=?, email=?, password=? ");
         sbSql.append("WHERE id=?");
         try {
             return this.jdbcTemplate.update(sbSql.toString(),
-                    new Object[] { user.getName(), user.getEmail(), user.getPassword(), user.getId() });
+                    new Object[]{user.getName(), user.getEmail(), user.getPassword(), user.getId()});
         } catch (Exception e) {
             throw new RepositoryException(e, e.getMessage());
         }
@@ -102,11 +101,11 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public int delete(long id) {
-        StringBuilder sbSql =  new StringBuilder("DELETE FROM users ");
+        StringBuilder sbSql = new StringBuilder("DELETE FROM users ");
         sbSql.append("WHERE id=?");
         try {
             return this.jdbcTemplate.update(sbSql.toString(),
-                    new Object[] { id });
+                    new Object[]{id});
         } catch (Exception e) {
             throw new RepositoryException(e, e.getMessage());
         }

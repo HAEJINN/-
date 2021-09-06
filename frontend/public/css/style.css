@@ -1,28 +1,28 @@
-@font-face{ 
-    font-family:'BPreplayExtended'; 
-    src:url('../fonts/BPreplayExtended.otf') format('otf'); 
-    font-weight: normal; 
-    font-style: normal; 
+@font-face {
+    font-family: 'BPreplayExtended';
+    src: url('../fonts/BPreplayExtended.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
 }
 
-@font-face{ 
-    font-family:'BPreplayExtended'; 
-    src:url('../fonts/BPreplayExtendedBold.otf'); 
-    font-weight: bold; 
-    font-style: normal; 
+@font-face {
+    font-family: 'BPreplayExtended';
+    src: url('../fonts/BPreplayExtendedBold.otf');
+    font-weight: bold;
+    font-style: normal;
 }
 
-@font-face{ 
-    font-family:'BPreplayExtended'; 
-    src:url('../fonts/BPreplayExtendedItalics.otf'); 
-    font-weight: normal; 
+@font-face {
+    font-family: 'BPreplayExtended';
+    src: url('../fonts/BPreplayExtendedItalics.otf');
+    font-weight: normal;
     font-style: italic;
 }
 
-@font-face{ 
-    font-family:'BPreplayExtended'; 
-    src:url('../fonts/BPreplayExtendedBoldItalics.otf'); 
-    font-weight: bold; 
+@font-face {
+    font-family: 'BPreplayExtended';
+    src: url('../fonts/BPreplayExtendedBoldItalics.otf');
+    font-weight: bold;
     font-style: italic;
 }
 
@@ -31,7 +31,7 @@ body {
     padding: 0;
     color: #293046;
     font-family: BPreplayExtended;
-    font-style: normal; 
+    font-style: normal;
     font-weight: normal;
 }
 
@@ -108,10 +108,12 @@ a {
     border: 1px solid #eaeaea;
     color: #354a67 !important;
 }
+
 .sub-nav .nav-item.nav-link:hover {
     background: #eaeaea;
     border: 1px solid #eaeaea;
 }
+
 .sub-nav .nav-item.nav-link.active {
     background: #354a67;
     border: 1px solid #354a67;
@@ -153,7 +155,7 @@ nav.bottom-pagination {
 }
 
 .work-list-item:hover {
-    text-decoration :none;
+    text-decoration: none;
     background: #f7f7f7;
 }
 
@@ -177,7 +179,7 @@ nav.bottom-pagination {
 }
 
 /* 폰트 변경 */
-.navbar { 
+.navbar {
     font-family: 'BPreplayExtended';
     font-weight: bold;
 }
@@ -188,21 +190,25 @@ nav.bottom-pagination {
     border-color: #238f08;
     border-radius: 5px;
 }
+
 #item-status-D {
     background: #fff3cd;
     border-color: #ffeeba;
     border-radius: 5px;
 }
+
 #item-status-C {
     background: #7cb0e0;
     border-color: #1a69b3;
     border-radius: 5px;
 }
+
 #item-status-X {
     background: rgb(235, 176, 176);
     border-color: red;
     border-radius: 5px;
 }
+
 #item-status-N {
     background: lightgray;
     border-color: gray;
