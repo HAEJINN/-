@@ -31,7 +31,7 @@ public class UserController {
     public List<User> list() {
         List<User> userList = userService.list();
 
-        if (userList == null || userList.isEmpty() )
+        if (userList == null || userList.isEmpty())
             throw new EmptyListException("NO DATA");
 
         return userList;

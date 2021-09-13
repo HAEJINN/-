@@ -35,7 +35,7 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     @Override
     public List<Purchase> list() {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM purchases");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM purchases");
         try {
             return this.jdbcTemplate.query(sbSql.toString(),
                     new Object[]{}, (rs, rowNum) -> PurchaseFactory.create(rs));
@@ -46,10 +46,10 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     @Override
     public Purchase get(long id) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM purchases WHERE id=?");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM purchases WHERE id=?");
         try {
             return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                    new Object[] { id }, (rs, rowNum) -> PurchaseFactory.create(rs) );
+                    new Object[]{id}, (rs, rowNum) -> PurchaseFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -59,10 +59,10 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     @Override
     public Purchase getByPurchaseId(long pid) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM purchases WHERE purchase_id=?");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM purchases WHERE purchase_id=?");
         try {
             return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                    new Object[] { pid }, (rs, rowNum) -> PurchaseFactory.create(rs) );
+                    new Object[]{pid}, (rs, rowNum) -> PurchaseFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     @Override
     public List<Purchase> getBySeller(long id) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM purchases WHERE seller_id=? ");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM purchases WHERE seller_id=? ");
         try {
             return this.jdbcTemplate.query(sbSql.toString(),
                     new Object[]{id}, (rs, rowNum) -> PurchaseFactory.create(rs));
@@ -83,7 +83,7 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     @Override
     public List<Purchase> getByBuyer(long id) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM purchases WHERE buyer_id=? ");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM purchases WHERE buyer_id=? ");
         try {
             return this.jdbcTemplate.query(sbSql.toString(),
                     new Object[]{id}, (rs, rowNum) -> PurchaseFactory.create(rs));
@@ -120,12 +120,12 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     @Override
     public long update(final Purchase purchase) {
-        StringBuilder sbSql =  new StringBuilder("UPDATE purchases ");
+        StringBuilder sbSql = new StringBuilder("UPDATE purchases ");
         sbSql.append("SET state=? ");
         sbSql.append("where id=?");
         try {
             return this.jdbcTemplate.update(sbSql.toString(),
-                    new Object[] {
+                    new Object[]{
                             purchase.getState(),
                             purchase.getId()
                     });

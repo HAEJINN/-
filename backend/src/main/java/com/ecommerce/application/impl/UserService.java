@@ -31,7 +31,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User get(String email) { return this.userRepository.get(email); }
+    public User get(String email) {
+        return this.userRepository.get(email);
+    }
 
     @Override
     public User add(User user) {
@@ -43,18 +45,18 @@ public class UserService implements IUserService {
     public User update(User user) {
 
         User found = this.userRepository.get(user.getEmail());
-        if(found == null)
+        if (found == null)
             throw new ApplicationException("회원 정보를 찾을 수 없습니다.");
 
-        if(user.getId() == 0)
+        if (user.getId() == 0)
             user.setId(found.getId());
-        if(user.getName() == null)
+        if (user.getName() == null)
             user.setName(found.getName());
-        if(user.getPassword() == null)
+        if (user.getPassword() == null)
             user.setPassword(found.getPassword());
 
         int affected = this.userRepository.update(user);
-        if(affected == 0)
+        if (affected == 0)
             throw new ApplicationException("작품정보수정 처리가 반영되지 않았습니다.");
 
         return this.userRepository.get(user.getId());

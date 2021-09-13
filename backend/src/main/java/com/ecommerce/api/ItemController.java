@@ -16,73 +16,74 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
-public class ItemController
-{
-	public static final Logger logger = LoggerFactory.getLogger(ItemController.class);
+public class ItemController {
+    public static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
-	private IItemService itemService;
+    private IItemService itemService;
 
-	@Autowired
-	public ItemController(IItemService itemService) {
-		Assert.notNull(itemService, "itemService 개체가 반드시 필요!");
-		this.itemService = itemService;
-	}
+    @Autowired
+    public ItemController(IItemService itemService) {
+        Assert.notNull(itemService, "itemService 개체가 반드시 필요!");
+        this.itemService = itemService;
+    }
 
-	/**
-	 * TODO Sub PJT Ⅲ 과제 3
-	 * 상품 등록
-	 * @param item
-	 * @return Item
-	 */
-	@ApiOperation(value = "Register an item")
-	@RequestMapping(value = "/items", method = RequestMethod.POST)
-	public Item register(@RequestBody Item item) {
-		return itemService.register(item);
-	}
+    /**
+     * TODO Sub PJT Ⅲ 과제 3
+     * 상품 등록
+     *
+     * @param item
+     * @return Item
+     */
+    @ApiOperation(value = "Register an item")
+    @RequestMapping(value = "/items", method = RequestMethod.POST)
+    public Item register(@RequestBody Item item) {
+        return itemService.register(item);
+    }
 
-	@ApiOperation(value = "Fetch all items")
-	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	public List<Item> list() {
-		List<Item> list = itemService.list();
+    @ApiOperation(value = "Fetch all items")
+    @RequestMapping(value = "/items", method = RequestMethod.GET)
+    public List<Item> list() {
+        List<Item> list = itemService.list();
 
-		if (list == null || list.isEmpty())
-			throw new EmptyListException("NO DATA");
+        if (list == null || list.isEmpty())
+            throw new EmptyListException("NO DATA");
 
-		return list;
-	}
+        return list;
+    }
 
-	@ApiOperation(value = "Fetch an item with id")
-	@RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
-	public Item get(@PathVariable int id) {
-		Item item = itemService.get(id);
-		if (item == null) {
-			logger.error("NOT FOUND ID: ", id);
-			throw new NotFoundException(id + " 상품 정보를 찾을 수 없습니다.");
-		}
-		return item;
-	}
+    @ApiOperation(value = "Fetch an item with id")
+    @RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
+    public Item get(@PathVariable int id) {
+        Item item = itemService.get(id);
+        if (item == null) {
+            logger.error("NOT FOUND ID: ", id);
+            throw new NotFoundException(id + " 상품 정보를 찾을 수 없습니다.");
+        }
+        return item;
+    }
 
-	@ApiOperation(value = "Fetch an item with id")
-	@RequestMapping(value = "/items/of/{uid}", method = RequestMethod.GET)
-	public List<Item> getByUser(@PathVariable int uid) {
-		List<Item> items = itemService.getByUser(uid);
-		if (items == null || items.size() == 0 ) {
-			logger.error("NOT FOUND LIST OF UID: ", uid);
-			return null;
-		}
-		return items;
-	}
+    @ApiOperation(value = "Fetch an item with id")
+    @RequestMapping(value = "/items/of/{uid}", method = RequestMethod.GET)
+    public List<Item> getByUser(@PathVariable int uid) {
+        List<Item> items = itemService.getByUser(uid);
+        if (items == null || items.size() == 0) {
+            logger.error("NOT FOUND LIST OF UID: ", uid);
+            return null;
+        }
+        return items;
+    }
 
-	/**
-	 * TODO Sub PJT Ⅲ 과제 3
-	 * 상품 판매 취소
-	 * @param id 아이템 id
-	 * @return Item
-	 */
-	@ApiOperation(value = "Delete an item with id")
-	@RequestMapping(value = "/items/{id}", method = RequestMethod.DELETE)
-	public Item delete(@PathVariable int id) {
-		return  itemService.delete(id);
-	}
+    /**
+     * TODO Sub PJT Ⅲ 과제 3
+     * 상품 판매 취소
+     *
+     * @param id 아이템 id
+     * @return Item
+     */
+    @ApiOperation(value = "Delete an item with id")
+    @RequestMapping(value = "/items/{id}", method = RequestMethod.DELETE)
+    public Item delete(@PathVariable int id) {
+        return itemService.delete(id);
+    }
 
 }

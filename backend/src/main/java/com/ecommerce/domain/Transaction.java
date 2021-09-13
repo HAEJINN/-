@@ -3,6 +3,7 @@ package com.ecommerce.domain;
 import lombok.Data;
 import org.springframework.util.Assert;
 import org.web3j.protocol.core.methods.response.EthBlock;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -27,10 +28,10 @@ public class Transaction {
     private int v;
     private LocalDateTime storedAt;
 
-    public Transaction() { }
+    public Transaction() {
+    }
 
-    public Transaction(final EthBlock.TransactionResult txResult)
-    {
+    public Transaction(final EthBlock.TransactionResult txResult) {
         Assert.isTrue(txResult instanceof EthBlock.TransactionObject, "Wrong EthBlock.TransactionResult instance type");
 
         org.web3j.protocol.core.methods.response.Transaction tx = ((EthBlock.TransactionObject) txResult).get();
@@ -44,7 +45,7 @@ public class Transaction {
         this.value = String.valueOf(tx.getValue());
         this.gasPrice = String.valueOf(tx.getGasPrice());
         this.gas = String.valueOf(tx.getGas());
-        if(tx.getInput().length() < 300)
+        if (tx.getInput().length() < 300)
             this.input = tx.getInput();
         this.creates = tx.getCreates();
         this.publicKey = tx.getPublicKey();

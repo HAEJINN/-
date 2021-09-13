@@ -12,17 +12,17 @@ public class BadRequestException extends Exception {
         super();
     }
 
-    public BadRequestException(Throwable throwable, String errorMessage){
+    public BadRequestException(Throwable throwable, String errorMessage) {
         super(errorMessage, throwable);
         this.errorMessage = errorMessage;
     }
 
-    public BadRequestException(String errorMessage){
+    public BadRequestException(String errorMessage) {
         super(errorMessage);
         this.errorMessage = errorMessage;
     }
 
-    public BadRequestException(Throwable throwable){
+    public BadRequestException(Throwable throwable) {
         super(throwable);
     }
 

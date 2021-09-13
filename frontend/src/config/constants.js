@@ -1,5 +1,5 @@
 /**
- * 아래의 상수들을 임의로 변경하여 구현할 수 있습니다. 
+ * 아래의 상수들을 임의로 변경하여 구현할 수 있습니다.
  */
 export const CATEGORIES = {
     DIGITAL: "D",
@@ -71,7 +71,7 @@ export const ESCROW_STATE = {
         symbol: "X",
         explanation: "거래취소"
     },
-    
+
     symbolToState(symbol) {
         switch (symbol) {
             case "I":

@@ -15,6 +15,7 @@ import java.util.TimeZone;
 @Data
 public class Record {
     enum State {Purchased, Paid, Sent, Complete, Cancelled, Refunded, End}
+
     private String state;
     private LocalDateTime when;
     private String by; // user's wallet account
@@ -29,7 +30,7 @@ public class Record {
     }
 
     private static String getStateString(BigInteger number) {
-        switch(number.intValue()) {
+        switch (number.intValue()) {
             case 0:
                 return "Purchased";
             case 1:

@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface IPurchaseService {
     List<Purchase> list();
+
     Purchase get(long id);
+
     Purchase getByPurchaseId(int pid);
+
     List<PurchaseInfo> getBySeller(int id);
+
     List<PurchaseInfo> getByBuyer(int id);
 
     @Transactional

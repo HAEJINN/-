@@ -61,12 +61,13 @@ public class PurchaseService implements IPurchaseService {
      */
     @Override
     public List<PurchaseInfo> getByBuyer(int id) {
-       return null;
+        return null;
     }
 
     /**
      * TODO Sub PJT Ⅲ 과제 3
      * Purchase 정보 등록
+     *
      * @param purchase
      * @return
      */
@@ -78,6 +79,7 @@ public class PurchaseService implements IPurchaseService {
     /**
      * TODO Sub PJT Ⅲ 과제 3
      * Purchase 상태 업데이트
+     *
      * @return
      */
     @Override

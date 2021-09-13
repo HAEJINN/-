@@ -23,11 +23,11 @@ public class EthInfoRepository implements IEthInfoRepository {
 
     @Override
     public EthInfo get(String ethUrl) {
-        String sql =  "SELECT * FROM ETH_INFO WHERE net_url=?";
+        String sql = "SELECT * FROM ETH_INFO WHERE net_url=?";
         try {
             return this.jdbcTemplate.queryForObject(sql,
-                    new Object[] { ethUrl }, (rs, rowNum) -> new EthInfo(rs.getString("net_url"),
-                                                                    rs.getString("latest_bno")) );
+                    new Object[]{ethUrl}, (rs, rowNum) -> new EthInfo(rs.getString("net_url"),
+                            rs.getString("latest_bno")));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -37,10 +37,10 @@ public class EthInfoRepository implements IEthInfoRepository {
 
     @Override
     public void put(String ethUrl, String blockNumber) {
-        String sql =  "UPDATE ETH_INFO SET latest_bno=? WHERE net_url=?";
+        String sql = "UPDATE ETH_INFO SET latest_bno=? WHERE net_url=?";
         try {
             this.jdbcTemplate.update(sql,
-                    new Object[] { blockNumber, ethUrl });
+                    new Object[]{blockNumber, ethUrl});
         } catch (Exception e) {
             throw new RepositoryException(e, e.getMessage());
         }

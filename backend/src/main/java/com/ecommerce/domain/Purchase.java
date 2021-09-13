@@ -17,8 +17,7 @@ public class Purchase {
     private String contractAddress;
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "{ id: " + id +
                 "\n\tpurchaseId: " + purchaseId +
                 "\n\tstate: " + state +
