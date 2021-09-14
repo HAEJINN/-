@@ -1,10 +1,18 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <!-- Main으로 시작 -->
+  <Main></Main>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import Main from "@/views/main/main.vue";
+export default defineComponent({
+  name: "App",
+  components: {
+    Main,
+  },
+});
+</script>
 
 <style lang="scss">
 #app {
