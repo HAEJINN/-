@@ -4,6 +4,7 @@ import org.web3j.protocol.core.methods.response.EthBlock;
 import org.web3j.protocol.core.methods.response.Transaction;
 
 import lombok.Data;
+
 import java.math.BigInteger;
 import java.time.Instant;
 import java.time.LocalDateTime;
