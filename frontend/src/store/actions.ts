@@ -10,7 +10,7 @@ export async function request_userLogin(
     email: email,
     password: password,
   };
-  const url = "/api/users/login";
+  const url = "/users/login";
   return await axios.post(url, data);
 }
 
@@ -25,7 +25,7 @@ export async function request_userSignup(
     name: user.name,
     password: user.password,
   };
-  const url = "/api/users";
+  const url = "/users";
   return await axios.post(url, data);
 }
 

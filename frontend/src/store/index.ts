@@ -2,14 +2,14 @@
 // import state from "./state";
 // import * as getters from "./getters";
 // import * as mutations from "./mutations";
-import * as userActions from "./actions/userActions";
+import * as actions from "./actions";
 
 const root = {
   namespaced: true,
   // state,
   // getters,
   // mutations,
-  userActions,
+  actions,
 };
 
 export default root;

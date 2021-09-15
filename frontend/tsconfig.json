@@ -13,9 +13,6 @@
     "baseUrl": ".",
     "outDir": "./built",
     "allowJs": true,
-    "types": [
-      "webpack-env"
-    ],
     "paths": {
       "@/*": [
         "src/*"
