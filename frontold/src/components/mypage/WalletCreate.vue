@@ -58,9 +58,9 @@
 </template>
 
 <script>
-import { registerWallet } from "@/api/wallet.js";
-import Web3 from "web3";
-import MyPageNav from "./MyPageNav.vue";
+import { registerWallet } from '@/api/wallet.js';
+import Web3 from 'web3';
+import MyPageNav from './MyPageNav.vue';
 
 export default {
   components: {
@@ -69,8 +69,8 @@ export default {
   data() {
     return {
       step: 0,
-      privateKey: "",
-      walletAddress: "",
+      privateKey: '',
+      walletAddress: '',
       sharedState: this.$store.state,
       userId: this.$store.state.user.id
     };

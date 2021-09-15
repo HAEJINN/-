@@ -41,7 +41,7 @@ import {
   timeSince,
   REFRESH_TIMES_OF_TRANSACTIONS,
 } from '../../utils/blockchainProvider.js';
-import { createWeb3 } from "@/utils/itemInventory.js";
+import { createWeb3 } from '@/utils/itemInventory.js';
 
 export default {
   props: [ 'countToShow' ],

@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import { findById, update } from "../../api/user.js";
-import MyPageNav from "./MyPageNav.vue";
+import { findById, update } from '../../api/user.js';
+import MyPageNav from './MyPageNav.vue';
 
 export default {
   components: {
@@ -66,12 +66,12 @@ export default {
   },
   data() {
     return {
-      prevPwd: "",
-      newPwd: "",
-      confirmNew: "",
+      prevPwd: '',
+      newPwd: '',
+      confirmNew: '',
       user: {
         id: this.$store.state.user.id,
-        email: ""
+        email: ''
       }
     };
   },
@@ -84,14 +84,14 @@ export default {
         this.newPwd.length === 0 ||
         this.confirmNew.length === 0
       ) {
-        alert("입력란을 모두 채워주세요.");
+        alert('입력란을 모두 채워주세요.');
       } else if (this.newPwd !== this.confirmNew) {
-        alert("새 비밀번호가 일치하지 않습니다.");
+        alert('새 비밀번호가 일치하지 않습니다.');
       } else {
         findById(this.user.id, function(response) {
-          scope.user.email = response.data["email"];
-          if (scope.prevPwd !== response.data["password"]) {
-            alert("기존 비밀번호와 일치하지 않습니다.");
+          scope.user.email = response.data['email'];
+          if (scope.prevPwd !== response.data['password']) {
+            alert('기존 비밀번호와 일치하지 않습니다.');
           } else {
             update(
               {
@@ -100,13 +100,13 @@ export default {
                 password: scope.newPwd
               },
               function() {
-                alert("비밀번호가 변경되었습니다.");
-                scope.user.prevPwd = "";
-                scope.user.newPwd = "";
-                scope.user.confirmNew = "";
+                alert('비밀번호가 변경되었습니다.');
+                scope.user.prevPwd = '';
+                scope.user.newPwd = '';
+                scope.user.confirmNew = '';
               },
               function() {
-                alert("비밀번호 변경에 실패했습니다.");
+                alert('비밀번호 변경에 실패했습니다.');
               }
             );
           }

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import BlockList from "./BlockList.vue";
+import BlockList from './BlockList.vue';
 
 export default {
   components: {

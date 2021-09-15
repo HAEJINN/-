@@ -40,8 +40,8 @@
 <script>
 // 스텝 개수, 이름, 아이콘, 완료 단계, 애니메이션
 export default {
-  name: "StepFlow",
-  props: ["history"],
+  name: 'StepFlow',
+  props: ['history'],
   data() {
     return {
       activeCount: 0, // flow UI 활성화 개수
@@ -51,11 +51,11 @@ export default {
   },
   methods: {
     setFlow() {
-      console.log("setFlow 실행: ", this.history);
-      if (this.history.filter(h => h.state === "Cancelled").length === 1) {
+      console.log('setFlow 실행: ', this.history);
+      if (this.history.filter(h => h.state === 'Cancelled').length === 1) {
         this.isCancelled = true;
         this.activeCount = 1;
-      } else if (this.history.filter(h => h.state === "Refunded").length === 1) {
+      } else if (this.history.filter(h => h.state === 'Refunded').length === 1) {
         this.isRefunded = true;
         switch(this.history.length) {
           case 3:
@@ -72,7 +72,7 @@ export default {
   },
   watch: {
     history() {
-      console.log("History 변경됨");
+      console.log('History 변경됨');
       this.setFlow();
     },
   }

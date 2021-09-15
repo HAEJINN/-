@@ -1,4 +1,4 @@
-import { createWeb3 } from "./itemInventory.js";
+import { createWeb3 } from './itemInventory.js';
 
 const web3 = createWeb3();
 
@@ -10,7 +10,7 @@ const web3 = createWeb3();
  * @returns {String|BN} If a number, or string is given it returns a number string, otherwise a BN.js instance.
  */
 export function weiToEth(value) {
-  return web3.utils.fromWei(value, "ether");
+  return web3.utils.fromWei(value, 'ether');
 }
 /**
  * 이더리움의 ether 단위를 wei로 변환

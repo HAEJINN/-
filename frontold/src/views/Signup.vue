@@ -54,16 +54,16 @@
 </template>
 
 <script>
-import { signup } from "../api/user.js";
+import { signup } from '../api/user.js';
 
 export default {
   data() {
     return {
       user: {
-        email: "",
-        name: "",
-        password: "",
-        passwordConfirm: ""
+        email: '',
+        name: '',
+        password: '',
+        passwordConfirm: ''
       }
     };
   },
@@ -77,15 +77,15 @@ export default {
           this.user.name,
           this.user.password,
           function() {
-            alert("회원가입이 완료되었습니다.");
-            vm.$router.push("/");
+            alert('회원가입이 완료되었습니다.');
+            vm.$router.push('/');
           },
           function(error) {
             console.error(error);
           }
         );
       } else {
-        alert("비밀번호가 일치하지 않습니다.");
+        alert('비밀번호가 일치하지 않습니다.');
       }
     }
   }

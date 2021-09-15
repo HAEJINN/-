@@ -72,16 +72,16 @@
 </template>
 
 <script>
-import * as walletService from "@/api/wallet.js";
-import { findById } from "@/api/user.js";
-import { createWeb3 } from "@/utils/itemInventory.js";
-import { buyCash, getBalance } from "@/utils/cashContract.js";
-import MyPageNav from "./MyPageNav.vue";
-import { ethToWei } from "@/utils/ethereumUnitUtils.js";
-import BN from "bn.js";
+import * as walletService from '@/api/wallet.js';
+import { findById } from '@/api/user.js';
+import { createWeb3 } from '@/utils/itemInventory.js';
+import { buyCash, getBalance } from '@/utils/cashContract.js';
+import MyPageNav from './MyPageNav.vue';
+import { ethToWei } from '@/utils/ethereumUnitUtils.js';
+import BN from 'bn.js';
 
 export default {
-  name: "WalletInfo",
+  name: 'WalletInfo',
   components: {
     MyPageNav
   },
@@ -90,14 +90,14 @@ export default {
       wallet: {
         id: 0,
         ownerId: null,
-        address: "",
+        address: '',
         balance: 0,
         cash: 0,
         receivingCount: 0
       },
       user: {
-        name: "",
-        email: ""
+        name: '',
+        email: ''
       },
       isCharging: false, // 현재 코인을 충전하고 있는 중인지 확인
       isCashCharging: false, // 현재 캐시을 충전하고 있는 중인지 확인
@@ -134,7 +134,7 @@ export default {
     chargeCash() {
       const vm = this;
       this.isCashCharging = true;
-      const privateKey = prompt("캐시를 충전하시려면 개인키를 입력하세요.");
+      const privateKey = prompt('캐시를 충전하시려면 개인키를 입력하세요.');
       if (privateKey) {
         /**
          * TODO: PJTⅡ 과제3 Req.1-1 [토큰 구매]
@@ -156,7 +156,7 @@ export default {
         const web3 = createWeb3();
         vm.wallet.balance = web3.utils.fromWei(
           res.data.balance.toString(),
-          "ether"
+          'ether'
         );
       });
     },
@@ -165,8 +165,8 @@ export default {
       const vm = this;
       findById(this.userId, function(response) {
         const data = response.data;
-        vm.user.name = data["name"];
-        vm.user.email = data["email"];
+        vm.user.name = data['name'];
+        vm.user.email = data['email'];
       });
     },
   },

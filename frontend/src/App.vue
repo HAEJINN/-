@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import Nav from "@/views/main/components/nav.vue";
 export default defineComponent({

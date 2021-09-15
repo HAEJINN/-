@@ -696,221 +696,221 @@ const CASH_CONTRACT_ABI = [
 
 const PURCHASE_RECORD_CONTRACT_ABI = [
 	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		'inputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'constructor'
 	},
 	{
-		"anonymous": false,
-		"inputs": [
+		'anonymous': false,
+		'inputs': [
 			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "previousOwner",
-				"type": "address"
+				'indexed': true,
+				'internalType': 'address',
+				'name': 'previousOwner',
+				'type': 'address'
 			},
 			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
+				'indexed': true,
+				'internalType': 'address',
+				'name': 'newOwner',
+				'type': 'address'
 			}
 		],
-		"name": "OwnershipTransferred",
-		"type": "event"
+		'name': 'OwnershipTransferred',
+		'type': 'event'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "addPurchase",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'addPurchase',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "admin",
-		"outputs": [
+		'constant': true,
+		'inputs': [],
+		'name': 'admin',
+		'outputs': [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
+				'internalType': 'address',
+				'name': '',
+				'type': 'address'
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		'payable': false,
+		'stateMutability': 'view',
+		'type': 'function'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "cancelPurchase",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'cancelPurchase',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "confirmDeposit",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'confirmDeposit',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "confirmPurchase",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'confirmPurchase',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	},
 	{
-		"constant": true,
-		"inputs": [
+		'constant': true,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			},
 			{
-				"internalType": "uint256",
-				"name": "recordNo",
-				"type": "uint256"
+				'internalType': 'uint256',
+				'name': 'recordNo',
+				'type': 'uint256'
 			}
 		],
-		"name": "getRecord",
-		"outputs": [
+		'name': 'getRecord',
+		'outputs': [
 			{
-				"internalType": "enum PurchaseRecord.State",
-				"name": "_state",
-				"type": "uint8"
+				'internalType': 'enum PurchaseRecord.State',
+				'name': '_state',
+				'type': 'uint8'
 			},
 			{
-				"internalType": "uint256",
-				"name": "_when",
-				"type": "uint256"
+				'internalType': 'uint256',
+				'name': '_when',
+				'type': 'uint256'
 			},
 			{
-				"internalType": "address",
-				"name": "_by",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_by',
+				'type': 'address'
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		'payable': false,
+		'stateMutability': 'view',
+		'type': 'function'
 	},
 	{
-		"constant": true,
-		"inputs": [
+		'constant': true,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "getRecordNumber",
-		"outputs": [
+		'name': 'getRecordNumber',
+		'outputs': [
 			{
-				"internalType": "uint8",
-				"name": "numberOfRecords",
-				"type": "uint8"
+				'internalType': 'uint8',
+				'name': 'numberOfRecords',
+				'type': 'uint8'
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		'payable': false,
+		'stateMutability': 'view',
+		'type': 'function'
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
+		'constant': true,
+		'inputs': [],
+		'name': 'owner',
+		'outputs': [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
+				'internalType': 'address',
+				'name': '',
+				'type': 'address'
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		'payable': false,
+		'stateMutability': 'view',
+		'type': 'function'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "refund",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'refund',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
+				'internalType': 'address',
+				'name': '_address',
+				'type': 'address'
 			}
 		],
-		"name": "sendItem",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'sendItem',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	},
 	{
-		"constant": false,
-		"inputs": [
+		'constant': false,
+		'inputs': [
 			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
+				'internalType': 'address',
+				'name': 'newOwner',
+				'type': 'address'
 			}
 		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
+		'name': 'transferOwnership',
+		'outputs': [],
+		'payable': false,
+		'stateMutability': 'nonpayable',
+		'type': 'function'
 	}
 ];
 

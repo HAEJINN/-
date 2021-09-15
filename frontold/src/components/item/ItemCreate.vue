@@ -101,21 +101,21 @@
 </template>
 
 <script>
-import { create as createItem } from "@/api/item.js";
-import { registerItem } from "@/utils/itemInventory.js";
+import { create as createItem } from '@/api/item.js';
+import { registerItem } from '@/utils/itemInventory.js';
 
 export default {
-  name: "ItemCreate",
+  name: 'ItemCreate',
   data() {
     return {
       item: {
-        name: "",
-        category: "",
+        name: '',
+        category: '',
         price: null,
-        description: "",
+        description: '',
         imgName: null,
       },
-      privateKey: "",
+      privateKey: '',
       userId: this.$store.state.user.id,
       isCreating: false,
     };
@@ -128,7 +128,7 @@ export default {
      */
     imgLocalPath() {
       if (this.item.imgName) {
-        return process.env.BASE_URL + "images/" + this.item.imgName;
+        return process.env.BASE_URL + 'images/' + this.item.imgName;
       }
 
       return null;
@@ -147,7 +147,7 @@ export default {
         this.item.imgName === null ||
         this.item.imgName.length <= 0
       ) {
-        alert("입력폼을 모두 입력해주세요.");
+        alert('입력폼을 모두 입력해주세요.');
         this.isCreating = false;
         return;
       }

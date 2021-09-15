@@ -87,22 +87,22 @@
 </template>
 
 <script>
-import * as walletService from "@/api/wallet.js";
-import { weiToEth } from "@/utils/ethereumUnitUtils.js";
-import { getLocalImg } from "@/utils/imgLoader.js";
-import { purchaseItem } from "@/utils/itemInventory.js";
-import { create } from "@/api/purchase.js";
+import * as walletService from '@/api/wallet.js';
+import { weiToEth } from '@/utils/ethereumUnitUtils.js';
+import { getLocalImg } from '@/utils/imgLoader.js';
+import { purchaseItem } from '@/utils/itemInventory.js';
+import { create } from '@/api/purchase.js';
 //import BN from 'bn.js';
 
 export default {
-  name: "ItemPurchase",
+  name: 'ItemPurchase',
   data() {
     return {
       purchasing: false,
       auction: {},
       wallet: {},
       input: {
-        privateKey: ""
+        privateKey: ''
       },
       userId: this.$store.state.user.id
     };
@@ -143,8 +143,8 @@ export default {
     // 내 지갑 정보 조회
     walletService.findByUserId(vm.userId, function(response) {
       const wallet = response.data;
-      wallet["balance"] = Number(wallet["balance"]) / 10 ** 18;
-      wallet["cash"] = Number(wallet["cash"]);
+      wallet['balance'] = Number(wallet['balance']) / 10 ** 18;
+      wallet['cash'] = Number(wallet['cash']);
       vm.wallet = wallet;
     });
   }

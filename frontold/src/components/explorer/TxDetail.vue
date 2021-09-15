@@ -72,15 +72,15 @@
 </template>
 
 <script>
-import { createWeb3 } from "@/utils/itemInventory.js";
+import { createWeb3 } from '@/utils/itemInventory.js';
 
 export default {
   data() {
     return {
       isValid: true,
       tx: {
-        hash: "-",
-        timestamp: "-"
+        hash: '-',
+        timestamp: '-'
       }
     };
   },

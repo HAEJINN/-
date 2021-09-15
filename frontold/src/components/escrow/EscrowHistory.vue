@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import StepFlow from "@/components/common/StepFlow";
-import { getHistory } from "@/api/purchase.js";
-import { getRecordNumber, getRecord } from "@/utils/purchaseRecord.js";
+import StepFlow from '@/components/common/StepFlow';
+import { getHistory } from '@/api/purchase.js';
+import { getRecordNumber, getRecord } from '@/utils/purchaseRecord.js';
 
 export default {
-  name: "EscrowHistory",
+  name: 'EscrowHistory',
   components: { StepFlow },
   data() {
     return {
@@ -33,13 +33,13 @@ export default {
       purchaseId: null,
       escrowContractAddress: null,
       state: [
-        "Purchased",
-        "Paid",
-        "Sent",
-        "Complete",
-        "Cancelled",
-        "Refunded",
-        "End"
+        'Purchased',
+        'Paid',
+        'Sent',
+        'Complete',
+        'Cancelled',
+        'Refunded',
+        'End'
       ]
     };
   },
@@ -63,19 +63,19 @@ export default {
       var month = date.getMonth();
       var day = date.getDay();
       var hours = date.getHours();
-      var minutes = "0" + date.getMinutes();
-      var seconds = "0" + date.getSeconds();
+      var minutes = '0' + date.getMinutes();
+      var seconds = '0' + date.getSeconds();
       return (
         year +
-        "-" +
+        '-' +
         month +
-        "-" +
+        '-' +
         day +
-        " " +
+        ' ' +
         hours +
-        ":" +
+        ':' +
         minutes.substr(-2) +
-        ":" +
+        ':' +
         seconds.substr(-2)
       );
     }

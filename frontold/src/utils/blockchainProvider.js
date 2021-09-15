@@ -1,5 +1,5 @@
-import { BLOCKCHAIN_URL } from "../config"; // todo check index.js가 import 되는지 확인하기
-import Web3 from "web3";
+import { BLOCKCHAIN_URL } from '../config'; // todo check index.js가 import 되는지 확인하기
+import Web3 from 'web3';
 
 const NUMBER_OF_CONTENTS_TO_SHOW = 10; // 한 번에 보여줄 정보의 개수
 const REFRESH_TIMES_OF_OVERVIEW = 1000; // 개요 정보 갱신 시간 1초
@@ -26,12 +26,12 @@ function parseQueryString() {
   var values = [],
     item;
   var sliced = window.location.href.slice(
-    window.location.href.indexOf("?") + 1
+    window.location.href.indexOf('?') + 1
   );
-  sliced = sliced.split("&");
+  sliced = sliced.split('&');
 
   for (var i = 0; i < sliced.length; i++) {
-    item = sliced[i].split("=");
+    item = sliced[i].split('=');
     values.push(item[0]);
     values[item[0]] = item[1];
   }
@@ -58,25 +58,25 @@ function timeSince(date) {
   var interval = Math.floor(seconds / 31536000);
 
   if (interval > 1) {
-    return interval + " years ago";
+    return interval + ' years ago';
   }
   interval = Math.floor(seconds / 2592000);
   if (interval > 1) {
-    return interval + " months ago";
+    return interval + ' months ago';
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
-    return interval + " days ago";
+    return interval + ' days ago';
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
-    return interval + " hours ago";
+    return interval + ' hours ago';
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
-    return interval + " minutes ago";
+    return interval + ' minutes ago';
   }
-  return Math.floor(seconds) + " seconds ago";
+  return Math.floor(seconds) + ' seconds ago';
 }
 
 export {

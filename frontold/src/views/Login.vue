@@ -34,15 +34,15 @@
 </template>
 
 <script>
-import { login } from "../api/user.js";
-import { findByUserId as findWallet } from "../api/wallet.js";
+import { login } from '../api/user.js';
+import { findByUserId as findWallet } from '../api/wallet.js';
 
 export default {
   data() {
     return {
       user: {
-        email: "",
-        password: ""
+        email: '',
+        password: ''
       }
     };
   },
@@ -54,16 +54,16 @@ export default {
         this.user.email,
         this.user.password,
         function(response) {
-          scope.$store.commit("setIsSigned", true);
-          scope.$store.commit("setUserId", response.data.id);
+          scope.$store.commit('setIsSigned', true);
+          scope.$store.commit('setUserId', response.data.id);
 
           findWallet(
             response.data.id,
             function(response) {
               if (response.status == 200) {
-                scope.$store.commit("setWalletAddress", response.data.address);
+                scope.$store.commit('setWalletAddress', response.data.address);
               } else {
-                alert("Unexpected status code: " + response.status);
+                alert('Unexpected status code: ' + response.status);
               }
             },
             function(err) {
@@ -74,11 +74,11 @@ export default {
             }
           );
 
-          scope.$router.push("/");
+          scope.$router.push('/');
         },
         function(error) {
           console.error(error);
-          alert("유저 이메일 혹은 비밀번호가 일치하지 않습니다.");
+          alert('유저 이메일 혹은 비밀번호가 일치하지 않습니다.');
         }
       );
     }

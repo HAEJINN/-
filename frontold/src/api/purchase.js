@@ -1,24 +1,24 @@
-import { createInstance } from "./index.js";
+import { createInstance } from './index.js';
 
 const instance = createInstance();
 
 function create(body, success, fail) {
   instance
-    .post("/api/purchases", JSON.stringify(body))
+    .post('/api/purchases', JSON.stringify(body))
     .then(success)
     .catch(fail);
 }
 
 function findMySalePurchases(id, success, fail) {
   instance
-    .get("/api/purchases/seller/" + id)
+    .get('/api/purchases/seller/' + id)
     .then(success)
     .catch(fail);
 }
 
 function findMyPurchases(id, success, fail) {
   instance
-    .get("/api/purchases/buyer/" + id)
+    .get('/api/purchases/buyer/' + id)
     .then(success)
     .catch(fail);
 }
@@ -29,7 +29,7 @@ function findMyPurchases(id, success, fail) {
  */
 function checkDeposit(id, success, fail) {
   instance
-    .put("/api/purchases/" + id + "/deposit")
+    .put('/api/purchases/' + id + '/deposit')
     .then(success)
     .catch(fail);
 }
@@ -41,7 +41,7 @@ function checkDeposit(id, success, fail) {
  */
 function changeState(id, state, success, fail) {
   instance
-    .put("/api/purchases/" + id + "/state/" + state)
+    .put('/api/purchases/' + id + '/state/' + state)
     .then(success)
     .catch(fail);
 }
@@ -52,7 +52,7 @@ function changeState(id, state, success, fail) {
  */
 function getHistory(id, success, fail) {
   instance
-    .get("/api/purchases/history/" + id)
+    .get('/api/purchases/history/' + id)
     .then(success)
     .catch(fail)
 }

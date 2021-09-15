@@ -170,16 +170,16 @@
 </template>
 
 <script>
-import { findById as findUserById } from "@/api/user.js";
-import * as walletService from "@/api/wallet.js";
-import { getLocalImg } from "@/utils/imgLoader.js";
-import { confirm, cancel } from "@/utils/itemInventory.js";
-import { leaveDeposit } from "@/utils/cashContract.js";
-import { ESCROW_STATE } from "@/config/constants.js";
-import { checkDeposit, changeState } from "@/api/purchase.js";
+import { findById as findUserById } from '@/api/user.js';
+import * as walletService from '@/api/wallet.js';
+import { getLocalImg } from '@/utils/imgLoader.js';
+import { confirm, cancel } from '@/utils/itemInventory.js';
+import { leaveDeposit } from '@/utils/cashContract.js';
+import { ESCROW_STATE } from '@/config/constants.js';
+import { checkDeposit, changeState } from '@/api/purchase.js';
 
 export default {
-  name: "PurchaseTxDetail",
+  name: 'PurchaseTxDetail',
   data() {
     return {
       tx: {
@@ -189,7 +189,7 @@ export default {
         id: null,
         image: null,
         itemId: null,
-        itemName: "",
+        itemName: '',
         price: null,
         purchaseId: null,
         sellerId: null,
@@ -197,15 +197,15 @@ export default {
       },
       processing: false,
       wallet: {
-        address: ""
+        address: ''
       },
       input: {
         payAmount: null,
-        privateKey: ""
+        privateKey: ''
       },
       actionText: {
-        default: "",
-        inProcess: ""
+        default: '',
+        inProcess: ''
       },
       eState: ESCROW_STATE,
       userId: this.$store.state.user.id
@@ -260,16 +260,16 @@ export default {
     setActionText() {
       switch (ESCROW_STATE.symbolToState(this.tx.state)) {
         case ESCROW_STATE.INITIAL:
-          this.actionText.default = "입금하기";
-          this.actionText.inProcess = "입금 요청 중입니다...";
+          this.actionText.default = '입금하기';
+          this.actionText.inProcess = '입금 요청 중입니다...';
           break;
         case ESCROW_STATE.SENT:
-          this.actionText.default = "구매확정";
-          this.actionText.inProcess = "구매 확정 중입니다...";
+          this.actionText.default = '구매확정';
+          this.actionText.inProcess = '구매 확정 중입니다...';
           break;
         default:
-          this.actionText.default = "";
-          this.actionText.inProcess = "";
+          this.actionText.default = '';
+          this.actionText.inProcess = '';
       }
     },
     getImg() {
@@ -283,8 +283,8 @@ export default {
       const vm = this;
       walletService.findByUserId(vm.userId, function(response) {
         const wallet = response.data;
-        wallet["balance"] = Number(wallet["balance"]) / 10 ** 18;
-        wallet["cash"] = Number(wallet["cash"]);
+        wallet['balance'] = Number(wallet['balance']) / 10 ** 18;
+        wallet['cash'] = Number(wallet['cash']);
         vm.wallet = wallet;
       });
     }
@@ -294,7 +294,7 @@ export default {
       if (this.tx.state) {
         return ESCROW_STATE.symbolToState(this.tx.state).explanation;
       } else {
-        return "상태 조회 중";
+        return '상태 조회 중';
       }
     }
   },
@@ -308,12 +308,12 @@ export default {
     findUserById(
       this.tx.sellerId,
       function(res) {
-        vm.$set(vm.tx, "sellerName", res.data.name);
-        vm.$set(vm.tx, "sellerEmail", res.data.email);
+        vm.$set(vm.tx, 'sellerName', res.data.name);
+        vm.$set(vm.tx, 'sellerEmail', res.data.email);
       },
       function(err) {
-        console.error("사용자 정보 조회를 실패했습니다.", err);
-        alert("판매자 정보 조회를 실패했습니다.");
+        console.error('사용자 정보 조회를 실패했습니다.', err);
+        alert('판매자 정보 조회를 실패했습니다.');
       }
     );
   }

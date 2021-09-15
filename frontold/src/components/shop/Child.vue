@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import { findAll } from "@/api/item.js";
-import { CATEGORIES } from "@/config/constants.js";
-import HShopCategories from "./HShopCategories.vue";
-import ItemCard from "./ItemCard.vue";
+import { findAll } from '@/api/item.js';
+import { CATEGORIES } from '@/config/constants.js';
+import HShopCategories from './HShopCategories.vue';
+import ItemCard from './ItemCard.vue';
 import { getPrice } from '@/utils/itemInventory.js';
 
 export default {
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     onClickItem(itemId) {
-      this.$router.push({name: "item.detail", params: {
+      this.$router.push({name: 'item.detail', params: {
         id: itemId
       }});
     }
@@ -81,11 +81,11 @@ export default {
           getPrice(
             i.id,
             function(price) {
-              vm.$set(i, "price", price);
+              vm.$set(i, 'price', price);
             },
             function(err) {
               console.error('가격 조회 실패:', err);
-              alert("상품 가격 조회를 실패했습니다.");
+              alert('상품 가격 조회를 실패했습니다.');
             }
           )
         });

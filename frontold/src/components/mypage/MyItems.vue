@@ -314,19 +314,19 @@
 </template>
 
 <script>
-import { findMySaleItems, remove } from "@/api/item.js";
+import { findMySaleItems, remove } from '@/api/item.js';
 import {
   findMySalePurchases as findSaleTx,
   findMyPurchases as findPurchaseTx,
   checkDeposit
-} from "@/api/purchase.js";
-import MyPageNav from "./MyPageNav.vue";
-import { ESCROW_STATE } from "@/config/constants.js";
-import { getLocalImg } from "@/utils/imgLoader.js";
-import { getPrice, deregisterItem } from "@/utils/itemInventory.js";
+} from '@/api/purchase.js';
+import MyPageNav from './MyPageNav.vue';
+import { ESCROW_STATE } from '@/config/constants.js';
+import { getLocalImg } from '@/utils/imgLoader.js';
+import { getPrice, deregisterItem } from '@/utils/itemInventory.js';
 
 export default {
-  name: "MyItems",
+  name: 'MyItems',
   components: {
     MyPageNav
   },
@@ -351,7 +351,7 @@ export default {
     },
     deregister(item) {
       const privateKey = prompt(
-        "해당 아이템을 판매 종료하시려면 개인키를 입력하세요."
+        '해당 아이템을 판매 종료하시려면 개인키를 입력하세요.'
       );
       if (privateKey) {
         /**
@@ -384,11 +384,11 @@ export default {
           getPrice(
             i.id,
             function(price) {
-              vm.$set(i, "price", price);
+              vm.$set(i, 'price', price);
             },
             function(err) {
-              console.error("가격 조회 실패:", err);
-              alert("상품 가격 조회를 실패했습니다.");
+              console.error('가격 조회 실패:', err);
+              alert('상품 가격 조회를 실패했습니다.');
             }
           );
         });

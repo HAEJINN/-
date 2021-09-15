@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       hasWallet: this.$store.state.user.walletAddress != null,
-      viewName: ""
+      viewName: ''
     };
   },
   mounted: function() {

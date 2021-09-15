@@ -143,16 +143,16 @@
 </template>
 
 <script>
-import { findById as findUserById } from "@/api/user.js";
-import * as walletService from "@/api/wallet.js";
-import { weiToEth } from "@/utils/ethereumUnitUtils.js";
-import { getLocalImg } from "@/utils/imgLoader.js";
-import { send, cancel } from "@/utils/itemInventory.js";
-import { checkDeposit, changeState } from "@/api/purchase.js";
-import { ESCROW_STATE } from "@/config/constants.js";
+import { findById as findUserById } from '@/api/user.js';
+import * as walletService from '@/api/wallet.js';
+import { weiToEth } from '@/utils/ethereumUnitUtils.js';
+import { getLocalImg } from '@/utils/imgLoader.js';
+import { send, cancel } from '@/utils/itemInventory.js';
+import { checkDeposit, changeState } from '@/api/purchase.js';
+import { ESCROW_STATE } from '@/config/constants.js';
 
 export default {
-  name: "SaleTxDetail",
+  name: 'SaleTxDetail',
   data() {
     return {
       tx: {
@@ -164,21 +164,21 @@ export default {
         id: null,
         image: null,
         itemId: null,
-        itemName: "",
+        itemName: '',
         price: null,
         purchaseId: null,
         state: null
       },
       processing: false,
       wallet: {
-        address: ""
+        address: ''
       },
       input: {
-        privateKey: ""
+        privateKey: ''
       },
       buttonText: {
-        default: "",
-        inProcess: ""
+        default: '',
+        inProcess: ''
       },
       eState: ESCROW_STATE,
       userId: this.$store.state.user.id
@@ -229,7 +229,7 @@ export default {
       if (this.tx.state) {
         return ESCROW_STATE.symbolToState(this.tx.state).explanation;
       } else {
-        return "상태 조회 중";
+        return '상태 조회 중';
       }
     }
   },
@@ -240,20 +240,20 @@ export default {
     // 내 지갑 정보 조회
     walletService.findByUserId(vm.userId, function(response) {
       const wallet = response.data;
-      wallet["balance"] = Number(wallet["balance"]) / 10 ** 18;
-      wallet["cash"] = Number(wallet["cash"]);
+      wallet['balance'] = Number(wallet['balance']) / 10 ** 18;
+      wallet['cash'] = Number(wallet['cash']);
       vm.wallet = wallet;
     });
     // [UI] 구매자 정보 조회
     findUserById(
       this.tx.buyerId,
       function(res) {
-        vm.$set(vm.tx, "buyerName", res.data.name);
-        vm.$set(vm.tx, "buyerEmail", res.data.email);
+        vm.$set(vm.tx, 'buyerName', res.data.name);
+        vm.$set(vm.tx, 'buyerEmail', res.data.email);
       },
       function(err) {
-        console.error("사용자 정보 조회를 실패했습니다.", err);
-        alert("구매자 정보 조회를 실패했습니다.");
+        console.error('사용자 정보 조회를 실패했습니다.', err);
+        alert('구매자 정보 조회를 실패했습니다.');
       }
     );
   }
