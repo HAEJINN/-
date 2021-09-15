@@ -1,15 +1,17 @@
 <template>
-  <!-- Main으로 시작 -->
-  <Main></Main>
+  <div>
+    <Nav></Nav>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Main from "@/views/main/main.vue";
+import Nav from "@/views/main/components/nav.vue";
 export default defineComponent({
   name: "App",
   components: {
-    Main,
+    Nav,
   },
 });
 </script>

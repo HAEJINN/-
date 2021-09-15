@@ -4,7 +4,12 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/main/main.vue"), // 동적 import
+    component: () => import("../views/main/main.vue"),
+  },
+  {
+    path: "/join",
+    name: "join",
+    component: () => import("../views/user/join.vue"),
   },
 ];
 
