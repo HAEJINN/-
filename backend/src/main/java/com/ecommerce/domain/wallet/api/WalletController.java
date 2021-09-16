@@ -51,7 +51,7 @@ public class WalletController {
     /**
      * TODO Sub PJT Ⅱ 과제 1
      * 지갑 조회 by user's id
-     *
+     *수정
      * @param userId 사용자 id
      */
     @ApiOperation(value = "Fetch wallet of user")
