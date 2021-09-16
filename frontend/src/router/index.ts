@@ -11,6 +11,16 @@ const routes = [
     name: "join",
     component: () => import("../views/user/join.vue"),
   },
+  {
+    path: "/najakhwa",
+    name: "info",
+    component: () => import("../views/banner/info.vue"),
+  },
+  {
+    path: "/auctionhistory",
+    name: "auctionhistory",
+    component: () => import("../views/banner/auction.vue"),
+  },
 ];
 
 const router = createRouter({
