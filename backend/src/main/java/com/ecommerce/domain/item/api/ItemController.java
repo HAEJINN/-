@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
 public class ItemController {
     public final Logger logger = LoggerFactory.getLogger(getClass());
 

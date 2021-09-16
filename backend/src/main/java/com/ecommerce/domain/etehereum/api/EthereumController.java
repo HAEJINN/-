@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/eth")
+@RequestMapping("/eth")
 public class EthereumController {
 
     public static final Logger log = LoggerFactory.getLogger(EthereumController.class);
