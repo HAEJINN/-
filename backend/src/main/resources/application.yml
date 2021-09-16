@@ -13,7 +13,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         default_batch_fetch_size: 1000
@@ -33,9 +33,10 @@ eth:
     address: 718ca8088ae9c120551defcbbecfedc3b9761a1f
     wallet:
       filename: admin.wallet
-
 logging.level:
   org.hibernate.SQL: debug
 server:
   port: 8080
+  servlet:
+    context-path: /api
 
