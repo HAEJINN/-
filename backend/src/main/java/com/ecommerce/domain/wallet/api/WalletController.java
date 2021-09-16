@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
 public class WalletController {
     public final Logger logger = LoggerFactory.getLogger(getClass());
 

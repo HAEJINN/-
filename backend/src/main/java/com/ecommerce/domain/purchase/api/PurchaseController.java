@@ -22,7 +22,6 @@ import java.util.List;
  */
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
 public class PurchaseController {
 
     public static final Logger logger = LoggerFactory.getLogger(ItemController.class);
