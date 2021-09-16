@@ -19,7 +19,7 @@ spring:
         default_batch_fetch_size: 1000
         format_sql: true
   web3j:
-    client-address: http://127.0.0.1:8545
+    client-address: http://3.36.50.29:8545
     admin-client: true
 eth:
   encrypted:
