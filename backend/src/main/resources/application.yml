@@ -1,0 +1,41 @@
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    cache-duration: PT1H
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://3.34.135.3:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: ssafy
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        format_sql: true
+  web3j:
+    client-address: http://127.0.0.1:8545
+    admin-client: true
+eth:
+  encrypted:
+    password: Pn0OlSN0SdhjNK5X2EhUPQ==
+  erc20:
+    contract: 0xcDcedAcea55DB472060042C644096DF65B9d9849
+  purchase:
+    record:
+      contract: 0x0c2BC3cAB0036D1E51734B4D6e6cb8BCB046A2C7
+  admin:
+    address: 718ca8088ae9c120551defcbbecfedc3b9761a1f
+    wallet:
+      filename: admin.wallet
+
+logging.level:
+  org.hibernate.SQL: debug
+server:
+  port: 8080
+
