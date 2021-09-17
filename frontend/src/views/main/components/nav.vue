@@ -24,7 +24,7 @@
           </div>
         </q-menu>
       </q-btn>
-      <q-toolbar-title> 나만의 작은 화가 </q-toolbar-title>
+      <q-toolbar-title> 나만의 작은 화실 </q-toolbar-title>
       <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
       <q-btn flat round dense icon="people" @click="moveJoin" />
     </q-toolbar>
