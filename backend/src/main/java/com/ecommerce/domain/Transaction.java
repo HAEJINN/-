@@ -1,25 +1,25 @@
 package com.ecommerce.domain;
 
-import lombok.Data;
 import org.springframework.util.Assert;
 import org.web3j.protocol.core.methods.response.EthBlock;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Table(name = "transactions")
 @Entity
 public class Transaction {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String hash;
     private String nonce;
     private String blockHash;
     private String blockNumber;
     private String transactionIndex;
+    @Column(name = "from_hash")
     private String from;
+    @Column(name = "to_hash")
     private String to;
     private String value;
     private String gasPrice;
@@ -32,6 +32,7 @@ public class Transaction {
     private String s;
     private int v;
     private LocalDateTime storedAt;
+
 
     public Transaction() {
     }
