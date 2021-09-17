@@ -26,26 +26,25 @@
       </q-btn>
       <q-toolbar-title> 나만의 작은 화실 </q-toolbar-title>
       <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
-      <q-btn flat round dense icon="people" @click="moveJoin" />
+      <q-btn flat round dense icon="people" @click="dialog_login = true" />
+      <login-dialog v-model="dialog_login" />
     </q-toolbar>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import LoginDialog from "@/views/user/login-dialog";
 
-export default defineComponent({
+export default {
+  components: {
+    LoginDialog,
+  },
   setup() {
-    const router = useRouter();
-
-    const moveJoin = () => {
-      router.push("/join");
-    };
-
     return {
-      moveJoin,
+      dialog_login: ref(false),
     };
   },
-});
+};
 </script>
