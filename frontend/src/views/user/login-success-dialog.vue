@@ -21,7 +21,7 @@
           <q-btn
             style="background: #ff0080; color: white"
             label="Go"
-            @click="move_banner_najakhwa"
+            @click="MoveBanner_Najakhwa"
           />
           <div>혹시 미술전공이거나 예술작가이신가요?</div>
           <q-btn
@@ -29,34 +29,36 @@
             label="작가인증하기"
             @click="RegisterArtist"
           />
+          <div>마이페이지에서도 작가인증을 할 수 있어요!</div>
         </q-page>
       </q-page-container>
     </q-layout>
   </q-dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script>
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
-export default defineComponent({
-  setup() {
+export default {
+  name: "login-success-dialog",
+  setup(props, { emit }) {
     const router = useRouter();
-    const move_banner_najakhwa = () => {
+    const MoveBanner_Najakhwa = () => {
       router.push({
         name: "najakhwa",
       });
     };
     const RegisterArtist = () => {
-      console.log("register");
+      console.log("here");
     };
 
     return {
-      move_banner_najakhwa,
+      MoveBanner_Najakhwa,
       RegisterArtist,
     };
   },
-});
+};
 </script>
 
 <style lang=""></style>

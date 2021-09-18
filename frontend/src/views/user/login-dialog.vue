@@ -12,7 +12,7 @@
             <q-btn v-close-popup flat round dense icon="close" />
           </q-toolbar>
         </q-header>
-        <q-page class="row">
+        <q-page class="">
           <a href="/oauth2/authorization/google">
             <img :src="google" />
           </a>
@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 
-export default defineComponent({
+export default {
   name: "login-dialog",
   setup(props, { emit }) {
     const OpenDialog_LoginSuccess = () => {
@@ -51,7 +51,7 @@ export default defineComponent({
       OpenDialog_LoginSuccess,
     };
   },
-});
+};
 </script>
 
 <style lang="ts"></style>
