@@ -8,15 +8,15 @@ const routes = [
     component: () => import("../views/main/main.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     유저     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-  {
-    path: "/join",
-    name: "join",
-    component: () => import("../views/user/join.vue"),
-  },
+  // {
+  //   path: "/join",
+  //   name: "join",
+  //   component: () => import("../views/user/join.vue"),
+  // },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",
-    name: "info",
+    name: "najakhwa",
     component: () => import("../views/banner/info.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     거래     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */

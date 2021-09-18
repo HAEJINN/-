@@ -22,21 +22,33 @@
           <a href="/oauth2/authorization/naver">
             <img :src="naver" />
           </a>
+          <q-btn
+            color="black"
+            text-color="white"
+            label="login Lets git it~!"
+            @click="OpenDialog_LoginSuccess"
+          />
         </q-page>
       </q-page-container>
     </q-layout>
   </q-dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script>
+import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
-  setup() {
+  name: "login-dialog",
+  setup(props, { emit }) {
+    const OpenDialog_LoginSuccess = () => {
+      emit("LoginSuccess");
+    };
     return {
       google: require("../../assets/login/google_line.png"),
       kakao: require("../../assets/login/kakao_big.png"),
       naver: require("../../assets/login/naver_green.png"),
+
+      OpenDialog_LoginSuccess,
     };
   },
 });
