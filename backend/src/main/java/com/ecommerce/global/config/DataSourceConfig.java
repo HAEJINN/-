@@ -22,30 +22,6 @@ public class DataSourceConfig {
     @Value("${spring.web3j.client-address}")
     private String NETWORK_URL;
 
-    @Primary
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
-
-    @Bean
-    public TransactionAwareDataSourceProxy dataSourceProxy() {
-        return new TransactionAwareDataSourceProxy(dataSource());
-    }
-
-    @Bean
-    public DataSourceTransactionManager transactionManager() {
-        final DataSourceTransactionManager transactionManager =
-                new DataSourceTransactionManager(dataSourceProxy());
-        return transactionManager;
-    }
-
     @Bean
     public Web3j web3j() {
         return Web3j.build(new HttpService(NETWORK_URL));
