@@ -50,7 +50,7 @@ export default {
       });
     };
     const RegisterArtist = () => {
-      console.log("here");
+      emit("RegisterArtist");
     };
 
     return {

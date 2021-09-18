@@ -13,7 +13,11 @@
           </q-toolbar>
         </q-header>
         <q-page class="">
-          <q-btn color="secondary" label="소개페이지로 돌아가기" />
+          <q-btn
+            color="secondary"
+            label="소개페이지로 돌아가기"
+            @click="Move_Najakhwa"
+          />
           <q-btn class="" color="primary" @click="Register('student')">
             <div>미술대학</div>
             <div>재학생 | 졸업생</div>
@@ -30,15 +34,23 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 export default {
   name: "register-aritst-dialog",
   setup(props, { emit }) {
+    const router = useRouter();
+    const Move_Najakhwa = () => {
+      router.push({
+        name: "najakhwa",
+      });
+    };
     const Register = (type) => {
-      console.log("여기클릭햇어요");
       emit("Register", type);
     };
     return {
       Register,
+      Move_Najakhwa,
     };
   },
 };

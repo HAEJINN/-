@@ -36,7 +36,11 @@
       v-model="state.dialog_login_success"
       @RegisterArtist="OpenDialog_RegisterArtist"
     />
-    <register-artist-dialog v-model="state.dialog_register_artist" />
+    <register-artist-dialog
+      v-model="state.dialog_register_artist"
+      @Register="OpenDialog_Register"
+    />
+    <register-dialog v-model="state.dialog_register" />
   </div>
 </template>
 
@@ -46,6 +50,7 @@ import { useRouter } from "vue-router";
 import LoginDialog from "@/views/user/login-dialog";
 import LoginSuccessDialog from "@/views/user/login-success-dialog";
 import RegisterArtistDialog from "@/views/user/register-aritst-dialog";
+import RegisterDialog from "@/views/user/components/register-dialog";
 
 export default {
   components: {
@@ -85,6 +90,16 @@ export default {
     const CloseDialog_RegisterArtist = () => {
       state.dialog_register_artist = false;
     };
+    const OpenDialog_Register = (re) => {
+      console.log(re);
+      state.dialog_register = true;
+    };
+    const CloseDialog_Register = (complate) => {
+      if (complate) {
+        state.dialog_register_artist = false;
+      }
+      state.dialog_register = false;
+    };
 
     return {
       state,
@@ -95,6 +110,8 @@ export default {
       CloseDialog_LoginSuccess,
       OpenDialog_RegisterArtist,
       CloseDialog_RegisterArtist,
+      OpenDialog_Register,
+      CloseDialog_Register,
     };
   },
 };
