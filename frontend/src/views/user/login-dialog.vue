@@ -27,9 +27,11 @@
     </q-layout>
   </q-dialog>
 </template>
-<script>
-export default {
-  name: "login-dialog",
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   setup() {
     return {
       google: require("../../assets/login/google_line.png"),
@@ -37,6 +39,7 @@ export default {
       naver: require("../../assets/login/naver_green.png"),
     };
   },
-};
+});
 </script>
+
 <style lang="ts"></style>
