@@ -29,18 +29,22 @@
       <q-btn flat round dense icon="people" @click="OpenDialog_Login" />
     </q-toolbar>
     <login-dialog
-      v-model="state.dialog_login"
-      @LoginSuccess="CloseDialog_Login"
+      v-model="state.dialog.login"
+      @LoginSuccess="OpenDialog_LoginSuccess"
     />
     <login-success-dialog
-      v-model="state.dialog_login_success"
+      v-model="state.dialog.login_success"
       @RegisterArtist="OpenDialog_RegisterArtist"
     />
     <register-artist-dialog
-      v-model="state.dialog_register_artist"
-      @Register="OpenDialog_Register"
+      v-model="state.dialog.register_artist"
+      @RegisterCertify="OpenDialog_RegisterCertify"
     />
-    <register-dialog v-model="state.dialog_register" />
+    <register-certify-dialog
+      v-model="state.dialog.register_certify"
+      @RegisterSuccess="OpenDialog_RegisterSuccess"
+    />
+    <register-success-dialog v-model="state.dialog.register_success" />
   </div>
 </template>
 
@@ -50,14 +54,16 @@ import { useRouter } from "vue-router";
 import LoginDialog from "@/views/user/login-dialog";
 import LoginSuccessDialog from "@/views/user/login-success-dialog";
 import RegisterArtistDialog from "@/views/user/register-aritst-dialog";
-import RegisterDialog from "@/views/user/components/register-dialog";
+import RegisterCertifyDialog from "@/views/user/register-certify-dialog";
+import RegisterSuccessDialog from "@/views/user/register-success-dialog";
 
 export default {
   components: {
     LoginDialog,
     LoginSuccessDialog,
     RegisterArtistDialog,
-    RegisterDialog,
+    RegisterCertifyDialog,
+    RegisterSuccessDialog,
   },
   setup() {
     const router = useRouter();
@@ -65,40 +71,56 @@ export default {
       router.push("/");
     };
     const state = reactive({
-      dialog_login: ref(false),
-      dialog_login_success: ref(false),
-      dialog_register_artist: ref(false),
-      dialog_register: ref(false),
+      dialog: {
+        login: ref(false),
+        login_success: ref(false),
+        register_artist: ref(false),
+        register_certify: ref(false),
+        register_success: ref(false),
+      },
     });
     const OpenDialog_Login = () => {
-      state.dialog_login = true;
+      state.dialog.login = true;
     };
     const CloseDialog_Login = () => {
-      state.dialog_login = false;
-      OpenDialog_LoginSuccess();
+      state.dialog.login = false;
     };
     const OpenDialog_LoginSuccess = () => {
-      state.dialog_login_success = true;
+      CloseDialog_Login();
+      state.dialog.login_success = true;
     };
     const CloseDialog_LoginSuccess = () => {
-      state.dialog_login_success = false;
+      state.dialog.login_success = false;
     };
     const OpenDialog_RegisterArtist = () => {
       CloseDialog_LoginSuccess();
-      state.dialog_register_artist = true;
+      state.dialog.register_artist = true;
     };
     const CloseDialog_RegisterArtist = () => {
-      state.dialog_register_artist = false;
+      state.dialog.register_artist = false;
     };
-    const OpenDialog_Register = (re) => {
+    const OpenDialog_RegisterCertify = (re) => {
       console.log(re);
-      state.dialog_register = true;
+      state.dialog.register_certify = true;
     };
-    const CloseDialog_Register = (complate) => {
+    const CloseDialog_RegisterCertify = (complate) => {
       if (complate) {
-        state.dialog_register_artist = false;
+        state.dialog.register_artist = false;
       }
-      state.dialog_register = false;
+      state.dialog.register_certify = false;
+    };
+    const OpenDialog_RegisterSuccess = (success) => {
+      console.log(success);
+      if (success === true) {
+        state.dialog.register_artist = false;
+        state.dialog.register_certify = false;
+        state.dialog.register_success = true;
+      } else {
+        // 파일전송 오류메세지 띄우기
+      }
+    };
+    const CloseDialog_RegisterSuccess = () => {
+      state.dialog.register_success = false;
     };
 
     return {
@@ -110,8 +132,10 @@ export default {
       CloseDialog_LoginSuccess,
       OpenDialog_RegisterArtist,
       CloseDialog_RegisterArtist,
-      OpenDialog_Register,
-      CloseDialog_Register,
+      OpenDialog_RegisterCertify,
+      CloseDialog_RegisterCertify,
+      OpenDialog_RegisterSuccess,
+      CloseDialog_RegisterSuccess,
     };
   },
 };

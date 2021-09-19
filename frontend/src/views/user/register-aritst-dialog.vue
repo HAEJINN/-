@@ -46,7 +46,7 @@ export default {
       });
     };
     const Register = (type) => {
-      emit("Register", type);
+      emit("RegisterCertify", type);
     };
     return {
       Register,
