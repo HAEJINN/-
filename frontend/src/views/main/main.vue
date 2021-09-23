@@ -15,7 +15,6 @@ import Item from "@/views/main/components/item.vue";
 import Exhibition from "@/views/main/components/exhibition.vue";
 import Artist from "@/views/main/components/artist.vue";
 import Calendar from "@/views/main/components/calendar.vue";
-
 export default defineComponent({
   name: "Main",
   components: {
