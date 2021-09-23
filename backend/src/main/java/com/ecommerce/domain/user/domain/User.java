@@ -101,7 +101,7 @@ public class User extends BaseTimeEntity {
     }
 
     public String getUserRole() {
-        return userRole.getKey();
+        return userRole.name();
     }
 
 }
