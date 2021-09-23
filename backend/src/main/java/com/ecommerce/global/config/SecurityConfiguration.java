@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/", "/index/**","/login/**", "/logout/**", "/signup/**").permitAll()
-                .antMatchers("/test/**").hasAnyRole(allUserRole())
+                .antMatchers("/test.html").hasAnyRole(allUserRole())
                 .antMatchers("/api/v1/**").hasAnyRole(allUserRole())
                 .anyRequest().authenticated();
         http.oauth2Login()
