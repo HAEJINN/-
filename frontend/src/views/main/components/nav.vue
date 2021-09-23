@@ -24,119 +24,28 @@
           </div>
         </q-menu>
       </q-btn>
-      <q-toolbar-title @click="Move_Home"> 나만의 작은 화실 </q-toolbar-title>
+      <q-toolbar-title> 나만의 작은 화실 </q-toolbar-title>
       <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
-      <q-btn flat round dense icon="people" @click="OpenDialog_Login" />
+      <q-btn flat round dense icon="people" @click="moveJoin" />
     </q-toolbar>
-    <login-dialog
-      v-model="state.dialog.login"
-      @LoginSuccess="OpenDialog_LoginSuccess"
-    />
-    <login-success-dialog
-      v-model="state.dialog.login_success"
-      @RegisterArtist="OpenDialog_RegisterArtist"
-    />
-    <register-artist-dialog
-      v-model="state.dialog.register_artist"
-      @RegisterCertify="OpenDialog_RegisterCertify"
-    />
-    <register-certify-dialog
-      v-model="state.dialog.register_certify"
-      @RegisterSuccess="OpenDialog_RegisterSuccess"
-    />
-    <register-success-dialog v-model="state.dialog.register_success" />
   </div>
 </template>
 
 <script>
-import { ref, reactive } from "vue";
+import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import LoginDialog from "@/views/user/login-dialog";
-import LoginSuccessDialog from "@/views/user/login-success-dialog";
-import RegisterArtistDialog from "@/views/user/register-aritst-dialog";
-import RegisterCertifyDialog from "@/views/user/register-certify-dialog";
-import RegisterSuccessDialog from "@/views/user/register-success-dialog";
 
-export default {
-  components: {
-    LoginDialog,
-    LoginSuccessDialog,
-    RegisterArtistDialog,
-    RegisterCertifyDialog,
-    RegisterSuccessDialog,
-  },
+export default defineComponent({
   setup() {
     const router = useRouter();
-    const Move_Home = () => {
-      router.push("/");
-    };
-    const state = reactive({
-      dialog: {
-        login: ref(false),
-        login_success: ref(false),
-        register_artist: ref(false),
-        register_certify: ref(false),
-        register_success: ref(false),
-      },
-    });
-    const OpenDialog_Login = () => {
-      state.dialog.login = true;
-    };
-    const CloseDialog_Login = () => {
-      state.dialog.login = false;
-    };
-    const OpenDialog_LoginSuccess = () => {
-      CloseDialog_Login();
-      state.dialog.login_success = true;
-    };
-    const CloseDialog_LoginSuccess = () => {
-      state.dialog.login_success = false;
-    };
-    const OpenDialog_RegisterArtist = () => {
-      CloseDialog_LoginSuccess();
-      state.dialog.register_artist = true;
-    };
-    const CloseDialog_RegisterArtist = () => {
-      state.dialog.register_artist = false;
-    };
-    const OpenDialog_RegisterCertify = (re) => {
-      console.log(re);
-      state.dialog.register_certify = true;
-    };
-    const CloseDialog_RegisterCertify = (complate) => {
-      if (complate) {
-        state.dialog.register_artist = false;
-      }
-      state.dialog.register_certify = false;
-    };
-    const OpenDialog_RegisterSuccess = (success) => {
-      console.log(success);
-      if (success === true) {
-        state.dialog.register_artist = false;
-        state.dialog.register_certify = false;
-        state.dialog.register_success = true;
-      } else {
-        // 파일전송 오류메세지 띄우기
-      }
-    };
-    const CloseDialog_RegisterSuccess = () => {
-      state.dialog.register_success = false;
+
+    const moveJoin = () => {
+      router.push("/join");
     };
 
     return {
-      state,
-      Move_Home,
-      OpenDialog_Login,
-      CloseDialog_Login,
-      OpenDialog_LoginSuccess,
-      CloseDialog_LoginSuccess,
-      OpenDialog_RegisterArtist,
-      CloseDialog_RegisterArtist,
-      OpenDialog_RegisterCertify,
-      CloseDialog_RegisterCertify,
-      OpenDialog_RegisterSuccess,
-      CloseDialog_RegisterSuccess,
+      moveJoin,
     };
   },
-};
+});
 </script>
