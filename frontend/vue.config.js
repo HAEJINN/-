@@ -5,8 +5,8 @@ module.exports = {
     open: true,
     proxy: {
       "/api": {
-        // target: "http://localhost:8080/",
-        target: "http://j5c201.p.ssafy.io/",
+        target: "http://localhost:8080/",
+        // target: "http://j5c201.p.ssafy.io/",
       },
     },
     historyApiFallback: true,

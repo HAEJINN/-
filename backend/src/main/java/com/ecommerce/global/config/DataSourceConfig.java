@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-public class Web3JConfig {
+public class DataSourceConfig {
     @Value("${spring.web3j.client-address}")
     private String NETWORK_URL;
 

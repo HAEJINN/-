@@ -3,9 +3,8 @@ package com.ecommerce.domain.auth.session;
 import com.ecommerce.domain.user.domain.User;
 import lombok.Getter;
 
-import java.io.Serializable;
-
-public class SessionUser implements Serializable {
+@Getter
+public class SessionUser {
 
     private String name;
     private String email;
@@ -15,19 +14,10 @@ public class SessionUser implements Serializable {
         this(user.getName(), user.getEmail(), user.getPhoto().getPath());
     }
 
-    private SessionUser(String name, String email, String picture) {
+    public SessionUser(String name, String email, String picture) {
         this.name = name;
         this.email = email;
         this.picture = picture;
-    }
-
-    @Override
-    public String toString() {
-        return "SessionUser{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
     }
 
 }
