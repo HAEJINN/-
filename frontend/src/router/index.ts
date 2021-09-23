@@ -13,6 +13,19 @@ const routes = [
   //   name: "join",
   //   component: () => import("../views/user/join.vue"),
   // },
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  {
+    path: "/item",
+    name: "item",
+    component: () => import("../views/item/item.vue"),
+    children: [
+      {
+        path: "create",
+        name: "item-create",
+        component: () => import("../views/item/item-create.vue"),
+      },
+    ],
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",
