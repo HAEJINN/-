@@ -25,14 +25,6 @@
         </q-menu>
       </q-btn>
       <q-toolbar-title @click="Move_Home"> 나만의 작은 화실 </q-toolbar-title>
-      <q-btn
-        flat
-        round
-        dense
-        icon="add_photo_alternate"
-        class="q-mr-xs"
-        @click="Move_ItemCreate"
-      />
       <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
       <q-btn flat round dense icon="people" @click="OpenDialog_Login" />
     </q-toolbar>
@@ -77,11 +69,6 @@ export default {
     const router = useRouter();
     const Move_Home = () => {
       router.push("/");
-    };
-    const Move_ItemCreate = () => {
-      router.push({
-        name: "item-create",
-      });
     };
     const state = reactive({
       dialog: {
@@ -139,8 +126,6 @@ export default {
     return {
       state,
       Move_Home,
-      Move_ItemCreate,
-
       OpenDialog_Login,
       CloseDialog_Login,
       OpenDialog_LoginSuccess,
