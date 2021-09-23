@@ -35,9 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable().headers().frameOptions().disable();
 
         http.authorizeRequests()
-                .antMatchers("/", "/index/**","/login/**", "/logout/**", "/signup/**").permitAll()
-                .antMatchers("/test/**").hasAnyRole(allUserRole())
-                .antMatchers("/api/v1/**").hasAnyRole(allUserRole())
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
         http.oauth2Login()
                 .userInfoEndpoint()
