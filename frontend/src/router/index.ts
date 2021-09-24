@@ -4,7 +4,7 @@ const routes = [
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     홈     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/",
-    name: "Home",
+    name: "main",
     component: () => import("../views/main/main.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     유저     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -13,6 +13,11 @@ const routes = [
   //   name: "join",
   //   component: () => import("../views/user/join.vue"),
   // },
+  {
+    path: "/mypage",
+    name: "mypage",
+    component: () => import("../views/mypage/mypage.vue"),
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/item",
@@ -30,13 +35,13 @@ const routes = [
   {
     path: "/najakhwa",
     name: "najakhwa",
-    component: () => import("../views/banner/info.vue"),
+    component: () => import("../views/banner/najakhwa.vue"),
   },
-  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     거래     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     컬렉션     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
-    path: "/auctionhistory",
-    name: "auctionhistory",
-    component: () => import("../views/banner/auction.vue"),
+    path: "/collections",
+    name: "collections",
+    component: () => import("../views/banner/collection.vue"),
   },
 ];
 
