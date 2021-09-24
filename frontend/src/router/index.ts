@@ -8,11 +8,6 @@ const routes = [
     component: () => import("../views/main/main.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     유저     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-  // {
-  //   path: "/join",
-  //   name: "join",
-  //   component: () => import("../views/user/join.vue"),
-  // },
   {
     path: "/mypage",
     name: "mypage",
@@ -23,13 +18,11 @@ const routes = [
     path: "/item",
     name: "item",
     component: () => import("../views/item/item.vue"),
-    children: [
-      {
-        path: "create",
-        name: "item-create",
-        component: () => import("../views/item/item-create.vue"),
-      },
-    ],
+  },
+  {
+    path: "/item/create",
+    name: "item-create",
+    component: () => import("../views/item/create.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
@@ -39,8 +32,8 @@ const routes = [
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     컬렉션     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
-    path: "/collections",
-    name: "collections",
+    path: "/collection",
+    name: "collection",
     component: () => import("../views/banner/collection.vue"),
   },
 ];

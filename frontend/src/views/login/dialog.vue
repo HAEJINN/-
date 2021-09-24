@@ -26,7 +26,7 @@
             color="black"
             text-color="white"
             label="login Lets git it~!"
-            @click="OpenDialog_LoginSuccess"
+            @click="openDialogLoginSuccess"
           />
         </q-page>
       </q-page-container>
@@ -40,15 +40,15 @@ import { reactive, ref } from "vue";
 export default {
   name: "login-dialog",
   setup(props, { emit }) {
-    const OpenDialog_LoginSuccess = () => {
-      emit("LoginSuccess");
+    const openDialogLoginSuccess = () => {
+      emit("loginSuccess");
     };
     return {
       google: require("../../assets/login/google_line.png"),
       kakao: require("../../assets/login/kakao_big.png"),
       naver: require("../../assets/login/naver_green.png"),
 
-      OpenDialog_LoginSuccess,
+      openDialogLoginSuccess,
     };
   },
 };

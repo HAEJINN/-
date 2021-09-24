@@ -21,13 +21,13 @@
           <q-btn
             style="background: #ff0080; color: white"
             label="Go"
-            @click="MoveBanner_Najakhwa"
+            @click="moveNajakhwa"
           />
           <div>혹시 미술전공이거나 예술작가이신가요?</div>
           <q-btn
             style="background: goldenrod; color: white"
             label="작가인증하기"
-            @click="RegisterArtist"
+            @click="registerArtist"
           />
           <div>마이페이지에서도 작가인증을 할 수 있어요!</div>
         </q-page>
@@ -44,18 +44,18 @@ export default {
   name: "login-success-dialog",
   setup(props, { emit }) {
     const router = useRouter();
-    const MoveBanner_Najakhwa = () => {
+    const moveNajakhwa = () => {
       router.push({
         name: "najakhwa",
       });
     };
-    const RegisterArtist = () => {
-      emit("RegisterArtist");
+    const registerArtist = () => {
+      emit("registerArtist");
     };
 
     return {
-      MoveBanner_Najakhwa,
-      RegisterArtist,
+      moveNajakhwa,
+      registerArtist,
     };
   },
 };

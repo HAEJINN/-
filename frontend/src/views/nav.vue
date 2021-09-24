@@ -24,14 +24,14 @@
           </div>
         </q-menu>
       </q-btn>
-      <q-toolbar-title @click="Move_Home"> 나만의 작은 화실 </q-toolbar-title>
+      <q-toolbar-title @click="moveMain"> 나만의 작은 화실 </q-toolbar-title>
       <q-btn
         flat
         round
         dense
         icon="add_photo_alternate"
         class="q-mr-xs"
-        @click="Move_ItemCreate"
+        @click="moveItemCreate"
       />
       <q-btn
         flat
@@ -41,36 +41,36 @@
         @click="mvMypage"
         class="q-mr-xs"
       />
-      <q-btn flat round dense icon="people" @click="OpenDialog_Login" />
+      <q-btn flat round dense icon="people" @click="openDialogLogin" />
     </q-toolbar>
     <login-dialog
-      v-model="state.dialog.login"
-      @LoginSuccess="OpenDialog_LoginSuccess"
+      v-model="state.dialog.login.main"
+      @loginSuccess="openDialogLoginSuccess"
     />
     <login-success-dialog
-      v-model="state.dialog.login_success"
-      @RegisterArtist="OpenDialog_RegisterArtist"
+      v-model="state.dialog.login.success"
+      @registerArtist="openDialogRegisterArtist"
     />
     <register-artist-dialog
-      v-model="state.dialog.register_artist"
-      @RegisterCertify="OpenDialog_RegisterCertify"
+      v-model="state.dialog.register.artist"
+      @registerCertify="openDialogRegisterCertify"
     />
     <register-certify-dialog
-      v-model="state.dialog.register_certify"
-      @RegisterSuccess="OpenDialog_RegisterSuccess"
+      v-model="state.dialog.register.certify"
+      @registerSuccess="openDialogRegisterSuccess"
     />
-    <register-success-dialog v-model="state.dialog.register_success" />
+    <register-success-dialog v-model="state.dialog.register.success" />
   </div>
 </template>
 
 <script>
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import LoginDialog from "@/views/user/login-dialog";
-import LoginSuccessDialog from "@/views/user/login-success-dialog";
-import RegisterArtistDialog from "@/views/user/register-aritst-dialog";
-import RegisterCertifyDialog from "@/views/user/register-certify-dialog";
-import RegisterSuccessDialog from "@/views/user/register-success-dialog";
+import LoginDialog from "@/views/login/dialog";
+import LoginSuccessDialog from "@/views/login/success-dialog";
+import RegisterArtistDialog from "@/views/register/aritst-dialog";
+import RegisterCertifyDialog from "@/views/register/certify-dialog";
+import RegisterSuccessDialog from "@/views/register/success-dialog";
 
 export default {
   components: {
@@ -81,88 +81,96 @@ export default {
     RegisterSuccessDialog,
   },
   setup() {
+    /*ㅡㅡㅡㅡㅡRouterㅡㅡㅡㅡㅡ*/
     const router = useRouter();
-    const Move_Home = () => {
+    const moveMain = () => {
       router.push("/");
     };
-    const Move_ItemCreate = () => {
+    const moveItemCreate = () => {
       router.push({
         name: "item-create",
       });
-    };
-    const state = reactive({
-      dialog: {
-        login: ref(false),
-        login_success: ref(false),
-        register_artist: ref(false),
-        register_certify: ref(false),
-        register_success: ref(false),
-      },
-    });
-    const OpenDialog_Login = () => {
-      state.dialog.login = true;
-    };
-    const CloseDialog_Login = () => {
-      state.dialog.login = false;
-    };
-    const OpenDialog_LoginSuccess = () => {
-      CloseDialog_Login();
-      state.dialog.login_success = true;
-    };
-    const CloseDialog_LoginSuccess = () => {
-      state.dialog.login_success = false;
-    };
-    const OpenDialog_RegisterArtist = () => {
-      CloseDialog_LoginSuccess();
-      state.dialog.register_artist = true;
-    };
-    const CloseDialog_RegisterArtist = () => {
-      state.dialog.register_artist = false;
-    };
-    const OpenDialog_RegisterCertify = (re) => {
-      console.log(re);
-      state.dialog.register_certify = true;
-    };
-    const CloseDialog_RegisterCertify = (complate) => {
-      if (complate) {
-        state.dialog.register_artist = false;
-      }
-      state.dialog.register_certify = false;
-    };
-    const OpenDialog_RegisterSuccess = (success) => {
-      console.log(success);
-      if (success === true) {
-        state.dialog.register_artist = false;
-        state.dialog.register_certify = false;
-        state.dialog.register_success = true;
-      } else {
-        // 파일전송 오류메세지 띄우기
-      }
-    };
-    const CloseDialog_RegisterSuccess = () => {
-      state.dialog.register_success = false;
     };
     const mvMypage = () => {
       router.push("/mypage");
     };
 
+    /*ㅡㅡㅡㅡㅡStateㅡㅡㅡㅡㅡ*/
+    const state = reactive({
+      dialog: {
+        login: {
+          main: ref(false),
+          success: ref(false),
+        },
+        register: {
+          artist: ref(false),
+          certify: ref(false),
+          success: ref(false),
+        },
+      },
+    });
+
+    /*ㅡㅡㅡㅡㅡDialogㅡㅡㅡㅡㅡ*/
+    const openDialogLogin = () => {
+      state.dialog.login.main = true;
+    };
+    const closeDialogLogin = () => {
+      state.dialog.login.main = false;
+    };
+    const openDialogLoginSuccess = () => {
+      closeDialogLogin();
+      state.dialog.login.success = true;
+    };
+    const closeDialogLoginSuccess = () => {
+      state.dialog.login.success = false;
+    };
+    const openDialogRegisterArtist = () => {
+      closeDialogLoginSuccess();
+      state.dialog.register.artist = true;
+    };
+    const closeDialogRegisterArtist = () => {
+      state.dialog.register.artist = false;
+    };
+    const openDialogRegisterCertify = (re) => {
+      console.log(re);
+      state.dialog.register.certify = true;
+    };
+    const closeDialogRegisterCertify = (complate) => {
+      if (complate) {
+        state.dialog.register.artist = false;
+      }
+      state.dialog.register.certify = false;
+    };
+    const openDialogRegisterSuccess = (success) => {
+      console.log(success);
+      if (success === true) {
+        state.dialog.register.artist = false;
+        state.dialog.register.certify = false;
+        state.dialog.register.success = true;
+      } else {
+        // 파일전송 오류메세지 띄우기
+      }
+    };
+    const closeDialogRegisterSuccess = () => {
+      state.dialog.register.success = false;
+    };
+
     return {
       state,
-      Move_Home,
-      Move_ItemCreate,
-
-      OpenDialog_Login,
-      CloseDialog_Login,
-      OpenDialog_LoginSuccess,
-      CloseDialog_LoginSuccess,
-      OpenDialog_RegisterArtist,
-      CloseDialog_RegisterArtist,
-      OpenDialog_RegisterCertify,
-      CloseDialog_RegisterCertify,
-      OpenDialog_RegisterSuccess,
-      CloseDialog_RegisterSuccess,
-
+      moveMain,
+      moveItemCreate,
       mvMypage,
+
+      openDialogLogin,
+      closeDialogLogin,
+      openDialogLoginSuccess,
+      closeDialogLoginSuccess,
+      openDialogRegisterArtist,
+      closeDialogRegisterArtist,
+      openDialogRegisterCertify,
+      closeDialogRegisterCertify,
+      openDialogRegisterSuccess,
+      closeDialogRegisterSuccess,
     };
   },
 };

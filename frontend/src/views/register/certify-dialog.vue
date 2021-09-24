@@ -6,7 +6,7 @@
           url="/api/upload"
           label="멋진 작품들로 당신을 증명해주세요!"
           multiple
-          @uploaded="RegisterSuccess"
+          @uploaded="registerSuccess"
         >
         </q-uploader>
       </q-card-section>
@@ -24,13 +24,13 @@ export default {
     // RegisterUploadfiles,
   },
   setup(props, { emit }) {
-    const RegisterSuccess = () => {
+    const registerSuccess = () => {
       console.log("여기클릭햇음 success");
-      emit("RegisterSuccess", true);
+      emit("registerSuccess", true);
     };
     return {
       files: ref(null),
-      RegisterSuccess,
+      registerSuccess,
     };
   },
 };
