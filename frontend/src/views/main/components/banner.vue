@@ -54,7 +54,7 @@ export default {
       router.push("/najakhwa");
     };
     const moveCollection = () => {
-      router.push("/auctionhistory");
+      router.push("/collections");
     };
     return {
       slide,

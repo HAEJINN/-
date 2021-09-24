@@ -33,7 +33,14 @@
         class="q-mr-xs"
         @click="Move_ItemCreate"
       />
-      <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
+      <q-btn
+        flat
+        round
+        dense
+        icon="sim_card"
+        @click="mvMypage"
+        class="q-mr-xs"
+      />
       <q-btn flat round dense icon="people" @click="OpenDialog_Login" />
     </q-toolbar>
     <login-dialog
@@ -135,6 +142,9 @@ export default {
     const CloseDialog_RegisterSuccess = () => {
       state.dialog.register_success = false;
     };
+    const mvMypage = () => {
+      router.push("/mypage");
+    };
 
     return {
       state,
@@ -151,6 +161,8 @@ export default {
       CloseDialog_RegisterCertify,
       OpenDialog_RegisterSuccess,
       CloseDialog_RegisterSuccess,
+
+      mvMypage,
     };
   },
 };
