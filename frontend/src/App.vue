@@ -7,7 +7,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import Nav from "@/views/main/components/nav.vue";
+import Nav from "@/views/nav.vue";
 export default defineComponent({
   name: "App",
   components: {
