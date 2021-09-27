@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 public class SessionUser implements Serializable {
 
-    private String name;
-    private String email;
-    private String picture;
+    private final String name;
+    private final String email;
+    private final String picture;
 
     public SessionUser(User user) {
         this(user.getName(), user.getEmail(), user.getPhoto().getPath());
