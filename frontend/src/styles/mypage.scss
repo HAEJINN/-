@@ -20,3 +20,14 @@
     cursor: pointer;
   }
 }
+
+.mypage-button {
+  background-color: burlywood;
+  border-radius: 5px;
+  padding: 0.3em 1em;
+  margin: 1em 0.5em 0.2em;
+}
+
+.mypage-button:hover {
+  cursor: pointer;
+}

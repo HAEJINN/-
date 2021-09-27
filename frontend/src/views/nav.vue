@@ -24,24 +24,18 @@
           </div>
         </q-menu>
       </q-btn>
-      <q-toolbar-title @click="moveMain"> 나만의 작은 화실 </q-toolbar-title>
+      <q-toolbar-title @click="moveMain" class="najakhwa">
+        나만의 작은 화실
+      </q-toolbar-title>
       <q-btn
         flat
         round
         dense
         icon="add_photo_alternate"
-        class="q-mr-xs"
         @click="moveItemCreate"
       />
-      <q-btn
-        flat
-        round
-        dense
-        icon="sim_card"
-        @click="mvMypage"
-        class="q-mr-xs"
-      />
-      <q-btn flat round dense icon="people" @click="openDialogLogin" />
+      <q-btn flat round dense icon="account_circle" @click="mvMypage" />
+      <q-btn flat round dense icon="input" @click="openDialogLogin" />
     </q-toolbar>
     <login-dialog
       v-model="state.dialog.login.main"
@@ -64,6 +58,7 @@
 </template>
 
 <script>
+import "../styles/nav.scss";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import LoginDialog from "@/views/login/dialog";

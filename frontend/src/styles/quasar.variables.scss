@@ -1,15 +1,16 @@
 // It's highly recommended to change the default colors
 // to match your app's branding.
 
-$primary   : #027BE3;
-$secondary : #26A69A;
-$accent    : #9C27B0;
+$primary: #c2b8a3; // 기본 브라운
+$positive: #a19882; // 다크 브라운
 
-$dark      : #1D1D1D;
+$secondary: #fef7dc; // 연한 베이지
+$accent: #e6ddc6; //  베이지
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+$info: #9d9d9d; // 그레이
+$dark: #494949; // 다크그레이
 
-@import '~quasar-variables-styl'
+$negative: #c10015;
+$warning: #f2c037;
+
+@import "~quasar-variables-styl";

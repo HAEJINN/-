@@ -12,30 +12,30 @@
         padding
         arrows
         height="300px"
-        class="bg-secondary text-white shadow-1 rounded-borders"
+        class="bg-accent text-white shadow-1 rounded-borders"
       >
         <q-carousel-slide name="style" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div>나만의 작은 화실 소개</div>
-            <q-btn @click="moveInfo">바로가기</q-btn>
+            <div class="text-dark text-h6 q-py-md">나만의 작은 화실 소개</div>
+            <q-btn color="positive" @click="moveInfo">바로가기</q-btn>
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="tv" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div>컬렉션들</div>
-            <q-btn @click="moveCollection">바로가기</q-btn>
+            <div class="text-dark text-h6 q-py-md">컬렉션들</div>
+            <q-btn color="positive" @click="moveCollection">바로가기</q-btn>
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="layers" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div>판매작품/판매완료작품?</div>
-            <q-btn>바로가기</q-btn>
+            <div class="text-dark text-h6 q-py-md">작품판매상황</div>
+            <q-btn color="positive">바로가기</q-btn>
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="map" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div>모하지..</div>
-            <q-btn>바로가기</q-btn>
+            <div class="text-dark text-h6 q-py-md">모하지..</div>
+            <q-btn color="positive">바로가기</q-btn>
           </div>
         </q-carousel-slide>
       </q-carousel>
