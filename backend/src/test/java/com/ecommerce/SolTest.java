@@ -14,27 +14,27 @@ public class SolTest {
     @Test
     public void getEthClientVersionSync() throws Exception
     {
-        Web3j web3j = Web3j.build(new HttpService());
+        Web3j web3j = Web3j.build(new HttpService("http://3.36.50.29:8545"));
         Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();
-        System.out.println(web3ClientVersion.getWeb3ClientVersion());
+        System.out.println(">>> web3ClientVersion = " + web3ClientVersion.getWeb3ClientVersion());
     }
 
     @DisplayName("getEthClientVersionASync")
     @Test
     public void getEthClientVersionASync() throws Exception
     {
-        Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
-        Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().sendAsync().get();
-        System.out.println(web3ClientVersion.getWeb3ClientVersion());
+        Web3j web3j = Web3j.build(new HttpService("http://3.36.50.29:8545"));
+        Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().sendAsync().get();
+        System.out.println(">>> web3ClientVersion = " + web3ClientVersion.getWeb3ClientVersion());
     }
 
     @DisplayName("getEthClientVersionRx")
     @Test
     public void getEthClientVersionRx() throws Exception
     {
-        Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
-        web3.web3ClientVersion().flowable().subscribe(x -> {
-            System.out.println(x.getWeb3ClientVersion());
+        Web3j web3j = Web3j.build(new HttpService("http://3.36.50.29:8545"));
+        web3j.web3ClientVersion().flowable().subscribe(x -> {
+            System.out.println(">>> web3ClientVersion = " + x.getWeb3ClientVersion());
         });
 
         Thread.sleep(5000);
