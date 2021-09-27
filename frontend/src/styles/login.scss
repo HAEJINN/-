@@ -1,0 +1,23 @@
+.login-image {
+  border-radius: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  height: 150px;
+  margin: 0.5em;
+}
+.google {
+  background-image: url("../assets/login/google_light.png");
+}
+.kakao {
+  background-image: url("../assets/login/kakao_big.png");
+}
+.naver {
+  background-image: url("../assets/login/naver_green.png");
+}
+
+.close-btn {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
