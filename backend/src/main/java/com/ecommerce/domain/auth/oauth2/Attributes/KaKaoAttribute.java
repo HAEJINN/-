@@ -20,12 +20,12 @@ public class KaKaoAttribute implements OAuthAttribute {
     private static final String PROFILE = "profile";
     private static final String KAKAO_ACCOUNT = "kakao_account";
 
-    private Map<String, Object> attributes;
-    private String nameAttributeKey;
-    private String name;
-    private String email;
-    private String picture;
-    private SocialType socialType;
+    private final Map<String, Object> attributes;
+    private final String nameAttributeKey;
+    private final String name;
+    private final String email;
+    private final String picture;
+    private final SocialType socialType;
 
     @Builder
     private KaKaoAttribute(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture, SocialType socialType) {

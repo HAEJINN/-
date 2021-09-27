@@ -19,12 +19,12 @@ public class NaverAttribute implements OAuthAttribute {
     private static final String PROFILE_IMAGE = "profile_image";
     private static final String RESPONSE = "response";
 
-    private Map<String, Object> attributes;
-    private String nameAttributeKey; // 사용자 이름은 key:value 형태로 되어있기에 이에 해당하는 키값을 구해야한다.
-    private String name;
-    private String email;
-    private String picture;
-    private SocialType socialType;
+    private final Map<String, Object> attributes;
+    private final String nameAttributeKey; // 사용자 이름은 key:value 형태로 되어있기에 이에 해당하는 키값을 구해야한다.
+    private final String name;
+    private final String email;
+    private final String picture;
+    private final SocialType socialType;
 
     @Builder
     private NaverAttribute(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture, SocialType socialType) {
