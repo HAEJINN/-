@@ -4,39 +4,37 @@ const routes = [
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     홈     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/",
-    name: "Home",
+    name: "main",
     component: () => import("../views/main/main.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     유저     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-  // {
-  //   path: "/join",
-  //   name: "join",
-  //   component: () => import("../views/user/join.vue"),
-  // },
+  {
+    path: "/mypage",
+    name: "mypage",
+    component: () => import("../views/mypage/mypage.vue"),
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/item",
     name: "item",
     component: () => import("../views/item/item.vue"),
-    children: [
-      {
-        path: "create",
-        name: "item-create",
-        component: () => import("../views/item/item-create.vue"),
-      },
-    ],
+  },
+  {
+    path: "/item/create",
+    name: "item-create",
+    component: () => import("../views/item/create.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",
     name: "najakhwa",
-    component: () => import("../views/banner/info.vue"),
+    component: () => import("../views/banner/najakhwa.vue"),
   },
-  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     거래     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     컬렉션     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
-    path: "/auctionhistory",
-    name: "auctionhistory",
-    component: () => import("../views/banner/auction.vue"),
+    path: "/collection",
+    name: "collection",
+    component: () => import("../views/banner/collection.vue"),
   },
 ];
 

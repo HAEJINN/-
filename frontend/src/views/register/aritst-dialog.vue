@@ -16,13 +16,13 @@
           <q-btn
             color="secondary"
             label="소개페이지로 돌아가기"
-            @click="Move_Najakhwa"
+            @click="moveNajakhwa"
           />
-          <q-btn class="" color="primary" @click="Register('student')">
+          <q-btn class="" color="primary" @click="register('student')">
             <div>미술대학</div>
             <div>재학생 | 졸업생</div>
           </q-btn>
-          <q-btn class="" color="primary" @click="Register('artist')">
+          <q-btn class="" color="primary" @click="register('artist')">
             <div>개인작가</div>
             <div>신입 예술 작가</div>
           </q-btn>
@@ -40,17 +40,17 @@ export default {
   name: "register-aritst-dialog",
   setup(props, { emit }) {
     const router = useRouter();
-    const Move_Najakhwa = () => {
+    const moveNajakhwa = () => {
       router.push({
         name: "najakhwa",
       });
     };
-    const Register = (type) => {
-      emit("RegisterCertify", type);
+    const register = (type) => {
+      emit("registerCertify", type);
     };
     return {
-      Register,
-      Move_Najakhwa,
+      register,
+      moveNajakhwa,
     };
   },
 };

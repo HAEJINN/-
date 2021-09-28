@@ -6,8 +6,8 @@
         :name="1"
         img-src="https://cdn.quasar.dev/img/mountains.jpg"
       >
-        <div class="absolute-bottom bg-secondary text-center">
-          <div class="text-h5 text-weight-bolder">전시회명</div>
+        <div class="absolute-bottom bg-accent text-center">
+          <div class="text-h5 q-py-sm">전시회명</div>
           <div class="text-subtitle1">작가명</div>
         </div>
       </q-carousel-slide>
@@ -15,8 +15,8 @@
         :name="2"
         img-src="https://cdn.quasar.dev/img/parallax1.jpg"
       >
-        <div class="absolute-bottom bg-secondary text-center">
-          <div class="text-h5 text-weight-bolder">전시회명</div>
+        <div class="absolute-bottom bg-accent text-center">
+          <div class="text-h5 q-py-sm">전시회명</div>
           <div class="text-subtitle1">작가명</div>
         </div>
       </q-carousel-slide>
@@ -24,8 +24,8 @@
         :name="3"
         img-src="https://cdn.quasar.dev/img/parallax2.jpg"
       >
-        <div class="absolute-bottom bg-secondary text-center">
-          <div class="text-h5 text-weight-bolder">전시회명</div>
+        <div class="absolute-bottom bg-accent text-center">
+          <div class="text-h5 q-py-sm">전시회명</div>
           <div class="text-subtitle1">작가명</div>
         </div>
       </q-carousel-slide>
@@ -33,8 +33,8 @@
         :name="4"
         img-src="https://cdn.quasar.dev/img/quasar.jpg"
       >
-        <div class="absolute-bottom bg-secondary text-center">
-          <div class="text-h5 text-weight-bolder">전시회명</div>
+        <div class="absolute-bottom bg-accent text-center">
+          <div class="text-h5 q-py-sm">전시회명</div>
           <div class="text-subtitle1">작가명</div>
         </div>
       </q-carousel-slide>

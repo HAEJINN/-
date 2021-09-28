@@ -1,0 +1,33 @@
+.profile-image {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-image: url("../assets/mypage/malang.png");
+  background-size: cover;
+  background-position: center center;
+
+  .modify-profile {
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+    width: 18%;
+    height: 18%;
+    background-image: url("../assets/mypage/settings.png");
+    background-size: cover;
+    background-position: center center;
+  }
+  .modify-profile:hover {
+    cursor: pointer;
+  }
+}
+
+.mypage-button {
+  background-color: burlywood;
+  border-radius: 5px;
+  padding: 0.3em 1em;
+  margin: 1em 0.5em 0.2em;
+}
+
+.mypage-button:hover {
+  cursor: pointer;
+}

@@ -20,7 +20,7 @@
         <q-btn
           style="background: #ff0080; color: white"
           label="나작화"
-          @click="Move_Najakhwa"
+          @click="moveNajakhwa"
         />
         <div>
           마이페이지로 이동해서 <br />
@@ -30,7 +30,7 @@
           flat
           style="color: #ff0080"
           label="마이페이지"
-          @click="Move_Mypage"
+          @click="moveMypage"
         />
       </q-page>
     </q-page-container>
@@ -39,22 +39,22 @@
 <script>
 import { useRouter } from "vue-router";
 export default {
-  name: "register-success",
+  name: "register-components-success",
   setup() {
     const router = useRouter();
-    const Move_Najakhwa = () => {
+    const moveNajakhwa = () => {
       router.push({
         name: "najakhwa",
       });
     };
-    const Move_Mypage = () => {
+    const moveMypage = () => {
       router.push({
         name: "mypage",
       });
     };
     return {
-      Move_Najakhwa,
-      Move_Mypage,
+      moveNajakhwa,
+      moveMypage,
     };
   },
 };

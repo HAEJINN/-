@@ -1,15 +1,15 @@
 <template lang="">
   <q-dialog>
-    <register-success />
+    <success />
   </q-dialog>
 </template>
 
 <script>
-import RegisterSuccess from "@/views/user/components/register-success";
+import Success from "@/views/register/components/success";
 
 export default {
   components: {
-    RegisterSuccess,
+    Success,
   },
   setup() {
     return {};
