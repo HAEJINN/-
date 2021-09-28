@@ -16,12 +16,18 @@
           <div class="row">
             <a
               class="col login-image google"
-              href="/oauth2/authorization/google"
+              href="http://localhost:8080/oauth2/authorization/google"
             >
             </a>
-            <a class="col login-image kakao" href="/oauth2/authorization/kakao">
+            <a
+              class="col login-image kakao"
+              href="http://localhost:8080/oauth2/authorization/kakao"
+            >
             </a>
-            <a class="col login-image naver" href="/oauth2/authorization/naver">
+            <a
+              class="col login-image naver"
+              href="http://localhost:8080/oauth2/authorization/naver"
+            >
             </a>
           </div>
           <div class="row justify-center">
@@ -38,11 +44,11 @@
   </q-dialog>
 </template>
 
-<script>
+<script lang="ts">
 import "../../styles/login.scss";
-import { reactive, ref } from "vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "login-dialog",
   setup(props, { emit }) {
     const openDialogLoginSuccess = () => {
@@ -52,5 +58,5 @@ export default {
       openDialogLoginSuccess,
     };
   },
-};
+});
 </script>
