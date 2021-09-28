@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 public class SessionUser implements Serializable {
 
+    public static final String SESSION_KEY = "user";
+
     private final String name;
     private final String email;
     private final String picture;
@@ -21,13 +23,21 @@ public class SessionUser implements Serializable {
         this.picture = picture;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
     @Override
     public String toString() {
-        return "SessionUser{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
+        return "name=" + name + "&email=" + email + "&picture=" + picture;
     }
 
 }

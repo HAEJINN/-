@@ -2,6 +2,8 @@ package com.ecommerce.global.config;
 
 import com.ecommerce.domain.auth.oauth2.CustomOAuth2UserService;
 import com.ecommerce.domain.user.domain.vo.UserRole;
+import com.ecommerce.global.handler.OAuth2CustomFailureHandler;
+import com.ecommerce.global.handler.OAuth2CustomSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,8 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/**").hasAnyRole(allUserRole())
                 .anyRequest().authenticated();
         http.oauth2Login()
-                .successHandler(successHandler())
-                .failureHandler(failureHandler())
+                .successHandler(oauth2CustomSuccessHandler())
+                .failureHandler(oauth2CustomFailureHandler())
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
     }
@@ -57,13 +59,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    SimpleUrlAuthenticationSuccessHandler successHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler("http://localhost:8083");
+    OAuth2CustomSuccessHandler oauth2CustomSuccessHandler() {
+        return new OAuth2CustomSuccessHandler();
     }
 
     @Bean
-    SimpleUrlAuthenticationFailureHandler failureHandler() {
-        return new SimpleUrlAuthenticationFailureHandler("http://localhost:8083");
+    OAuth2CustomFailureHandler oauth2CustomFailureHandler() {
+        return new OAuth2CustomFailureHandler();
     }
 
 }
