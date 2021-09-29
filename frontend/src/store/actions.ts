@@ -3,14 +3,21 @@ import { User, UserResponse, UserRequest } from "@/types/user";
 
 // 로그인
 export async function request_userLogin(
-  email: any,
-  password: any
+  // email: any,
+  // password: any
+  commit: any,
+  user: User
 ): Promise<UserResponse> {
+  // const data = {
+  //   email: email,
+  //   password: password,
+  // };
   const data = {
-    email: email,
-    password: password,
+    email: user.email,
+    password: user.password,
   };
-  const url = "/users/login";
+  console.log(data);
+  const url = "/api/v1/login";
   return await axios.post(url, data);
 }
 
@@ -25,7 +32,7 @@ export async function request_userSignup(
     name: user.name,
     password: user.password,
   };
-  const url = "/users";
+  const url = "/api/v1/users";
   return await axios.post(url, data);
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-font">
     <Nav></Nav>
     <router-view></router-view>
   </div>
@@ -8,6 +8,7 @@
 <script>
 import { defineComponent } from "vue";
 import Nav from "@/views/nav.vue";
+import "../src/styles/app.css";
 export default defineComponent({
   name: "App",
   components: {

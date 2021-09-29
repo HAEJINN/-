@@ -1,3 +1,4 @@
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ mypage.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 .profile-image {
   position: relative;
   border: 1px solid black;
@@ -21,13 +22,23 @@
   }
 }
 
-.mypage-button {
-  background-color: burlywood;
-  border-radius: 5px;
-  padding: 0.3em 1em;
-  margin: 1em 0.5em 0.2em;
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ followitem.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.user-img {
+  border: 1px solid black;
+  border-radius: 50%;
+  background-image: url("../assets/mypage/malang.png");
+  background-size: cover;
+  background-position: center center;
+  width: 45px;
+  height: 45px;
+  margin: 0.5em;
 }
-
-.mypage-button:hover {
+.mvcollection {
+  height: 10%;
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  margin-right: 0.2em;
+}
+.mvcollection:hover {
   cursor: pointer;
 }
