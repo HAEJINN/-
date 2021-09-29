@@ -3,11 +3,6 @@ package com.ecommerce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
-import org.web3j.crypto.Credentials;
-import org.web3j.erc721.ERC721;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.gas.DefaultGasProvider;
 
 @SpringBootApplication
 public class Application {

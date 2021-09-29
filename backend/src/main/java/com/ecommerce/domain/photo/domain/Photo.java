@@ -1,6 +1,6 @@
 package com.ecommerce.domain.photo.domain;
 
-import com.ecommerce.domain.BaseTimeEntity;
+import com.ecommerce.global.common.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

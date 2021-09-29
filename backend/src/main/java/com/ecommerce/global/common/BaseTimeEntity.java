@@ -1,4 +1,4 @@
-package com.ecommerce.domain;
+package com.ecommerce.global.common;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

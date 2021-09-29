@@ -1,8 +1,17 @@
-POST http://3.34.135.3:8080/api/users
+POST http://localhost:8080/api/v1/users
 Content-Type: application/json
 
 {
-    "name": "jake2@jake.jake",
-    "email": "jake2jake",
+    "name": "jake",
+    "email": "jake2@jake.jake",
     "password" : "password2"
+}
+
+### Login
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
+
+{
+  "email": "jake2@jake.jake",
+  "password" : "password2"
 }
