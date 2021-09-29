@@ -14,16 +14,16 @@ const routes = [
     component: () => import("../views/mypage/mypage.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-  {
-    path: "/item",
-    name: "item",
-    component: () => import("../views/item/item.vue"),
-  },
-  {
-    path: "/item/create",
-    name: "item-create",
-    component: () => import("../views/item/create.vue"),
-  },
+  // {
+  //   path: "/item",
+  //   name: "item",
+  //   component: () => import("../views/item/item.vue"),
+  // },
+  // {
+  //   path: "/item/create",
+  //   name: "item-create",
+  //   component: () => import("../views/item/create.vue"),
+  // },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",

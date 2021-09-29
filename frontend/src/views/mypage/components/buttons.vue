@@ -1,6 +1,5 @@
 <template>
   <div class="col q-py-md bg-accent">
-    <q-btn unelevated rounded color="primary" label="작가인증" />
     <div class="row justify-center q-my-sm">
       <q-btn-group outline unelevated>
         <q-btn outline color="brown" label="내 컬렉션" />
