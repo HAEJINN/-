@@ -12,10 +12,11 @@
             <q-btn v-close-popup flat round dense icon="close" />
           </q-toolbar>
         </q-header>
-        <q-page>
-          <div>
-            <div>
-              <label for="email">이메일</label>
+        <q-page class="column justify-center items-center">
+          <div class="column justify-center items-center">
+            <span class="text-h4 q-my-md">로그인</span>
+            <div class="row q-my-sm">
+              <label class="q-mr-md" for="email">이메일</label>
               <input
                 type="text"
                 class="form-control"
@@ -24,8 +25,8 @@
                 placeholder="이메일"
               />
             </div>
-            <div>
-              <label for="password">비밀번호</label>
+            <div class="row q-my-sm">
+              <label class="q-mr-md" for="password">비밀번호</label>
               <input
                 type="password"
                 id="password"
@@ -33,9 +34,12 @@
                 placeholder="비밀번호"
               />
             </div>
-            <button type="submit" @click="clickLogin()">로그인</button>
+            <button class="q-my-md" type="submit" @click="clickLogin()">
+              로그인
+            </button>
           </div>
-          <div class="row justify-center">
+          <div class="column justify-center items-center q-mt-lg">
+            <span class="q-mb-sm">아직 회원이 아니신가요?</span>
             <q-btn
               color="black"
               text-color="white"
@@ -50,6 +54,7 @@
 </template>
 
 <script lang="ts">
+import "../../styles/login.scss";
 import { defineComponent } from "vue";
 import { reactive } from "vue";
 import { useStore } from "vuex";
