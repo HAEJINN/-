@@ -12,24 +12,47 @@
             <q-btn v-close-popup flat round dense icon="close" />
           </q-toolbar>
         </q-header>
-        <q-page class="col">
-          <div>회원가입 축하합니다~!</div>
+        <q-page>
           <div>
-            나작화에 대해 경험하고 <br />
-            새로운 예술품들을 만나러 가시죠~!
+            <div>
+              <label for="email">이메일</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                v-model="state.user.email"
+                placeholder="이메일"
+              />
+            </div>
+            <div>
+              <label for="name">이름</label>
+              <input
+                type="text"
+                id="name"
+                v-model="state.user.name"
+                placeholder="이름"
+              />
+            </div>
+            <div>
+              <label for="password">비밀번호</label>
+              <input
+                type="password"
+                id="password"
+                v-model="state.user.password"
+                placeholder="비밀번호"
+              />
+            </div>
+            <div>
+              <label for="password-confirm">비밀번호 확인</label>
+              <input
+                type="password"
+                id="password-confirm"
+                v-model="state.user.passwordConfirm"
+                placeholder="비밀번호 확인"
+              />
+            </div>
+            <button type="submit" @click="clickRegister()">회원가입</button>
           </div>
-          <q-btn
-            style="background: #ff0080; color: white"
-            label="Go"
-            @click="moveNajakhwa"
-          />
-          <div>혹시 미술전공이거나 예술작가이신가요?</div>
-          <q-btn
-            style="background: goldenrod; color: white"
-            label="작가인증하기"
-            @click="registerArtist"
-          />
-          <div>마이페이지에서도 작가인증을 할 수 있어요!</div>
         </q-page>
       </q-page-container>
     </q-layout>
@@ -37,28 +60,52 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { defineComponent } from "vue";
+import { reactive } from "vue";
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-export default {
+export default defineComponent({
   name: "login-success-dialog",
-  setup(props, { emit }) {
+  setup() {
+    const store = useStore();
     const router = useRouter();
-    const moveNajakhwa = () => {
-      router.push({
-        name: "najakhwa",
-      });
-    };
-    const registerArtist = () => {
-      emit("registerArtist");
+    const state = reactive({
+      user: {
+        email: "",
+        name: "",
+        password: "",
+        passwordConfirm: "",
+      },
+    });
+    const clickRegister = () => {
+      if (state.user.password === state.user.passwordConfirm) {
+        const data = {
+          email: state.user.email,
+          name: state.user.name,
+          password: state.user.password,
+        };
+        store
+          .dispatch("root/request_userSignup", data)
+          .then((response) => {
+            console.log(response);
+            alert("회원가입이 완료되었습니다.");
+            router.push("/");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
     };
 
     return {
-      moveNajakhwa,
-      registerArtist,
+      clickRegister,
+      state,
     };
   },
-};
+});
 </script>
 
 <style lang=""></style>

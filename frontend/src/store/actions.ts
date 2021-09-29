@@ -3,13 +3,20 @@ import { User, UserResponse, UserRequest } from "@/types/user";
 
 // 로그인
 export async function request_userLogin(
-  email: any,
-  password: any
+  // email: any,
+  // password: any
+  commit: any,
+  user: User
 ): Promise<UserResponse> {
+  // const data = {
+  //   email: email,
+  //   password: password,
+  // };
   const data = {
-    email: email,
-    password: password,
+    email: user.email,
+    password: user.password,
   };
+  console.log(data);
   const url = "/users/login";
   return await axios.post(url, data);
 }
