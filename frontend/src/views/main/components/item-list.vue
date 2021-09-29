@@ -1,6 +1,6 @@
 <template>
-  <div class="q-pa-sm">
-    <div class="text-center text-h5">최근 작품</div>
+  <div class="q-pa-sm q-my-md">
+    <div class="text-center text-h5 q-mb-md">최근 사진</div>
     <div class="row">
       <div class="my-card col-lg-3 col-xs-6">
         <q-card class="q-ma-sm">

@@ -22,19 +22,19 @@
         </q-carousel-slide>
         <q-carousel-slide name="tv" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div class="text-dark text-h6 q-py-md">컬렉션들</div>
+            <div class="text-dark text-h6 q-py-md">컬렉션소개</div>
             <q-btn color="positive" @click="moveCollection">바로가기</q-btn>
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="layers" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div class="text-dark text-h6 q-py-md">작품판매상황</div>
+            <div class="text-dark text-h6 q-py-md">사진 모아보기</div>
             <q-btn color="positive">바로가기</q-btn>
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="map" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div class="text-dark text-h6 q-py-md">모하지..</div>
+            <div class="text-dark text-h6 q-py-md">작가 모아보기</div>
             <q-btn color="positive">바로가기</q-btn>
           </div>
         </q-carousel-slide>
