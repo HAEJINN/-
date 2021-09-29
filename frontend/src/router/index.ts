@@ -13,6 +13,16 @@ const routes = [
     name: "mypage",
     component: () => import("../views/mypage/mypage.vue"),
   },
+  {
+    path: "/collect",
+    name: "collect",
+    component: () => import("../views/mypage/feed.vue"),
+  },
+  {
+    path: "/addpic",
+    name: "addpic",
+    component: () => import("../views/mypage/addpic.vue"),
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   // {
   //   path: "/item",

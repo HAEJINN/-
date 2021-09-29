@@ -1,12 +1,17 @@
 <template>
   <div>
     <div class="column items-center">
-      <q-icon name="account_balance_wallet"></q-icon>
-      <div>
-        <span>999ETH</span>
-        <q-icon name="add_circle_outline"></q-icon>
+      <div class="wallet"></div>
+      <div class="row items-start justify-center">
+        <div class="text-h3">999ETH</div>
+        <div class="add-btn"></div>
       </div>
-      <span>0X123456789</span>
+      <div class="text-h6 q-my-md">0X123456789</div>
     </div>
   </div>
 </template>
+<script lang="ts">
+import "../../../styles/mypage.scss";
+import { defineComponent } from "vue";
+export default defineComponent({});
+</script>

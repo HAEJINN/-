@@ -1,10 +1,9 @@
 <template>
-  <div class="col q-py-md bg-accent">
+  <div class="col q-pt-sm q-pb-md bg-accent">
     <div class="row justify-center q-my-sm">
       <q-btn-group outline unelevated>
-        <q-btn outline color="brown" label="내 컬렉션" />
-        <q-btn outline color="brown" label="작품 추가" />
-        <q-btn outline color="brown" label="전시회 등록" />
+        <q-btn outline color="brown" label="내 컬렉션" @click="mvfeed" />
+        <q-btn outline color="brown" label="작품 추가" @click="addpicture" />
       </q-btn-group>
     </div>
   </div>
@@ -12,5 +11,22 @@
 <script lang="ts">
 import "../../../styles/mypage.scss";
 import { defineComponent } from "vue";
-export default defineComponent({});
+import { useRouter } from "vue-router";
+
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+    const mvfeed = () => {
+      router.push("/feed");
+    };
+    const addpicture = () => {
+      router.push("/addpic");
+    };
+
+    return {
+      mvfeed,
+      addpicture,
+    };
+  },
+});
 </script>

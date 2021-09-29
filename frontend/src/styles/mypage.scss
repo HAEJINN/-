@@ -42,3 +42,22 @@
 .mvcollection:hover {
   cursor: pointer;
 }
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ wallet.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.wallet {
+  background-image: url("../assets/mypage/wallet.png");
+  background-size: cover;
+  background-position: center center;
+  width: 100px;
+  height: 100px;
+  margin: 0.5em;
+}
+
+.add-btn {
+  background-image: url("../assets/mypage/plus.png");
+  background-size: cover;
+  background-position: center center;
+  width: 30px;
+  height: 30px;
+  margin: 0.2em 0.5em;
+}
