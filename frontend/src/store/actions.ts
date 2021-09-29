@@ -17,7 +17,7 @@ export async function request_userLogin(
     password: user.password,
   };
   console.log(data);
-  const url = "/users/login";
+  const url = "/api/v1/login";
   return await axios.post(url, data);
 }
 
@@ -32,7 +32,7 @@ export async function request_userSignup(
     name: user.name,
     password: user.password,
   };
-  const url = "/users";
+  const url = "/api/v1/users";
   return await axios.post(url, data);
 }
 
