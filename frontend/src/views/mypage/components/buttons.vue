@@ -1,10 +1,12 @@
 <template>
-  <div class="col q-my-md">
+  <div class="col q-py-md bg-accent">
     <q-btn unelevated rounded color="primary" label="작가인증" />
-    <div class="row justify-center">
-      <div class="mypage-button">내컬렉션</div>
-      <div class="mypage-button">작품추가</div>
-      <div class="mypage-button">전시회등록</div>
+    <div class="row justify-center q-my-sm">
+      <q-btn-group outline unelevated>
+        <q-btn outline color="brown" label="내 컬렉션" />
+        <q-btn outline color="brown" label="작품 추가" />
+        <q-btn outline color="brown" label="전시회 등록" />
+      </q-btn-group>
     </div>
   </div>
 </template>
