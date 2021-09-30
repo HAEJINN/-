@@ -29,13 +29,13 @@
         <q-carousel-slide name="layers" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
             <div class="text-dark text-h6 q-py-md">사진 모아보기</div>
-            <q-btn color="positive">바로가기</q-btn>
+            <q-btn color="positive" @click="mvpicture">바로가기</q-btn>
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="map" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            <div class="text-dark text-h6 q-py-md">작가 모아보기</div>
-            <q-btn color="positive">바로가기</q-btn>
+            <div class="text-dark text-h6 q-py-md">컬렉션 모아보기</div>
+            <q-btn color="positive" @click="mvcollections">바로가기</q-btn>
           </div>
         </q-carousel-slide>
       </q-carousel>
@@ -54,12 +54,21 @@ export default {
       router.push("/najakhwa");
     };
     const moveCollection = () => {
+      router.push("/collection");
+    };
+    const mvpicture = () => {
+      router.push("/picture");
+    };
+    const mvcollections = () => {
       router.push("/collections");
     };
+
     return {
       slide,
       moveInfo,
       moveCollection,
+      mvpicture,
+      mvcollections,
     };
   },
 };

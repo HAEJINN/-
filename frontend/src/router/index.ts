@@ -14,8 +14,8 @@ const routes = [
     component: () => import("../views/mypage/mypage.vue"),
   },
   {
-    path: "/collect",
-    name: "collect",
+    path: "/feed",
+    name: "feed",
     component: () => import("../views/mypage/feed.vue"),
   },
   {
@@ -34,17 +34,29 @@ const routes = [
   //   name: "item-create",
   //   component: () => import("../views/item/create.vue"),
   // },
-  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     나작화소개     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",
     name: "najakhwa",
     component: () => import("../views/banner/najakhwa.vue"),
   },
-  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     컬렉션     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     컬렉션소개     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/collection",
     name: "collection",
     component: () => import("../views/banner/collection.vue"),
+  },
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     컬렉션 모아보기     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  {
+    path: "/collections",
+    name: "collections",
+    component: () => import("../views/banner/user.vue"),
+  },
+  /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     사진 모아보기     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+  {
+    path: "/picture",
+    name: "picture",
+    component: () => import("../views/banner/picture.vue"),
   },
 ];
 

@@ -53,7 +53,7 @@
   </q-dialog>
 </template>
 
-<script lang="ts">
+<script>
 import "../../styles/login.scss";
 import { defineComponent } from "vue";
 import { reactive } from "vue";
@@ -84,8 +84,10 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           alert("로그인이 완료되었습니다.");
-          router.push("/");
+          localStorage.setItem("userInfo", JSON.stringify(response.data));
+          router.go();
         })
+
         .catch((error) => {
           console.error(error);
         });
