@@ -18,11 +18,11 @@ public class FollowerListResponse {
         return ofUser(follow.getFollower());
     }
 
-    public static FollowerListResponse ofUser(final User user) {
+    private static FollowerListResponse ofUser(final User user) {
         return new FollowerListResponse(user.getId(), user.getName(), user.getPhoto().getPath());
     }
 
-    public FollowerListResponse(final Long id, final String name, final String photo) {
+    private FollowerListResponse(final Long id, final String name, final String photo) {
         this.id = id;
         this.name = name;
         this.photo = photo;
