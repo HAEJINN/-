@@ -1,4 +1,4 @@
-package com.ecommerce.domain.wallet;
+package com.ecommerce.domain.wallet.domain;
 
 import com.ecommerce.domain.user.domain.User;
 import lombok.*;
@@ -6,20 +6,21 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigInteger;
 
-@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table
+@Table(name = "wallets")
 @Entity
-
 public class Wallet {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wallet_id")
     private Long id;
 
+    @Column(name = "credentials_address")
+    private String credentials_address;
+
     @Column(name = "wallet_address")
-    private String address;
+    private String wallet_address;
 
     @Column(name = "wallet_balance")
     private BigInteger balance;
@@ -32,12 +33,18 @@ public class Wallet {
     private User user;
 
     @Builder
-
-    public Wallet(Long id, String address, BigInteger balance, int wallet_cash, User user) {
-        this.id = id;
-        this.address = address;
+    public Wallet(final String credentials_address, final String wallet_address,
+                  final BigInteger balance, final int wallet_cash, final User user) {
+        this.credentials_address = credentials_address;
+        this.wallet_address = wallet_address;
         this.balance = balance;
         this.wallet_cash = wallet_cash;
         this.user = user;
     }
+
+    public Wallet changeBalance(final BigInteger balance) {
+        this.balance = balance;
+        return this;
+    }
+
 }

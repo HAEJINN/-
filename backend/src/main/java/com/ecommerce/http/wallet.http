@@ -1,0 +1,11 @@
+### 지갑 생성
+POST http://localhost:8080/login/create/test
+Content-Type: application/json
+
+{
+  "email": "jake2@jake.jake",
+  "password" : "password2"
+}
+
+### 월렉에서 주소값 가져오기
+GET http://localhost:8080/login/balance/test?address=0xd599f1255b79d18377e49498f27ac8815855370c

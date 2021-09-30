@@ -1,6 +1,5 @@
 package com.ecommerce.domain.item.domain;
 
-
 import com.ecommerce.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -37,6 +36,10 @@ public class Item {
         this.token_id = token_id;
         this.cid = cid;
         this.user = user;
+    }
+
+    public void update(final Item updateData) {
+
     }
 
 }
