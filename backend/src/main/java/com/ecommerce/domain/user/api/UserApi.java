@@ -4,20 +4,18 @@ import com.ecommerce.domain.user.application.UserService;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.dto.UserSaveRequest;
 import com.ecommerce.domain.user.dto.UserSaveResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 public class UserApi {
 
     private final UserService userService;
-
-    public UserApi(final UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/api/v1/users/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {

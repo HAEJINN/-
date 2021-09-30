@@ -1,5 +1,6 @@
 package com.ecommerce.domain.user.domain;
 
+import com.ecommerce.domain.follow.domain.Follow;
 import com.ecommerce.global.common.BaseTimeEntity;
 import com.ecommerce.domain.photo.domain.Photo;
 import lombok.*;
@@ -7,12 +8,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
 @Entity
-public class User extends BaseTimeEntity implements Serializable {
+public class User extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -35,17 +40,22 @@ public class User extends BaseTimeEntity implements Serializable {
     @JoinColumn(name = "photo_id")
     private Photo photo;
 
-    protected User() {
-    }
+    @OneToMany(mappedBy = "follower" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Follow> myFollowing = new HashSet<>();
+
+    @OneToMany(mappedBy = "following" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Follow> myFollower = new HashSet<>();
 
     @Builder
-    public User(final String email, final String name, final String password,
-                final UserStatus status, final Photo photo) {
+    public User(final String email, final String name, final String password, final UserStatus status,
+                final Photo photo, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
         this.email = email;
         this.name = name;
         this.password = password;
+        this.status = status;
         this.photo = photo;
-        this.status = UserStatus.ACTIVITY;
+        this.myFollowing = myFollowing;
+        this.myFollower = myFollower;
     }
 
     public User changeEmail(final String email) {
@@ -69,4 +79,15 @@ public class User extends BaseTimeEntity implements Serializable {
             throw new IllegalArgumentException();
         }
     }
+
+    public void addFollowing(final Follow follow) {
+        myFollowing.add(follow);
+        follow.changeFollower(this);
+    }
+
+    public void addFollower(final Follow follower) {
+        myFollower.add(follower);
+        follower.changeFollowing(this);
+    }
+
 }
