@@ -9,11 +9,28 @@
         </q-responsive>
       </div>
     </div>
-    <span class="text-h6">ooo님 환영합니다</span>
+    <span class="text-h6">🤎 {{ state.name }}님 환영합니다 🤎</span>
   </div>
 </template>
-<script lang="ts">
+<script>
 import "../../../styles/mypage.scss";
 import { defineComponent } from "vue";
-export default defineComponent({});
+import { reactive, onBeforeMount } from "vue";
+
+export default defineComponent({
+  name: "profile",
+  setup() {
+    const state = reactive({
+      name: "",
+    });
+    onBeforeMount(() => {
+      const userinfo = JSON.parse(localStorage.getItem("userInfo"));
+      state.name = userinfo.name;
+    });
+    return {
+      state,
+      onBeforeMount,
+    };
+  },
+});
 </script>

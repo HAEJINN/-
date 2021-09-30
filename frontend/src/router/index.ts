@@ -14,8 +14,8 @@ const routes = [
     component: () => import("../views/mypage/mypage.vue"),
   },
   {
-    path: "/collect",
-    name: "collect",
+    path: "/feed",
+    name: "feed",
     component: () => import("../views/mypage/feed.vue"),
   },
   {

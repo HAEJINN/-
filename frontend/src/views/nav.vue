@@ -34,6 +34,7 @@
         나만의 작은 화실
       </q-toolbar-title>
       <q-btn
+        class="q-mx-xs"
         v-if="state.isLogin"
         flat
         round
@@ -54,15 +55,6 @@
       v-model="state.dialog.login.success"
       @registerArtist="openDialogRegisterArtist"
     />
-    <register-artist-dialog
-      v-model="state.dialog.register.artist"
-      @registerCertify="openDialogRegisterCertify"
-    />
-    <register-certify-dialog
-      v-model="state.dialog.register.certify"
-      @registerSuccess="openDialogRegisterSuccess"
-    />
-    <register-success-dialog v-model="state.dialog.register.success" />
   </div>
 </template>
 
@@ -72,17 +64,11 @@ import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import LoginDialog from "@/views/login/dialog";
 import LoginSuccessDialog from "@/views/login/success-dialog";
-import RegisterArtistDialog from "@/views/register/aritst-dialog";
-import RegisterCertifyDialog from "@/views/register/certify-dialog";
-import RegisterSuccessDialog from "@/views/register/success-dialog";
 
 export default {
   components: {
     LoginDialog,
     LoginSuccessDialog,
-    RegisterArtistDialog,
-    RegisterCertifyDialog,
-    RegisterSuccessDialog,
   },
   setup() {
     /*ㅡㅡㅡㅡㅡRouterㅡㅡㅡㅡㅡ*/
@@ -113,11 +99,6 @@ export default {
           main: ref(false),
           success: ref(false),
         },
-        register: {
-          artist: ref(false),
-          certify: ref(false),
-          success: ref(false),
-        },
         isLogin: false,
       },
     });
@@ -144,36 +125,6 @@ export default {
     const closeDialogLoginSuccess = () => {
       state.dialog.login.success = false;
     };
-    const openDialogRegisterArtist = () => {
-      closeDialogLoginSuccess();
-      state.dialog.register.artist = true;
-    };
-    const closeDialogRegisterArtist = () => {
-      state.dialog.register.artist = false;
-    };
-    const openDialogRegisterCertify = (re) => {
-      console.log(re);
-      state.dialog.register.certify = true;
-    };
-    const closeDialogRegisterCertify = (complate) => {
-      if (complate) {
-        state.dialog.register.artist = false;
-      }
-      state.dialog.register.certify = false;
-    };
-    const openDialogRegisterSuccess = (success) => {
-      console.log(success);
-      if (success === true) {
-        state.dialog.register.artist = false;
-        state.dialog.register.certify = false;
-        state.dialog.register.success = true;
-      } else {
-        // 파일전송 오류메세지 띄우기
-      }
-    };
-    const closeDialogRegisterSuccess = () => {
-      state.dialog.register.success = false;
-    };
 
     /*ㅡㅡㅡㅡㅡ로그인 로그아웃ㅡㅡㅡㅡㅡ*/
     const userstate = localStorage.getItem("userInfo");
@@ -193,14 +144,6 @@ export default {
       closeDialogLogin,
       openDialogLoginSuccess,
       closeDialogLoginSuccess,
-      openDialogRegisterArtist,
-      closeDialogRegisterArtist,
-      openDialogRegisterCertify,
-      closeDialogRegisterCertify,
-      openDialogRegisterSuccess,
-      closeDialogRegisterSuccess,
-
-      // userstate,
     };
   },
 };
