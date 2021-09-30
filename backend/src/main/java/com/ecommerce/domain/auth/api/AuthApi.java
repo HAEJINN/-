@@ -1,5 +1,6 @@
 package com.ecommerce.domain.auth.api;
 
+import com.ecommerce.domain.auth.domain.SessionUser;
 import com.ecommerce.domain.auth.dto.LoginRequest;
 import com.ecommerce.domain.auth.dto.LoginResponse;
 import com.ecommerce.domain.user.application.UserService;
@@ -24,7 +25,7 @@ public class AuthApi {
     public ResponseEntity<LoginResponse> login(final HttpSession httpSession, @RequestBody final LoginRequest request) {
         final User user = userService.login(request.toEntity());
         final LoginResponse loginResponse = new LoginResponse(user);
-        httpSession.setAttribute("user", loginResponse);
+        httpSession.setAttribute("user", new SessionUser(user));
         return ResponseEntity.ok().body(loginResponse);
     }
 
