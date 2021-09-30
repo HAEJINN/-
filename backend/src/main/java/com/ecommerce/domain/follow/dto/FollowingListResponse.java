@@ -15,10 +15,10 @@ public class FollowingListResponse {
     private String photo;
 
     public static FollowingListResponse ofFollow(final Follow follow) {
-        return ofUser(follow.getFollower());
+        return ofUser(follow.getFollowing());
     }
 
-    public static FollowingListResponse ofUser(final User user) {
+    private static FollowingListResponse ofUser(final User user) {
         return new FollowingListResponse(user.getId(), user.getName(), user.getPhoto().getPath());
     }
 

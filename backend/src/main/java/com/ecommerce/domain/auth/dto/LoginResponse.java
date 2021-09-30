@@ -15,11 +15,13 @@ import java.io.Serializable;
 @Getter
 public class LoginResponse implements Serializable {
 
+    private Long id;
     private String email;
     private String name;
     private UserStatus status;
 
     public LoginResponse(final User user) {
+        this.id = user.getId();
         this.email = user.getEmail();
         this.name = user.getName();
         this.status = user.getStatus();

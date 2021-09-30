@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "follows")
 @Entity
-public class Follow extends BaseTimeEntity {
+public class Follow {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
