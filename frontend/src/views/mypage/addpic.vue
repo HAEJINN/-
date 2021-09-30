@@ -6,20 +6,27 @@
         <label for="name">사진제목</label>
         <input
           type="text"
-          class="form-control"
           id="name"
           placeholder="사진제목"
           v-model="state.picture.name"
         />
       </div>
       <div>
-        <label for="desc">사진설명</label>
+        <label for="description">사진설명</label>
         <input
           type="text"
-          class="form-control"
-          id="desc"
+          id="description"
           placeholder="사진설명"
-          v-model="state.picture.desc"
+          v-model="state.picture.description"
+        />
+      </div>
+      <div>
+        <label for="price">가격</label>
+        <input
+          type="number"
+          id="price"
+          placeholder="가격"
+          v-model="state.picture.price"
         />
       </div>
       <div>
@@ -42,6 +49,7 @@
 <script>
 import { defineComponent } from "vue";
 import { reactive } from "vue";
+import store from "../../lib/store";
 
 export default defineComponent({
   name: "addpic",
@@ -49,14 +57,15 @@ export default defineComponent({
     const state = reactive({
       picture: {
         name: "",
-        desc: "",
+        description: "",
+        price: "",
         file: null,
         src: "",
       },
+      cid: "",
     });
     const loadf = () => {
       var file = document.getElementById("chooseFile");
-
       var preview = document.querySelector(".preview");
       preview.src = URL.createObjectURL(file.files[0]);
 
@@ -66,15 +75,42 @@ export default defineComponent({
       preview.style.height = "60%";
       preview.style.maxHeight = "500px";
     };
+
     const clickUpload = () => {
-      const formData = new FormData();
-      formData.append("name", state.picture.name);
-      formData.append("desc", state.picture.desc);
-      // formData.append("userid", 유저아이디);
-      formData.append("image", document.getElementById("chooseFile").files[0]);
-      console.log(state.picture.name);
-      console.log(state.picture.desc);
-      console.log(document.getElementById("chooseFile").files[0]);
+      // pinata통해 cid얻기
+      const image = document.getElementById("chooseFile").files[0];
+      store
+        .dispatch("root/request_pinata", image)
+        .then((response) => {
+          console.log(response);
+          state.cid = response.data.IpfsHash;
+
+          // cid 받아왔으면 데이터 합쳐 보내기
+          const userinfo = JSON.parse(localStorage.getItem("userInfo"));
+          const data = {
+            id: userinfo.email,
+            // 지갑주소,
+            name: state.picture.name,
+            description: state.picture.description,
+            price: state.picture.price,
+            cid: state.cid,
+          };
+          console.log(data);
+
+          // store
+          // .dispatch("", data)
+          // .then((response)=>{
+          //   console.log(response);
+          //   alert('사진이 등록되었습니다.');
+          //   router.push("/mypage");
+          // })
+          // .catch((error)=>{
+          //   console.error(error);
+          // })
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
 
     return {
