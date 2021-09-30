@@ -83,7 +83,7 @@ export default defineComponent({
         .dispatch("root/request_userLogin", data)
         .then((response) => {
           console.log(response);
-          alert("회원가입이 완료되었습니다.");
+          alert("로그인이 완료되었습니다.");
           router.push("/");
         })
         .catch((error) => {
