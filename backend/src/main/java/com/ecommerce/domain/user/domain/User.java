@@ -52,15 +52,21 @@ public class User extends BaseTimeEntity {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.status = status;
+        this.status = UserStatus.ACTIVITY;
         this.photo = photo;
         this.myFollowing = myFollowing;
         this.myFollower = myFollower;
     }
 
     public User changeEmail(final String email) {
-        validateNull(photo);
+        validateNull(email);
         this.email = email;
+        return this;
+    }
+
+    public User changePhoto(final Photo photo) {
+        validateNull(photo);
+        this.photo = photo;
         return this;
     }
 
@@ -89,5 +95,6 @@ public class User extends BaseTimeEntity {
         myFollower.add(follower);
         follower.changeFollowing(this);
     }
+
 
 }
