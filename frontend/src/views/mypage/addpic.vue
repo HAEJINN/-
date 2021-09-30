@@ -49,11 +49,12 @@
 <script>
 import { defineComponent } from "vue";
 import { reactive } from "vue";
-import store from "../../lib/store";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "addpic",
   setup() {
+    const store = useStore();
     const state = reactive({
       picture: {
         name: "",
@@ -88,25 +89,24 @@ export default defineComponent({
           // cid 받아왔으면 데이터 합쳐 보내기
           const userinfo = JSON.parse(localStorage.getItem("userInfo"));
           const data = {
-            id: userinfo.email,
+            id: userinfo.id,
             // 지갑주소,
             name: state.picture.name,
             description: state.picture.description,
             price: state.picture.price,
             cid: state.cid,
           };
-          console.log(data);
 
           // store
-          // .dispatch("", data)
-          // .then((response)=>{
-          //   console.log(response);
-          //   alert('사진이 등록되었습니다.');
-          //   router.push("/mypage");
-          // })
-          // .catch((error)=>{
-          //   console.error(error);
-          // })
+          //   .dispatch("root/request_picupload", data)
+          //   .then((response) => {
+          //     console.log(response);
+          //     alert('사진이 등록되었습니다.');
+          //     router.push("/mypage");
+          //   })
+          //   .catch((error) => {
+          //     console.error(error);
+          //   });
         })
         .catch((error) => {
           console.error(error);
