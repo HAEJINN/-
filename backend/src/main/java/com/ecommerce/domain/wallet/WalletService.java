@@ -1,6 +1,7 @@
 package com.ecommerce.domain.wallet;
 
 import com.ecommerce.domain.user.domain.User;
+import com.ecommerce.domain.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Bip39Wallet;
@@ -25,37 +26,29 @@ import java.util.Optional;
 public class WalletService {
 
     private final WalletRepository walletRepository;
+    private final UserRepository userRepository;
     private Web3j web3j;
 
+    // ToDo path 지정 하는법, 배포했을때 경로 지정은 어떻게 할지?
     public Map<String, String> createWallet(User user) throws CipherException, IOException {
-//        if(!WALLET_DIR.exists()){
-//            WALLET_DIR.mkdir();
-//        }
-//        String filename = WalletUtils.generateNewWalletFile(WALLET_PASS, WALLET_DIR);
-        //path 지정 하는법, 배포했을때 경로 지정은 어떻게 할지?
+        System.out.println("왜???");
         Bip39Wallet bip39Wallet = WalletUtils.generateBip39Wallet(user.getPassword(), new File("C:\\Users\\multicampus\\IdeaProjects\\S05P21C201\\backend\\src\\main\\resources\\key"));
         String fileName = bip39Wallet.getFilename();
-//            String mnemonic = bip39Wallet.getMnemonic();
+
         return getWalletAddress(user, fileName);
-//        System.out.println("fileName : "+fileName);
-//        System.out.println("mnemonic임당 :" + mnemonic);
-//        System.out.println("지갑생성완료");
     }
 
 
 
     public Map<String, String> getWalletAddress(User user, String fileName) throws CipherException, IOException {
         Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), "C:\\Users\\multicampus\\IdeaProjects\\S05P21C201\\backend\\src\\main\\resources\\key\\" + fileName);
-//        String filename = WalletUtils.generateNewWalletFile("1234",new File());
-        System.out.println(credentials.getAddress());
-        System.out.println(credentials.getEcKeyPair().getPrivateKey().toString(16));
         Map<String, String> map = new HashMap<>();
         map.put("WalletAddress", credentials.getAddress());
         map.put("PrivateKey", credentials.getEcKeyPair().getPrivateKey().toString(16));
-
+        User user1 = userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new);
         Wallet wallet = Wallet.builder()
                 .address(credentials.getAddress())
-            .user(user)
+                .user(user1)
                 .build();
 
         walletRepository.save(wallet);
@@ -63,18 +56,15 @@ public class WalletService {
 }
 
     public Map<String, String> getWalletAddressbyuser(User user){
-
         Optional<Wallet> findWalletAddress =  walletRepository.findById(user.getId());
         Map<String, String> map = new HashMap<>();
         if(findWalletAddress.isPresent()){
           map.put("WalletAddress", findWalletAddress.toString());
         }
-
         return map;
     }
 
     public Map<String, BigInteger> getBalance(User user, String address) throws IOException {
-
         web3j = Web3j.build(new HttpService());
 //      DefaultBlockParameter defaultBlockParameter = new DefaultBlockParameterNumber(web3j.ethBlockNumber().send().getBlockNumber());
         EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();

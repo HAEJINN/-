@@ -30,7 +30,7 @@ public class walletController{
     // 그리고 address, privatekey반환
 
     @PostMapping("/login/create/test")
-    public ResponseEntity<?> createWallet(User user) throws InvalidAlgorithmParameterException, CipherException, NoSuchAlgorithmException, IOException, NoSuchProviderException {
+    public ResponseEntity<?> createWallet(@RequestBody User user) throws InvalidAlgorithmParameterException, CipherException, NoSuchAlgorithmException, IOException, NoSuchProviderException {
         Map<String,String> map = walletService.createWallet(user);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
@@ -52,12 +52,12 @@ public class walletController{
 
 
     //충전 한번하기
-    @PostMapping("login/reqeth/test")
-    public ResponseEntity<?> reqEth(User user, String address) throws IOException {
-
-        return new ResponseEntity<>(map, HttpStatus.OK);
-
-    }
+//    @PostMapping("login/reqeth/test")
+//    public ResponseEntity<?> reqEth(User user, String address) throws IOException {
+//
+//        return new ResponseEntity<>(map, HttpStatus.OK);
+//
+//    }
 
 
     //지갑주소가져오기
