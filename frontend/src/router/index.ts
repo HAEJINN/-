@@ -13,17 +13,27 @@ const routes = [
     name: "mypage",
     component: () => import("../views/mypage/mypage.vue"),
   },
+  {
+    path: "/collect",
+    name: "collect",
+    component: () => import("../views/mypage/feed.vue"),
+  },
+  {
+    path: "/addpic",
+    name: "addpic",
+    component: () => import("../views/mypage/addpic.vue"),
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-  {
-    path: "/item",
-    name: "item",
-    component: () => import("../views/item/item.vue"),
-  },
-  {
-    path: "/item/create",
-    name: "item-create",
-    component: () => import("../views/item/create.vue"),
-  },
+  // {
+  //   path: "/item",
+  //   name: "item",
+  //   component: () => import("../views/item/item.vue"),
+  // },
+  // {
+  //   path: "/item/create",
+  //   name: "item-create",
+  //   component: () => import("../views/item/create.vue"),
+  // },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     배너     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",

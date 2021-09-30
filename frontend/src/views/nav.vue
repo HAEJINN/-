@@ -27,13 +27,6 @@
       <q-toolbar-title @click="moveMain" class="najakhwa">
         나만의 작은 화실
       </q-toolbar-title>
-      <q-btn
-        flat
-        round
-        dense
-        icon="add_photo_alternate"
-        @click="moveItemCreate"
-      />
       <q-btn flat round dense icon="account_circle" @click="mvMypage" />
       <q-btn flat round dense icon="input" @click="openDialogLogin" />
     </q-toolbar>
@@ -80,11 +73,6 @@ export default {
     const router = useRouter();
     const moveMain = () => {
       router.push("/");
-    };
-    const moveItemCreate = () => {
-      router.push({
-        name: "item-create",
-      });
     };
     const mvMypage = () => {
       router.push("/mypage");
@@ -153,7 +141,6 @@ export default {
     return {
       state,
       moveMain,
-      moveItemCreate,
       mvMypage,
 
       openDialogLogin,

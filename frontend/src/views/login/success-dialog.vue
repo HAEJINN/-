@@ -4,7 +4,7 @@
       view="lhh LpR lff"
       container
       style="height: 500px"
-      class="bg-grey-3"
+      class="bg-secondary"
     >
       <q-page-container>
         <q-header class="bg-black">
@@ -12,10 +12,11 @@
             <q-btn v-close-popup flat round dense icon="close" />
           </q-toolbar>
         </q-header>
-        <q-page>
-          <div>
-            <div>
-              <label for="email">이메일</label>
+        <q-page class="column justify-center">
+          <div class="column justify-center items-center">
+            <span class="text-h4 q-my-md">회원가입</span>
+            <div class="row q-my-sm">
+              <label class="q-mr-md" for="email">이메일</label>
               <input
                 type="text"
                 class="form-control"
@@ -24,8 +25,8 @@
                 placeholder="이메일"
               />
             </div>
-            <div>
-              <label for="name">이름</label>
+            <div class="row q-my-sm">
+              <label class="q-mr-md" for="name">이름</label>
               <input
                 type="text"
                 id="name"
@@ -33,8 +34,8 @@
                 placeholder="이름"
               />
             </div>
-            <div>
-              <label for="password">비밀번호</label>
+            <div class="row q-my-sm">
+              <label class="q-mr-md" for="password">비밀번호</label>
               <input
                 type="password"
                 id="password"
@@ -42,8 +43,10 @@
                 placeholder="비밀번호"
               />
             </div>
-            <div>
-              <label for="password-confirm">비밀번호 확인</label>
+            <div class="row q-my-sm">
+              <label class="q-mr-md" for="password-confirm"
+                >비밀번호 확인</label
+              >
               <input
                 type="password"
                 id="password-confirm"
@@ -51,7 +54,9 @@
                 placeholder="비밀번호 확인"
               />
             </div>
-            <button type="submit" @click="clickRegister()">회원가입</button>
+            <button class="q-my-lg" type="submit" @click="clickRegister()">
+              회원가입
+            </button>
           </div>
         </q-page>
       </q-page-container>
@@ -60,6 +65,7 @@
 </template>
 
 <script>
+import "../../styles/login.scss";
 import { defineComponent } from "vue";
 import { reactive } from "vue";
 import { useStore } from "vuex";
