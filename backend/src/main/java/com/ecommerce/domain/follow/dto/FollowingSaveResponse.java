@@ -8,21 +8,20 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FollowingListResponse {
-
+public class FollowingSaveResponse {
     private Long id;
     private String name;
     private String photo;
 
-    public static FollowingListResponse ofFollow(final Follow follow) {
+    public static FollowingSaveResponse ofFollow(final Follow follow) {
         return ofUser(follow.getFollower());
     }
 
-    private static FollowingListResponse ofUser(final User user) {
-        return new FollowingListResponse(user.getId(), user.getName(), user.getPhoto().getPath());
+    private static FollowingSaveResponse ofUser(final User user) {
+        return new FollowingSaveResponse(user.getId(), user.getName(), user.getPhoto().getPath());
     }
 
-    public FollowingListResponse(final Long id, final String name, final String photo) {
+    public FollowingSaveResponse(final Long id, final String name, final String photo) {
         this.id = id;
         this.name = name;
         this.photo = photo;

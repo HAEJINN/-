@@ -3,6 +3,7 @@ package com.ecommerce.domain.follow.application;
 import com.ecommerce.domain.follow.domain.Follow;
 import com.ecommerce.domain.follow.domain.FollowRepository;
 import com.ecommerce.domain.follow.dto.FollowerListResponse;
+import com.ecommerce.domain.follow.dto.FollowingListResponse;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,15 +41,13 @@ public class FollowService {
                 .collect(Collectors.toList());
     }
 
-    public List<FollowerListResponse> findFollowings(final String email) {
+    public List<FollowingListResponse> findFollowings(final String email) {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
         final List<Follow> myFollowers = followRepository.findMyFollowings(user);
         return myFollowers.stream()
-                .map(FollowerListResponse::ofFollow)
+                .map(FollowingListResponse::ofFollow)
                 .collect(Collectors.toList());
     }
-
-
 
     @Transactional
     public Follow saveFollowing(final String userEmail, final Long followingId) {
