@@ -10,6 +10,7 @@ import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.core.methods.response.Transaction;
 import org.web3j.protocol.http.HttpService;
 
 import java.io.File;
@@ -41,6 +42,8 @@ public class WalletService {
 //        System.out.println("지갑생성완료");
     }
 
+
+
     public Map<String, String> getWalletAddress(User user, String fileName) throws CipherException, IOException {
         Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), "C:\\Users\\multicampus\\IdeaProjects\\S05P21C201\\backend\\src\\main\\resources\\key\\" + fileName);
 //        String filename = WalletUtils.generateNewWalletFile("1234",new File());
@@ -52,10 +55,21 @@ public class WalletService {
 
         Wallet wallet = Wallet.builder()
                 .address(credentials.getAddress())
-                .user(user)
+            .user(user)
                 .build();
 
         walletRepository.save(wallet);
+        return map;
+}
+
+    public Map<String, String> getWalletAddressbyuser(User user){
+
+        Optional<Wallet> findWalletAddress =  walletRepository.findById(user.getId());
+        Map<String, String> map = new HashMap<>();
+        if(findWalletAddress.isPresent()){
+          map.put("WalletAddress", findWalletAddress.toString());
+        }
+
         return map;
     }
 
@@ -81,5 +95,9 @@ public class WalletService {
 
         return map;
     }
+    //ToDo 트랜잭션 처리방법, 계정을 만들고 1회 한해서 이더리움을 받을 수 있도록 하기
+    // user 테이블에 1회 충전이 되었는지 속성 필요
+    // 1회 충전을 눌렀을 때 -> user테이블에서 검사하고 user.charge -> boolean 값으로 만들고 만약 fasle이면
+    // 충전 가능
 
 }
