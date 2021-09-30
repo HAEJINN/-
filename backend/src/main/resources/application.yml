@@ -12,14 +12,14 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: bcssafy
-    password: bcssafy
+    username: root
+    password: ssafy
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         default_batch_fetch_size: 1000
@@ -65,8 +65,8 @@ spring:
 eth:
   encrypted:
     password: Pn0OlSN0SdhjNK5X2EhUPQ==
-  erc20:
-    contract: 0xcDcedAcea55DB472060042C644096DF65B9d9849
+  erc721:
+    contract: fe031e1193f2ad53901ff9f33e3dd75586c074e0
   purchase:
     record:
       contract: 0x0c2BC3cAB0036D1E51734B4D6e6cb8BCB046A2C7
@@ -78,6 +78,6 @@ logging.level:
   org.hibernate.SQL: debug
 server:
   port: 8080
-  # servlet:
-    # context-path: /api
+    # servlet:
+  # context-path: /api
 
