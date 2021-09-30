@@ -27,8 +27,18 @@
       <q-toolbar-title @click="moveMain" class="najakhwa">
         나만의 작은 화실
       </q-toolbar-title>
-      <q-btn flat round dense icon="account_circle" @click="mvMypage" />
-      <q-btn flat round dense icon="input" @click="openDialogLogin" />
+      <q-btn
+        v-if="state.isLogin"
+        flat
+        round
+        dense
+        icon="account_circle"
+        @click="mvMypage"
+      />
+      <div v-if="state.isLogin" class="inout" @click="openDialogLogin">
+        로그아웃
+      </div>
+      <div v-else class="inout" @click="openDialogLogin">로그인</div>
     </q-toolbar>
     <login-dialog
       v-model="state.dialog.login.main"
@@ -90,12 +100,20 @@ export default {
           certify: ref(false),
           success: ref(false),
         },
+        isLogin: false,
       },
     });
 
     /*ㅡㅡㅡㅡㅡDialogㅡㅡㅡㅡㅡ*/
     const openDialogLogin = () => {
-      state.dialog.login.main = true;
+      if (localStorage.getItem("userInfo") != null) {
+        localStorage.removeItem("userInfo");
+        alert("로그아웃 되었습니다");
+        state.isLogin = false;
+        router.go;
+      } else {
+        state.dialog.login.main = true;
+      }
     };
     const closeDialogLogin = () => {
       state.dialog.login.main = false;
@@ -138,6 +156,11 @@ export default {
       state.dialog.register.success = false;
     };
 
+    /*ㅡㅡㅡㅡㅡ로그인 로그아웃ㅡㅡㅡㅡㅡ*/
+    const userstate = localStorage.getItem("userInfo");
+    if (userstate) {
+      state.isLogin = true;
+    }
     return {
       state,
       moveMain,
@@ -153,6 +176,8 @@ export default {
       closeDialogRegisterCertify,
       openDialogRegisterSuccess,
       closeDialogRegisterSuccess,
+
+      // userstate,
     };
   },
 };
