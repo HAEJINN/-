@@ -57,7 +57,7 @@ public class FollowApi {
         return ResponseEntity.ok().body(FollowerSaveResponse.ofFollow(follow));
     }
 
-    @PostMapping("/api/v1/follow/followers/{id}")
+    @PostMapping("/api/v1/follow/followings/{id}")
     public ResponseEntity<FollowingSaveResponse> saveFollowings(final HttpSession httpSession, @PathVariable Long id) {
         final SessionUser sessionUser = (SessionUser)httpSession.getAttribute("user");
         final Follow follow = followService.saveFollowing(sessionUser.getEmail(), id);

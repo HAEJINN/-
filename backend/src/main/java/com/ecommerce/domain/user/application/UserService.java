@@ -1,13 +1,16 @@
 package com.ecommerce.domain.user.application;
 
+import com.ecommerce.domain.photo.domain.Photo;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -19,6 +22,8 @@ public class UserService {
 
     @Transactional
     public User save(User user) {
+        final Photo photo = new Photo(UUID.randomUUID().toString());
+        user.changePhoto(photo);
         user.passwordEncode(passwordEncoder);
         return userRepository.save(user);
     }

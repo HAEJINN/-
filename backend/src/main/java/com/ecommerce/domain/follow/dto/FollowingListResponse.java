@@ -15,7 +15,7 @@ public class FollowingListResponse {
     private String photo;
 
     public static FollowingListResponse ofFollow(final Follow follow) {
-        return ofUser(follow.getFollower());
+        return ofUser(follow.getFollowing());
     }
 
     private static FollowingListResponse ofUser(final User user) {

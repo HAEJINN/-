@@ -36,6 +36,7 @@ public class FollowService {
     public List<FollowerListResponse> findFollowers(final String email) {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
         final List<Follow> myFollowers = followRepository.findMyFollowers(user);
+        System.out.println("찾아옴");
         return myFollowers.stream()
                 .map(FollowerListResponse::ofFollow)
                 .collect(Collectors.toList());
@@ -44,6 +45,7 @@ public class FollowService {
     public List<FollowingListResponse> findFollowings(final String email) {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
         final List<Follow> myFollowers = followRepository.findMyFollowings(user);
+        System.out.println("찾아옴");
         return myFollowers.stream()
                 .map(FollowingListResponse::ofFollow)
                 .collect(Collectors.toList());
