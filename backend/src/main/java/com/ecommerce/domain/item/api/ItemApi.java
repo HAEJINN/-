@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RequiredArgsConstructor
 @RestController
 public class ItemApi {
@@ -28,6 +27,14 @@ public class ItemApi {
         return ResponseEntity.ok().body(items);
     }
 
+    /*
+             id: userinfo.id,
+            // 지갑주소,
+            name: state.picture.name,
+            description: state.picture.description,
+            price: state.picture.price,
+            cid: state.cid,
+     */
     @PostMapping("/api/v1/items")
     public ResponseEntity<?> save(@RequestBody String tempData) {
         final Item item = itemService.save(Item.builder().build());
