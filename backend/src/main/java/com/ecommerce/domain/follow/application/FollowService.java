@@ -33,18 +33,20 @@ public class FollowService {
         return followRepository.countByFollower(user);
     }
 
+    // 자신이 팔로잉이어야지 팔로우 찾아서 역으로 검색함
     public List<FollowerListResponse> findFollowers(final String email) {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
-        final List<Follow> myFollowers = followRepository.findMyFollowers(user);
+        final List<Follow> myFollowers = followRepository.findByFollowing(user);
         System.out.println("찾아옴");
         return myFollowers.stream()
                 .map(FollowerListResponse::ofFollow)
                 .collect(Collectors.toList());
     }
 
+    // 자신이 팔로잉이어야지 팔로우 찾아서 역으로 검색함
     public List<FollowingListResponse> findFollowings(final String email) {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
-        final List<Follow> myFollowers = followRepository.findMyFollowings(user);
+        final List<Follow> myFollowers = followRepository.findByFollower(user);
         System.out.println("찾아옴");
         return myFollowers.stream()
                 .map(FollowingListResponse::ofFollow)
