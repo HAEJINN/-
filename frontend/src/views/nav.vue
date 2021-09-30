@@ -6,19 +6,25 @@
           <div class="q-pa-sm">
             <q-list>
               <q-item clickable>
-                <q-item-section>Menu1</q-item-section>
+                <q-item-section @click="mvinfo">나작화 소개</q-item-section>
               </q-item>
               <q-separator />
               <q-item clickable>
-                <q-item-section>Menu2</q-item-section>
+                <q-item-section @click="mvcollecinfo"
+                  >컬렉션 소개</q-item-section
+                >
               </q-item>
               <q-separator />
               <q-item clickable>
-                <q-item-section>Menu3</q-item-section>
+                <q-item-section @click="mvpicture"
+                  >사진 모아보기</q-item-section
+                >
               </q-item>
               <q-separator />
               <q-item clickable>
-                <q-item-section>Menu4</q-item-section>
+                <q-item-section @click="mvcollections"
+                  >컬렉션 모아보기</q-item-section
+                >
               </q-item>
             </q-list>
           </div>
@@ -87,6 +93,18 @@ export default {
     const mvMypage = () => {
       router.push("/mypage");
     };
+    const mvinfo = () => {
+      router.push("/najakhwa");
+    };
+    const mvcollecinfo = () => {
+      router.push("/collection");
+    };
+    const mvpicture = () => {
+      router.push("/picture");
+    };
+    const mvcollections = () => {
+      router.push("/collections");
+    };
 
     /*ㅡㅡㅡㅡㅡStateㅡㅡㅡㅡㅡ*/
     const state = reactive({
@@ -111,6 +129,7 @@ export default {
         alert("로그아웃 되었습니다");
         state.isLogin = false;
         router.go;
+        router.push("/");
       } else {
         state.dialog.login.main = true;
       }
@@ -165,6 +184,10 @@ export default {
       state,
       moveMain,
       mvMypage,
+      mvinfo,
+      mvcollecinfo,
+      mvpicture,
+      mvcollections,
 
       openDialogLogin,
       closeDialogLogin,
