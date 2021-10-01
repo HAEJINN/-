@@ -127,7 +127,7 @@ export default {
     };
     const openRegisterDialog = () => {
       closeLoginDailog();
-      state.dailog.register = true;
+      state.dialog.register = true;
     };
     const closeRegisterDialog = () => {
       state.dailog.register = false;

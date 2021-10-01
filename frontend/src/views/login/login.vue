@@ -85,7 +85,7 @@ export default defineComponent({
       };
       store
         .dispatch("root/requestUserLogin", data)
-        .then(response => {
+        .then((response) => {
           console.log(response);
           localStorage.setItem("userInfo", JSON.stringify(response.data));
 
@@ -94,7 +94,7 @@ export default defineComponent({
           router.go();
         })
 
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     };

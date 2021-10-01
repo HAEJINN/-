@@ -72,7 +72,7 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "register",
-  setup() {
+  setup(props, { emit }) {
     const store = useStore();
     const router = useRouter();
     const state = reactive({
@@ -97,12 +97,12 @@ export default defineComponent({
         };
         store
           .dispatch("root/requestUserRegister", data)
-          .then(response => {
+          .then((response) => {
             console.log(response);
             alert("회원가입이 완료되었습니다.");
             router.go();
           })
-          .catch(error => {
+          .catch((error) => {
             console.error(error);
           });
       } else {
