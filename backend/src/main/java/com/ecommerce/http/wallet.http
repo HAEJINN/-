@@ -8,4 +8,4 @@ Content-Type: application/json
 }
 
 ### 월렉에서 주소값 가져오기
-GET http://localhost:8080/login/balance/test?address=0xd599f1255b79d18377e49498f27ac8815855370c
+GET http://localhost:8080/login/balance/test?address=0x0e98d4ba0a2d2940f6a8c31017287b622ad6e744

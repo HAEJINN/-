@@ -20,9 +20,9 @@ public class WalletResponse {
 
     public static final WalletResponse ofWallet(final Wallet wallet) {
         final Long id = wallet.getId();
-        final String walletAddress = wallet.getWallet_address();
-        final String credentialsAddress = wallet.getCredentials_address();
-        final int walletCash = wallet.getWallet_cash();
+        final String walletAddress = wallet.getWalletAddress();
+        final String credentialsAddress = wallet.getCredentialsAddress();
+        final int walletCash = wallet.getWalletCash();
         final BigInteger balance = wallet.getBalance();
         final String userName = wallet.getUser().getName();
         return new WalletResponse(id, walletAddress, credentialsAddress, walletCash, balance, userName);
