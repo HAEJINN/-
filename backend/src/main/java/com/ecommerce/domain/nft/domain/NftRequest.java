@@ -1,4 +1,4 @@
-package com.ecommerce.domain.nft;
+package com.ecommerce.domain.nft.domain;
 
 import lombok.Data;
 
