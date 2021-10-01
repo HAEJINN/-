@@ -1,7 +1,7 @@
 <template>
   <div class="column">
     <div class="row justify-center items-center bg-accent">
-      <div class="text-h4 q-my-xl">나만의 작은 화실</div>
+      <div class="text-h5 text-bold q-my-xl">나만의 작은 화실</div>
       <div class="text-h6 q-my-md col-lg-12 col-xs-10">
         사진을 공유하고 안전하게 경매, 거래 할 수 있는 플랫폼
       </div>

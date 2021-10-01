@@ -60,3 +60,61 @@
   height: 30px;
   margin: 0.2em 0.5em;
 }
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ addpic.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.upload-btn {
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  background-color: #c2b8a3;
+}
+.upload-btn:hover {
+  cursor: pointer;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ feed.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.feed-user {
+  font-size: 1.3em;
+}
+
+.feed-profile {
+  border-radius: 50%;
+  background-image: url("../assets/mypage/profile.jpg");
+  background-size: cover;
+  background-position: center center;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+.follow-btn {
+  width: fit-content;
+  margin: auto;
+  padding: 0.3em 1em;
+  background-color: #a19882;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+
+.follow-btn:hover {
+  cursor: pointer;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ picture.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.picmo {
+  width: 100%;
+  height: 30vh !important;
+
+  .pic {
+    background-image: url("../assets/mypage/profile.jpg");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .pic:hover {
+    cursor: pointer;
+  }
+}
