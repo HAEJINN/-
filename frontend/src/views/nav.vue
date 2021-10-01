@@ -30,7 +30,7 @@
           </div>
         </q-menu>
       </q-btn>
-      <q-toolbar-title @click="moveMain" class="najakhwa">
+      <q-toolbar-title @click="mvMain" class="najakhwa">
         나만의 작은 화실
       </q-toolbar-title>
       <q-btn
@@ -42,18 +42,19 @@
         icon="account_circle"
         @click="mvMypage"
       />
-      <div v-if="state.isLogin" class="inout" @click="openDialogLogin">
+      <div v-if="state.isLogin" class="inout" @click="clickLoginLogout">
         로그아웃
       </div>
-      <div v-else class="inout" @click="openDialogLogin">로그인</div>
+      <div v-else class="inout" @click="clickLoginLogout">로그인</div>
     </q-toolbar>
     <login-dialog
-      v-model="state.dialog.login.main"
-      @loginSuccess="openDialogLoginSuccess"
+      v-model="state.dialog.login"
+      @loginSuccess="closeLoginDailog"
+      @openRegisterDialog="openRegisterDialog"
     />
-    <login-success-dialog
-      v-model="state.dialog.login.success"
-      @registerArtist="openDialogRegisterArtist"
+    <register-dialog
+      v-model="state.dialog.register"
+      @registerSuccess="closeRegisterDialog"
     />
   </div>
 </template>
@@ -62,18 +63,18 @@
 import "../styles/nav.scss";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import LoginDialog from "@/views/login/dialog";
-import LoginSuccessDialog from "@/views/login/success-dialog";
+import LoginDialog from "@/views/login/login";
+import RegisterDialog from "@/views/login/register";
 
 export default {
   components: {
     LoginDialog,
-    LoginSuccessDialog,
+    RegisterDialog,
   },
   setup() {
     /*ㅡㅡㅡㅡㅡRouterㅡㅡㅡㅡㅡ*/
     const router = useRouter();
-    const moveMain = () => {
+    const mvMain = () => {
       router.push("/");
     };
     const mvMypage = () => {
@@ -95,55 +96,60 @@ export default {
     /*ㅡㅡㅡㅡㅡStateㅡㅡㅡㅡㅡ*/
     const state = reactive({
       dialog: {
-        login: {
-          main: ref(false),
-          success: ref(false),
-        },
-        isLogin: false,
+        login: ref(false),
+        register: ref(false),
       },
+      isLogin: false,
     });
-
-    /*ㅡㅡㅡㅡㅡDialogㅡㅡㅡㅡㅡ*/
-    const openDialogLogin = () => {
-      if (localStorage.getItem("userInfo") != null) {
-        localStorage.removeItem("userInfo");
-        alert("로그아웃 되었습니다");
-        state.isLogin = false;
-        router.go;
-        router.push("/");
-      } else {
-        state.dialog.login.main = true;
-      }
-    };
-    const closeDialogLogin = () => {
-      state.dialog.login.main = false;
-    };
-    const openDialogLoginSuccess = () => {
-      closeDialogLogin();
-      state.dialog.login.success = true;
-    };
-    const closeDialogLoginSuccess = () => {
-      state.dialog.login.success = false;
-    };
 
     /*ㅡㅡㅡㅡㅡ로그인 로그아웃ㅡㅡㅡㅡㅡ*/
     const userstate = localStorage.getItem("userInfo");
     if (userstate) {
       state.isLogin = true;
     }
+    const clickLoginLogout = () => {
+      if (localStorage.getItem("userInfo") != null) {
+        localStorage.removeItem("userInfo");
+        alert("로그아웃 되었습니다");
+        state.isLogin = false;
+        router.push("/");
+      } else {
+        openLoginDailog();
+      }
+    };
+
+    /*ㅡㅡㅡㅡㅡDialogㅡㅡㅡㅡㅡ*/
+    const openLoginDailog = () => {
+      state.dialog.login = true;
+    };
+    const closeLoginDailog = () => {
+      state.dialog.login = false;
+      router.go();
+    };
+    const openRegisterDialog = () => {
+      closeLoginDailog();
+      state.dailog.register = true;
+    };
+    const closeRegisterDialog = () => {
+      state.dailog.register = false;
+      router.go();
+    };
+
     return {
       state,
-      moveMain,
+      mvMain,
       mvMypage,
       mvinfo,
       mvcollecinfo,
       mvpicture,
       mvcollections,
 
-      openDialogLogin,
-      closeDialogLogin,
-      openDialogLoginSuccess,
-      closeDialogLoginSuccess,
+      clickLoginLogout,
+
+      openLoginDailog,
+      closeLoginDailog,
+      openRegisterDialog,
+      closeRegisterDialog,
     };
   },
 };

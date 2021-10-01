@@ -66,13 +66,12 @@
 
 <script>
 import "../../styles/login.scss";
-import { defineComponent } from "vue";
-import { reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "login-success-dialog",
+  name: "register",
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -84,6 +83,11 @@ export default defineComponent({
         passwordConfirm: "",
       },
     });
+
+    const registerSuccess = () => {
+      emit("registerSuccess");
+    };
+
     const clickRegister = () => {
       if (state.user.password === state.user.passwordConfirm) {
         const data = {
@@ -92,13 +96,13 @@ export default defineComponent({
           password: state.user.password,
         };
         store
-          .dispatch("root/request_userSignup", data)
-          .then((response) => {
+          .dispatch("root/requestUserRegister", data)
+          .then(response => {
             console.log(response);
             alert("회원가입이 완료되었습니다.");
             router.push("/");
           })
-          .catch((error) => {
+          .catch(error => {
             console.error(error);
           });
       } else {
@@ -107,8 +111,10 @@ export default defineComponent({
     };
 
     return {
-      clickRegister,
       state,
+      registerSuccess,
+
+      clickRegister,
     };
   },
 });

@@ -2,7 +2,7 @@ import axios from "@/lib/axios";
 import { User, UserResponse, UserRequest } from "@/types/user";
 
 // 로그인
-export async function request_userLogin(
+export async function requestUserLogin(
   // email: any,
   // password: any
   commit: any,
@@ -22,7 +22,7 @@ export async function request_userLogin(
 }
 
 // 회원가입
-export async function request_userSignup(
+export async function requestUserRegister(
   commit: any,
   user: User
 ): Promise<UserResponse> {
