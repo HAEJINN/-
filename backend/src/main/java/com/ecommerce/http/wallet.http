@@ -1,5 +1,5 @@
 ### 지갑 생성
-POST http://localhost:8080/login/create/test
+POST http://localhost:8080/wallet/create
 Content-Type: application/json
 
 {
@@ -8,4 +8,4 @@ Content-Type: application/json
 }
 
 ### 월렉에서 주소값 가져오기
-GET http://localhost:8080/login/balance/test?address=0x0e98d4ba0a2d2940f6a8c31017287b622ad6e744
+GET http://localhost:8080/wallet/balance?address=0x715b04b5ad4ddc54d344dc1f36a50fbe98b1ec68
