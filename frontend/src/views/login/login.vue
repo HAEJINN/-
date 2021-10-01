@@ -91,6 +91,7 @@ export default defineComponent({
 
           alert("로그인이 완료되었습니다.");
           loginSuccess();
+          router.go();
         })
 
         .catch(error => {

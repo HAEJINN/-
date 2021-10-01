@@ -100,7 +100,7 @@ export default defineComponent({
           .then(response => {
             console.log(response);
             alert("회원가입이 완료되었습니다.");
-            router.push("/");
+            router.go();
           })
           .catch(error => {
             console.error(error);

@@ -124,7 +124,6 @@ export default {
     };
     const closeLoginDailog = () => {
       state.dialog.login = false;
-      router.go();
     };
     const openRegisterDialog = () => {
       closeLoginDailog();
@@ -132,7 +131,6 @@ export default {
     };
     const closeRegisterDialog = () => {
       state.dailog.register = false;
-      router.go();
     };
 
     return {
