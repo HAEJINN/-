@@ -17,16 +17,16 @@ public class Wallet {
     private Long id;
 
     @Column(name = "credentials_address")
-    private String credentials_address;
+    private String credentialsAddress;
 
     @Column(name = "wallet_address")
-    private String wallet_address;
+    private String walletAddress;
 
     @Column(name = "wallet_balance")
     private BigInteger balance;
 
     @Column(name = "wallet_cash")
-    private int wallet_cash;
+    private int walletCash;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
@@ -34,11 +34,11 @@ public class Wallet {
 
     @Builder
     public Wallet(final String credentials_address, final String wallet_address,
-                  final BigInteger balance, final int wallet_cash, final User user) {
-        this.credentials_address = credentials_address;
-        this.wallet_address = wallet_address;
+                  final BigInteger balance, final int walletCash, final User user) {
+        this.credentialsAddress = credentials_address;
+        this.walletAddress = wallet_address;
         this.balance = balance;
-        this.wallet_cash = wallet_cash;
+        this.walletCash = walletCash;
         this.user = user;
     }
 
