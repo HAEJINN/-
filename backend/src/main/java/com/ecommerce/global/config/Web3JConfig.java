@@ -10,11 +10,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.web3j.businesslogin.BusinessLogin;
+import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.gas.ContractGasProvider;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.math.BigInteger;
 
 @Configuration
 @EnableTransactionManagement
@@ -31,6 +38,46 @@ public class Web3JConfig {
     @Bean
     public Admin admin() {
         return Admin.build(new HttpService(NETWORK_URL));
+    }
+
+    @Value("${eth.erc721.contract}")
+    private String NFT_CONTRACT_ADDRESS;
+
+    @Bean
+    public BusinessLogin businessLogin(){
+        Web3j web3j = Web3j.build(new HttpService());
+        Credentials credentials = null;
+        try {
+            credentials = WalletUtils.loadCredentials("eth0second", "C:\\Users\\multicampus\\BCSSAFY\\0928\\backend\\src\\main\\resources\\key\\test.wallet");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (CipherException e) {
+            e.printStackTrace();
+        }
+        Credentials cr = Credentials.create(credentials.getEcKeyPair().getPrivateKey().toString(16));
+        ContractGasProvider contractGasProvider = new ContractGasProvider() {
+            @Override
+            public BigInteger getGasPrice(String contractFunc) {
+                return BigInteger.valueOf(100_000_0L);
+            }
+
+            @Override
+            public BigInteger getGasPrice() {
+                return BigInteger.valueOf(100_000_0L);
+            }
+
+            @Override
+            public BigInteger getGasLimit(String contractFunc) {
+                return BigInteger.valueOf(8000000);
+            }
+
+            @Override
+            public BigInteger getGasLimit() {
+                return BigInteger.valueOf(8000000);
+            }
+        };
+
+        return BusinessLogin.load("0x"+NFT_CONTRACT_ADDRESS,web3j, cr,contractGasProvider);
     }
 
 }

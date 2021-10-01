@@ -38,8 +38,12 @@ public class Item {
         this.user = user;
     }
 
+    public Item updateUser(final User buyer) {
+        this.user = buyer;
+        return this;
+    }
+
     public void update(final Item updateData) {
 
     }
-
 }
