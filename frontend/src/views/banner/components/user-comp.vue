@@ -1,5 +1,15 @@
 <template>
-  <div class="col-lg-4 col-xs-6">
+  <div class="col-lg-3 col-xs-6">
+    <div class="q-ma-sm bg-accent">
+      <img src="../../../assets/profile.png" />
+    </div>
+    <div>김작가</div>
+  </div>
+</template>
+
+<!--
+<template>
+  <div class="my-card col-lg-3 col-xs-6">
     <q-card class="q-ma-sm">
       <img src="../../../assets/mypage/malang.png" />
       <div class="q-py-sm">
@@ -9,3 +19,4 @@
     </q-card>
   </div>
 </template>
+-->
