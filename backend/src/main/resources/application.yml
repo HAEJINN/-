@@ -12,14 +12,14 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: ssafy
+    username: bcssafy
+    password: bcssafy
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         default_batch_fetch_size: 1000
@@ -60,7 +60,7 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
   web3j:
-    client-address: http://3.36.50.29:8545
+    client-address: http://localhost:8545
     admin-client: true
 eth:
   encrypted:
