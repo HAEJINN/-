@@ -44,7 +44,7 @@
               color="black"
               text-color="white"
               label="회원가입"
-              @click="openDialogLoginSuccess"
+              @click="openRegisterDialog"
             />
           </div>
         </q-page>
@@ -55,13 +55,12 @@
 
 <script>
 import "../../styles/login.scss";
-import { defineComponent } from "vue";
-import { reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "login-dialog",
+  name: "login",
   setup(props, { emit }) {
     const store = useStore();
     const router = useRouter();
@@ -71,20 +70,27 @@ export default defineComponent({
         password: "",
       },
     });
-    const openDialogLoginSuccess = () => {
+
+    const loginSuccess = () => {
       emit("loginSuccess");
     };
+    const openRegisterDialog = () => {
+      emit("openRegisterDialog");
+    };
+
     const clickLogin = () => {
       const data = {
         email: state.user.email,
         password: state.user.password,
       };
       store
-        .dispatch("root/request_userLogin", data)
+        .dispatch("root/requestUserLogin", data)
         .then((response) => {
           console.log(response);
-          alert("로그인이 완료되었습니다.");
           localStorage.setItem("userInfo", JSON.stringify(response.data));
+
+          alert("로그인이 완료되었습니다.");
+          loginSuccess();
           router.go();
         })
 
@@ -92,10 +98,13 @@ export default defineComponent({
           console.error(error);
         });
     };
+
     return {
-      openDialogLoginSuccess,
-      clickLogin,
       state,
+      loginSuccess,
+      openRegisterDialog,
+
+      clickLogin,
     };
   },
 });

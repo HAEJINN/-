@@ -12,6 +12,7 @@
 <script>
 import { defineComponent } from "vue";
 import ItemComp from "../components/item-comp.vue";
+
 export default defineComponent({
   name: "item-list",
   components: {
