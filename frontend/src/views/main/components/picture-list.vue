@@ -2,21 +2,21 @@
   <div class="q-pa-sm q-my-md">
     <div class="text-center text-h5 q-mb-md">최근 사진</div>
     <div class="row">
-      <ItemComp></ItemComp>
-      <ItemComp></ItemComp>
-      <ItemComp></ItemComp>
-      <ItemComp></ItemComp>
+      <PictureComp></PictureComp>
+      <PictureComp></PictureComp>
+      <PictureComp></PictureComp>
+      <PictureComp></PictureComp>
     </div>
   </div>
 </template>
 <script>
 import { defineComponent } from "vue";
-import ItemComp from "../components/item-comp.vue";
+import PictureComp from "../components/picture-comp.vue";
 
 export default defineComponent({
-  name: "item-list",
+  name: "picture-list",
   components: {
-    ItemComp,
+    PictureComp,
   },
 });
 </script>

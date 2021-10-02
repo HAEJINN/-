@@ -25,7 +25,7 @@ import { useRouter } from "vue-router";
 import PictureDialog from "@/views/picture/picture";
 
 export default defineComponent({
-  name: "item-list",
+  name: "picture-comp",
   components: {
     PictureDialog,
   },
