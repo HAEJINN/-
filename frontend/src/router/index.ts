@@ -34,6 +34,11 @@ const routes = [
   //   name: "item-create",
   //   component: () => import("../views/item/create.vue"),
   // },
+  {
+    path: "/purchase",
+    name: "purchase",
+    component: () => import("../views/picture/purchase.vue"),
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     나작화소개     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   {
     path: "/najakhwa",
