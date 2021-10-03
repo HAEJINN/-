@@ -35,13 +35,13 @@
       </q-toolbar-title>
       <q-btn
         class="q-mx-xs"
-        v-if="state.isLogin"
         flat
         round
         dense
         icon="account_circle"
         @click="mvMypage"
       />
+      <!--v-if="state.isLogin"-->
       <div v-if="state.isLogin" class="inout" @click="clickLoginLogout">
         로그아웃
       </div>

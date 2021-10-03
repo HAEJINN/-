@@ -15,24 +15,26 @@
         <q-page class="column justify-center items-center">
           <div class="column justify-center items-center">
             <span class="text-h4 q-my-md">로그인</span>
-            <div class="row q-my-sm">
-              <label class="q-mr-md" for="email">이메일</label>
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                v-model="state.user.email"
-                placeholder="이메일"
-              />
-            </div>
-            <div class="row q-my-sm">
-              <label class="q-mr-md" for="password">비밀번호</label>
-              <input
-                type="password"
-                id="password"
-                v-model="state.user.password"
-                placeholder="비밀번호"
-              />
+            <div class="row">
+              <div class="column justify-center q-my-sm">
+                <label class="q-mr-md q-my-sm" for="email">이메일</label>
+                <label class="q-mr-md" for="password">비밀번호</label>
+              </div>
+              <div class="column justify-center q-my-sm">
+                <input
+                  type="text"
+                  class="form-control q-my-sm"
+                  id="email"
+                  v-model="state.user.email"
+                  placeholder="이메일"
+                />
+                <input
+                  type="password"
+                  id="password"
+                  v-model="state.user.password"
+                  placeholder="비밀번호"
+                />
+              </div>
             </div>
             <button class="q-my-md" type="submit" @click="clickLogin()">
               로그인
