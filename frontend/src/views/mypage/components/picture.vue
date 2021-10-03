@@ -1,16 +1,20 @@
 <template>
   <div class="col-lg-4 col-xs-10 q-px-sm q-py-sm">
-    <ItemComp></ItemComp>
+    <picture-comp></picture-comp>
+    <picture-comp></picture-comp>
+    <picture-comp></picture-comp>
+    <picture-comp></picture-comp>
+    <picture-comp></picture-comp>
   </div>
 </template>
 <script>
 import { defineComponent } from "vue";
-import ItemComp from "@/views/main/components/item-comp.vue";
+import PictureComp from "../components/picture-comp.vue";
 
 export default defineComponent({
-  name: "item-list",
+  name: "mypage-picture",
   components: {
-    ItemComp,
+    PictureComp,
   },
 });
 </script>

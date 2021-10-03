@@ -22,10 +22,6 @@
     <div class="row justify-center">
       <div class="row justify-center col-lg-8 col-xs-11">
         <Picture></Picture>
-        <Picture></Picture>
-        <Picture></Picture>
-        <Picture></Picture>
-        <Picture></Picture>
       </div>
     </div>
   </div>
