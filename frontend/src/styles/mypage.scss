@@ -125,3 +125,9 @@
     font-size: 1.1em;
   }
 }
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ picture-comp.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.picture-comp:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}

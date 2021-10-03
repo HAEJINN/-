@@ -7,7 +7,7 @@
         transition-next="scale"
         swipeable
         animated
-        control-color="white"
+        control-color="dark"
         navigation
         padding
         arrows

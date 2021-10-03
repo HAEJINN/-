@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4 col-xs-12">
+  <div class="picture-comp col-lg-4 col-xs-12">
     <q-card class="q-ma-sm" @click="openPictureDialog">
       <img src="https://cdn.quasar.dev/img/mountains.jpg" />
 
@@ -23,6 +23,7 @@
 import { defineComponent, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import PictureDialog from "@/views/picture/picture";
+import "../../../styles/banner.scss";
 
 export default defineComponent({
   name: "picture-comp",

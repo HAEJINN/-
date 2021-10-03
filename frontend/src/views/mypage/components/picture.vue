@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4 col-xs-10 q-px-sm q-py-sm">
+  <div class="row">
     <picture-comp></picture-comp>
     <picture-comp></picture-comp>
     <picture-comp></picture-comp>
