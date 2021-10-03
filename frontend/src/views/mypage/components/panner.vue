@@ -3,9 +3,9 @@
     <q-tabs
       v-model="tab"
       dense
-      class="text-grey"
-      active-color="primary"
-      indicator-color="primary"
+      class="bg-brown-1"
+      active-color="dark bg-primary"
+      indicator-color="dark"
       align="justify"
       narrow-indicator
     >
@@ -29,12 +29,14 @@
     </q-tab-panels>
   </div>
 </template>
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import Wallet from "../components/wallet.vue";
 import Following from "../components/following.vue";
 import Follower from "../components/follower.vue";
+import "../../../styles/mypage.scss";
+
 export default defineComponent({
   name: "panner",
   components: {

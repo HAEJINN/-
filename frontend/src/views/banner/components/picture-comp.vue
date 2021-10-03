@@ -1,5 +1,5 @@
 <template>
-  <div class="my-card col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-12">
     <q-card class="q-ma-sm" @click="openPictureDialog">
       <img src="https://cdn.quasar.dev/img/mountains.jpg" />
 

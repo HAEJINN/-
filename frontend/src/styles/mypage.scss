@@ -101,7 +101,7 @@
   cursor: pointer;
 }
 
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ picture.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ pictures.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 .picmo {
   width: 100%;
   height: 30vh !important;
@@ -116,5 +116,12 @@
 
   .pic:hover {
     cursor: pointer;
+  }
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ panner.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.q-tab {
+  &__label {
+    font-size: 1.1em;
   }
 }

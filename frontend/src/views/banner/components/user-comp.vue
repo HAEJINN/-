@@ -9,7 +9,7 @@
 
 <!--
 <template>
-  <div class="my-card col-lg-3 col-xs-6">
+  <div class=" col-lg-3 col-xs-6">
     <q-card class="q-ma-sm">
       <img src="../../../assets/mypage/malang.png" />
       <div class="q-py-sm">
