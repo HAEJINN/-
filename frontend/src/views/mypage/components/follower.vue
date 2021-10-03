@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <Followitem></Followitem>
     <Followitem></Followitem>
     <Followitem></Followitem>
