@@ -1,51 +1,64 @@
 <template>
-  <div>
-    <q-toolbar>
-      <q-btn dense flat round icon="menu">
-        <q-menu>
-          <div class="q-pa-sm">
-            <q-list>
-              <q-item clickable>
-                <q-item-section @click="mvinfo">나작화 소개</q-item-section>
-              </q-item>
-              <q-separator />
-              <q-item clickable>
-                <q-item-section @click="mvcollecinfo"
-                  >컬렉션 소개</q-item-section
-                >
-              </q-item>
-              <q-separator />
-              <q-item clickable>
-                <q-item-section @click="mvpicture"
-                  >사진 모아보기</q-item-section
-                >
-              </q-item>
-              <q-separator />
-              <q-item clickable>
-                <q-item-section @click="mvcollections"
-                  >컬렉션 모아보기</q-item-section
-                >
-              </q-item>
-            </q-list>
-          </div>
-        </q-menu>
-      </q-btn>
-      <q-toolbar-title @click="mvMain" class="najakhwa">
-        나만의 작은 화실
-      </q-toolbar-title>
-      <q-btn
-        class="q-mx-xs"
-        flat
-        round
-        dense
-        icon="account_circle"
-        @click="mvMypage"
-      />
-      <!--v-if="state.isLogin"-->
-      <div v-if="state.isLogin" class="inout" @click="clickLoginLogout">
-        로그아웃
+  <div class="bg-negative">
+    <q-toolbar class="row">
+      <div class="col-3">
+        <div class="row justify-start">
+          <q-btn dense flat round icon="menu" color="white">
+            <q-menu>
+              <div class="q-pa-sm">
+                <q-list>
+                  <q-item clickable>
+                    <q-item-section @click="mvinfo">나작화 소개</q-item-section>
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable>
+                    <q-item-section @click="mvcollecinfo"
+                      >컬렉션 소개</q-item-section
+                    >
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable>
+                    <q-item-section @click="mvpicture"
+                      >사진 모아보기</q-item-section
+                    >
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable>
+                    <q-item-section @click="mvcollections"
+                      >컬렉션 모아보기</q-item-section
+                    >
+                  </q-item>
+                </q-list>
+              </div>
+            </q-menu>
+          </q-btn>
+        </div>
       </div>
-      <div v-else class="inout" @click="clickLoginLogout">로그인</div>
+      <div class="col-6">
+        <q-toolbar-title @click="mvMain" class="najakhwa text-white">
+          나만의 작은 화실
+        </q-toolbar-title>
+      </div>
+      <div class="col-3">
+        <div class="row justify-end items-center">
+          <q-btn
+            class="q-mx-xs"
+            flat
+            round
+            dense
+            icon="account_circle"
+            color="white"
+            @click="mvMypage"
+          />
+          <!--v-if="state.isLogin"-->
+          <div v-if="state.isLogin" class="inout" @click="clickLoginLogout">
+            로그아웃
+          </div>
+          <div v-else class="inout text-white" @click="clickLoginLogout">
+            로그인
+          </div>
+        </div>
+      </div>
     </q-toolbar>
     <login-dialog
       v-model="state.dialog.login"
