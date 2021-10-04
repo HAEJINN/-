@@ -21,7 +21,8 @@ public class Item {
     private String name;
     private String description;
     private int price;
-    private BigInteger token_id;
+    @Column(name = "token_id")
+    private BigInteger tokenId;
     private String cid;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
@@ -29,11 +30,11 @@ public class Item {
 
     @Builder
     public Item(final String name, final String description,
-                final int price, final BigInteger token_id, final String cid, final User user) {
+                final int price, final BigInteger tokenId, final String cid, final User user) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.token_id = token_id;
+        this.tokenId = tokenId;
         this.cid = cid;
         this.user = user;
     }
