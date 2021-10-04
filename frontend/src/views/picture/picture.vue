@@ -11,8 +11,9 @@
           icon="close"
         />
         <q-carousel v-model="slide" :fullscreen="fullscreen">
-          <q-carousel-slide :name="1" :img-src="malang" />
-
+          <q-carousel-slide :name="1" class="carousel-slide">
+            <q-img :src="malang" fit="contain" class="carousel-image"></q-img>
+          </q-carousel-slide>
           <template v-slot:control>
             <q-carousel-control position="bottom-right" :offset="[18, 18]">
               <q-btn
