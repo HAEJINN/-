@@ -1,0 +1,18 @@
+.picture-layout {
+  width: 100% !important;
+  max-width: 1000px !important;
+
+  height: auto;
+  overflow: auto;
+
+  // min-height: 600px !important;
+  max-height: 650px !important;
+}
+
+.picture-img {
+  max-height: 300px;
+}
+
+.picture-title {
+  padding-right: 100;
+}
