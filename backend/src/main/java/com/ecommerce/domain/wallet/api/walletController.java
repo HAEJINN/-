@@ -45,8 +45,9 @@ public class walletController{
     List<String> addressList;
 
     @PostMapping("/wallet/create")
-    public ResponseEntity<?> createWallet(@RequestBody User user) throws Exception {
-        final Wallet wallet = walletService.createWallet(user);
+    public ResponseEntity<?> createWallet(final HttpSession httpSession) throws Exception {
+        final SessionUser user = (SessionUser)httpSession.getAttribute("user");
+        final Wallet wallet = walletService.createWallet(user.getEmail());
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
@@ -54,7 +55,6 @@ public class walletController{
     public ResponseEntity<?> getBalance(final String address) throws Exception {
         final Wallet wallet = walletService.getBalance(address);
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
-
     }
 
     @GetMapping("/wallet/getaddress")

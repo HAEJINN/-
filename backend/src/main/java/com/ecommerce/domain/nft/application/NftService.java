@@ -70,7 +70,7 @@ public class NftService {
         approveAddress(tokenId,toAddress);
         businessLogin.transferFrom(fromAddress,toAddress,BigInteger.valueOf(tokenId)).send();
         Item item = itemRepository.findByTokenId(BigInteger.valueOf(tokenId)).orElseThrow(IllegalArgumentException::new);
-        Wallet wallet = walletRepository.findByWalletAddress(toAddress).orElseThrow(IllegalArgumentException::new);
+        Wallet wallet = walletRepository.findByAddress(toAddress).orElseThrow(IllegalArgumentException::new);
         System.out.println(wallet.toString());
         User user = userRepository.findById(wallet.getUser().getId()).orElseThrow(IllegalArgumentException::new);
         System.out.println(user.toString());
