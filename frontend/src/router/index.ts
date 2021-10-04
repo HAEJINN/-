@@ -23,6 +23,11 @@ const routes = [
     name: "addpic",
     component: () => import("../views/mypage/addpic.vue"),
   },
+  {
+    path: "/modify",
+    name: "modify",
+    component: () => import("../views/mypage/modifyme.vue"),
+  },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
   // {
   //   path: "/item",

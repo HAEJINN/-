@@ -61,6 +61,11 @@
   margin: 0.2em 0.5em;
 }
 
+.add-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ addpic.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 .upload-btn {
   border-radius: 5px;
