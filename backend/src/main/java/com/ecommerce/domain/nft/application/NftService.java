@@ -5,6 +5,8 @@ import com.ecommerce.domain.item.domain.ItemRepository;
 import com.ecommerce.domain.nft.domain.NftRequest;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
+import com.ecommerce.domain.wallet.domain.Wallet;
+import com.ecommerce.domain.wallet.domain.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import org.web3j.tuples.generated.Tuple3;
 import org.web3j.tx.gas.ContractGasProvider;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
 import static org.reflections.Reflections.log;
 
@@ -30,6 +33,7 @@ public class NftService {
 
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
+    private final WalletRepository walletRepository;
     private final BusinessLogin businessLogin;
 
 
@@ -50,7 +54,7 @@ public class NftService {
                 .description(nftRequest.getDescription())
                 .price(nftRequest.getPrice())
                 .cid(nftRequest.getCID())
-                .token_id(c.component2())
+                .tokenId(c.component2())
                 .user(user)
                 .build();
         itemRepository.save(item);
@@ -65,8 +69,11 @@ public class NftService {
     public boolean transferNft(String fromAddress, String toAddress, int tokenId) throws Exception {
         approveAddress(tokenId,toAddress);
         businessLogin.transferFrom(fromAddress,toAddress,BigInteger.valueOf(tokenId)).send();
-        User user = userRepository.findByAddress(toAddress).orElseThrow(IllegalArgumentException::new);
         Item item = itemRepository.findByTokenId(BigInteger.valueOf(tokenId)).orElseThrow(IllegalArgumentException::new);
+        Wallet wallet = walletRepository.findByWalletAddress(toAddress).orElseThrow(IllegalArgumentException::new);
+        System.out.println(wallet.toString());
+        User user = userRepository.findById(wallet.getUser().getId()).orElseThrow(IllegalArgumentException::new);
+        System.out.println(user.toString());
         item.updateUser(user);
         itemRepository.save(item);
         return true;
