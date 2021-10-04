@@ -1,0 +1,26 @@
+.picture-card {
+  width: 100% !important;
+  max-width: 800px !important;
+}
+.picture-img-section {
+  position: relative;
+}
+
+.card-close {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+}
+
+.carousel-slide {
+  height: 100%;
+}
+
+.carousel-image {
+  height: 100%;
+}
+
+.picture-title {
+  padding-right: 100;
+}

@@ -1,11 +1,11 @@
 <template>
-  <div class="my-card col-lg-3 col-xs-6">
+  <div class="picture-comp col-lg-4 col-xs-12">
     <q-card class="q-ma-sm" @click="openPictureDialog">
       <img src="https://cdn.quasar.dev/img/mountains.jpg" />
 
-      <q-card-section>
-        <div class="text-h6">작품 이름</div>
-        <div class="text-subtitle2">작가</div>
+      <q-card-section class="column">
+        <div class="text-h6 self-start">작품 이름</div>
+        <div class="text-subtitle2 self-end">작가</div>
       </q-card-section>
     </q-card>
     <picture-dialog
@@ -23,6 +23,7 @@
 import { defineComponent, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import PictureDialog from "@/views/picture/picture";
+import "../../../styles/banner.scss";
 
 export default defineComponent({
   name: "picture-comp",

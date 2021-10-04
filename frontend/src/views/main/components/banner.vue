@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-sm">
+  <div class="q-pb-sm">
     <div class="q-gutter-md">
       <q-carousel
         v-model="slide"
@@ -7,7 +7,7 @@
         transition-next="scale"
         swipeable
         animated
-        control-color="white"
+        control-color="dark"
         navigation
         padding
         arrows

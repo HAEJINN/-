@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-3 col-xs-6">
+  <div class="user-comp col-lg-3 col-xs-6">
     <div class="q-ma-sm bg-accent">
       <img src="../../../assets/profile.png" />
     </div>
@@ -9,7 +9,7 @@
 
 <!--
 <template>
-  <div class="my-card col-lg-3 col-xs-6">
+  <div class=" col-lg-3 col-xs-6">
     <q-card class="q-ma-sm">
       <img src="../../../assets/mypage/malang.png" />
       <div class="q-py-sm">
@@ -20,3 +20,8 @@
   </div>
 </template>
 -->
+<script>
+import "../../../styles/banner.scss";
+
+export default {};
+</script>

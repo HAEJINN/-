@@ -1,36 +1,73 @@
 <template>
   <q-dialog>
-    <q-layout
-      view="lhh LpR lff"
-      container
-      style="height: 500px"
-      class="bg-secondary"
-    >
-      <q-page-container>
-        <q-header class="bg-dark">
-          <q-toolbar>
-            <q-toolbar-title>{{ title }}</q-toolbar-title>
-            <q-btn v-close-popup flat round dense icon="close" />
-          </q-toolbar>
-        </q-header>
-        <q-page class="column justify-center items-center">
-          <div><img :src="malang" /></div>
-          <div>{{ name }}</div>
-          <div>{{ description }}</div>
-          <div v-if="price !== null">
-            <div>{{ price }}</div>
-            <q-btn label="구매하기" @click="mvPurchase"></q-btn>
+    <q-card class="picture-card q-dialog-plugin">
+      <div class="picture-img-section">
+        <q-btn
+          class="card-close bg-white"
+          v-close-popup
+          flat
+          round
+          dense
+          icon="close"
+        />
+        <q-carousel v-model="slide" :fullscreen="fullscreen">
+          <q-carousel-slide :name="1" class="carousel-slide">
+            <q-img :src="malang" fit="contain" class="carousel-image"></q-img>
+          </q-carousel-slide>
+          <template v-slot:control>
+            <q-carousel-control position="bottom-right" :offset="[18, 18]">
+              <q-btn
+                push
+                round
+                dense
+                color="white"
+                text-color="primary"
+                :icon="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
+                @click="fullscreen = !fullscreen"
+              />
+            </q-carousel-control>
+          </template>
+        </q-carousel>
+      </div>
+      <q-card-section class="column">
+        <div class="row justify-center items-bottom">
+          <div class="picture-title text-h4 text-weight-bolder q-mr-md">
+            {{ title }}
           </div>
-          <div v-else>
-            <div>이미 판매 완료된 상품입니다</div>
+          <div class="text-right text-h6 text-weight-medium q-ml-md self-end">
+            {{ name }}
           </div>
-        </q-page>
-      </q-page-container>
-    </q-layout>
+          <q-btn class="self-end" flat round dense icon="home"></q-btn>
+        </div>
+      </q-card-section>
+
+      <q-card-section>
+        <div class="q-ml-lg q-mt-sm q-mb-sm text-h6">작품 소개</div>
+        <div class="q-ml-lg q-mr-lg">{{ description }}</div>
+      </q-card-section>
+      <q-card-section class="q-mt-lg">
+        <div class="row items-center">
+          <div class="col-7"></div>
+          <div v-if="price !== null" class="col-3 text-center">
+            {{ price }} 원
+          </div>
+          <q-btn
+            v-if="price !== null"
+            class="bg-dark col-2"
+            text-color="white"
+            label="구매하기"
+            @click="mvPurchase"
+          ></q-btn>
+
+          <div v-else>이미 판매 완료된 상품입니다</div>
+        </div>
+      </q-card-section>
+    </q-card>
   </q-dialog>
 </template>
 <script>
-import { defineComponent } from "vue";
+import "../../styles/picture.scss";
+import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
   name: "picture",
@@ -46,6 +83,8 @@ export default defineComponent({
     };
     return {
       malang: require("@/assets/mypage/malang.png"),
+      slide: ref(1),
+      fullscreen: ref(false),
 
       mvPurchase,
     };
