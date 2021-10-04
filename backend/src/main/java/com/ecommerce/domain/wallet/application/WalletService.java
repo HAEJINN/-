@@ -8,11 +8,21 @@ import com.ecommerce.domain.wallet.dto.WalletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.web3j.abi.FunctionEncoder;
+import org.web3j.abi.TypeReference;
+import org.web3j.abi.datatypes.Function;
+import org.web3j.abi.datatypes.Type;
 import org.web3j.crypto.*;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
+import org.web3j.protocol.admin.methods.response.PersonalListAccounts;
+import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
+
+import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 
 import java.io.IOException;
@@ -20,10 +30,8 @@ import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 @Transactional(readOnly = true)
 @Service
@@ -32,11 +40,15 @@ public class WalletService {
 
     private static final String OX = "0x%s";
     private static final int HEX = 16;
+    private String adminEthAddress = "0x2bd661bad97160c81eb0704ae29cb97bcbec6f8a";
+
+
 
     private final WalletRepository walletRepository;
     private final UserRepository userRepository;
     private final Web3j web3j;
     private final Admin admin;
+    List<String> addressList;
 
     @Transactional
     public Wallet createWallet(final User request) throws CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
@@ -87,5 +99,40 @@ public class WalletService {
     // user 테이블에 1회 충전이 되었는지 속성 필요
     // 1회 충전을 눌렀을 때 -> user테이블에서 검사하고 user.charge -> boolean 값으로 만들고 만약 fasle이면
     // 충전 가능
+    public Transaction transactionFunction(String functionName, List<Type> inputParameters, List<TypeReference<?>> outputParameters, String amount) throws IOException{
+        final Web3j web3j = Web3j.build(new HttpService());
+        final Admin admin = Admin.build(new HttpService());
+        PersonalListAccounts personalListAccounts = admin.personalListAccounts().send();
+        addressList = personalListAccounts.getAccountIds();
+
+        PersonalUnlockAccount personalUnlockAccount = admin.personalUnlockAccount(adminEthAddress,"1234").send();
+        Boolean isUnlocked = personalUnlockAccount.accountUnlocked();
+
+        //contract function 만들기
+        Function function = new Function(functionName, inputParameters, outputParameters);
+
+        // nonce 체크
+        EthGetTransactionCount ethGetTransactionCount = null;
+        try{
+            ethGetTransactionCount = web3j.ethGetTransactionCount(addressList.get(0), DefaultBlockParameterName.LATEST)
+                    .sendAsync().get();
+        } catch(InterruptedException | ExecutionException e1){
+            e1.printStackTrace();
+        }
+
+        BigInteger value = new BigInteger(amount);
+        BigInteger nonce =  ethGetTransactionCount.getTransactionCount();
+
+        String to = String.valueOf(inputParameters.get(1));
+        Transaction transaction = Transaction.createFunctionCallTransaction(addressList.get(0), nonce,Transaction.DEFAULT_GAS,null,to,value,FunctionEncoder.encode(function));
+
+
+        EthSendTransaction test = web3j.ethSendTransaction(transaction).send();
+        return transaction;
+
+    }
+
+
+
 
 }
