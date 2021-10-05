@@ -55,3 +55,8 @@ export function request_picupload(commit: any, data: any) {
   const url = "/api/v1/items";
   return axios.post(url, data);
 }
+
+export function request_walletaddress(commit: any) {
+  const url = "/wallet/getaddress";
+  return axios.get(url);
+}

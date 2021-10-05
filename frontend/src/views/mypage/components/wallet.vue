@@ -6,16 +6,36 @@
         <div class="text-h3">999ETH</div>
         <div class="add-btn" @click="chargeCoin"></div>
       </div>
-      <div class="text-h6 q-my-md">0X123456789</div>
+      <!-- <div class="text-h6 q-my-md">{{ state.address }}</div> -->
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import "../../../styles/mypage.scss";
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeMount } from "vue";
+import { reactive } from "vue";
+import { useStore } from "vuex";
+
 export default defineComponent({
   name: "wallet",
   setup() {
+    const store = useStore();
+    const state = reactive({
+      wallet: {
+        address: "",
+      },
+    });
+    onBeforeMount(() => {
+      store
+        .dispatch("root/request_walletaddress")
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+
     const chargeCoin = () => {
       var yesno = confirm("충전하시겠습니끼?");
       if (yesno) {
@@ -26,6 +46,8 @@ export default defineComponent({
     };
 
     return {
+      state,
+      onBeforeMount,
       chargeCoin,
     };
   },
