@@ -12,13 +12,13 @@ spring:
     password:
     port: 6379
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: bcssafy
-    password: bcssafy
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
   jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
     generate-ddl: true
     hibernate:
       ddl-auto: create-drop
@@ -40,4 +40,9 @@ eth:
     address: ae568c16496505f5ec7a5ef7341d2da202234d71
 logging.level:
   org.hibernate.SQL: debug
-
+jwt:
+  token:
+    header-type: JWT
+    issuer: najakwha
+    secret: b3JpX3RveV9wcm9qZWN0X3JlYWxfd29ybGRfamF2YV9zcHJpbmdfYm9vdF9zZWNyZXRfand0X3NhdWx0X2tleQo=
+    access-time: 1800000  # 30분

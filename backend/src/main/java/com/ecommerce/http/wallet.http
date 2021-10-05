@@ -1,0 +1,2 @@
+GET http://127.0.0.1:8080/wallet/getaddress
+Authorization: TOKEN eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaXNzIjoibmFqYWt3aGEiLCJleHAiOjE2MzM0MzEzMzMsImlhdCI6MTYzMzQyOTUzM30.5yw8aHcwV8l3LQDaZqVV4yM78q-zasY0WMdCO31tvx-mhH53UK8xfAge5Y2PIz8LsNc4VqN97Amu3EHx3iY49Q

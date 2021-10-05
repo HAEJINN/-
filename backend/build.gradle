@@ -31,8 +31,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'org.hyperledger.fabric-sdk-java:fabric-sdk-java:2.2.8'
@@ -57,6 +55,10 @@ dependencies {
     implementation "org.web3j:core:4.5.11"
     implementation 'org.web3j:web3j-spring-boot-starter:4.0.3'
     testImplementation 'org.web3j:web3j-unit:4.5.11'
+
+    compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 }
 
 test {

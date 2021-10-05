@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.web3j.crypto.CipherException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -36,9 +39,8 @@ public class UserApi {
     }
 
     @PostMapping("/api/v1/users")
-    public ResponseEntity<UserSaveResponse> save(HttpSession httpSession, @RequestBody final UserSaveRequest request) throws InvalidAlgorithmParameterException, CipherException, IOException, NoSuchAlgorithmException, NoSuchProviderException {
+    public ResponseEntity<UserSaveResponse> save(@RequestBody final UserSaveRequest request) throws InvalidAlgorithmParameterException, CipherException, IOException, NoSuchAlgorithmException, NoSuchProviderException {
         final User user = userService.save(request.toEntity());
-        System.out.println(httpSession.getId());
         final UserSaveResponse userSaveResponse = new UserSaveResponse(user);
         return ResponseEntity.ok().body(userSaveResponse);
     }
