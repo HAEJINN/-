@@ -8,7 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.web3j.crypto.CipherException;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,7 +35,7 @@ public class UserApi {
     }
 
     @PostMapping("/api/v1/users")
-    public ResponseEntity<UserSaveResponse> save(@RequestBody final UserSaveRequest request) {
+    public ResponseEntity<UserSaveResponse> save(@RequestBody final UserSaveRequest request) throws InvalidAlgorithmParameterException, CipherException, IOException, NoSuchAlgorithmException, NoSuchProviderException {
         final User user = userService.save(request.toEntity());
         final UserSaveResponse userSaveResponse = new UserSaveResponse(user);
         return ResponseEntity.ok().body(userSaveResponse);

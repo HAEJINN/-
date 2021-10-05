@@ -41,7 +41,7 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "photo_id")
     private Photo photo;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Wallet wallet;
 
     @OneToMany(mappedBy = "follower" , cascade = CascadeType.ALL, orphanRemoval = true)

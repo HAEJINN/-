@@ -21,7 +21,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         default_batch_fetch_size: 1000
@@ -31,11 +31,13 @@ spring:
     client-address: http://localhost:8545
     admin-client: true
 eth:
+  erc20:
+    contract: dd
   erc721:
     contract: fe031e1193f2ad53901ff9f33e3dd75586c074e0
   admin:
     wallet: admin.wallet
-    address: 718ca8088ae9c120551defcbbecfedc3b9761a1f
+    address: ae568c16496505f5ec7a5ef7341d2da202234d71
 logging.level:
   org.hibernate.SQL: debug
 

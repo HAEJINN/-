@@ -53,6 +53,9 @@ public class WalletService {
     @Transactional
     public Wallet createWallet(final String email) throws CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+        if(user.getWallet() != null) {
+            return user.getWallet();
+        }
         final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), new File(Wallet.walletDirectory));
         final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.walletDirectory + walletFile));
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
