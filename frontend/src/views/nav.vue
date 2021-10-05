@@ -48,9 +48,9 @@
             dense
             icon="account_circle"
             color="white"
+            v-if="state.isLogin"
             @click="mvMypage"
           />
-          <!--v-if="state.isLogin"-->
           <div v-if="state.isLogin" class="inout" @click="clickLoginLogout">
             로그아웃
           </div>

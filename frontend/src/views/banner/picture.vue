@@ -7,50 +7,29 @@
     </div>
     <div class="row justify-center">
       <div class="col-lg-8 col-xs-12">
-        <q-tabs
-          v-model="tab"
-          dense
-          class="bg-brown-1"
-          active-color="dark bg-primary"
-          indicator-color="dark"
-          align="justify"
-          narrow-indicator
-        >
-          <q-tab name="remainpic" label="판매중인 사진" />
-          <q-tab name="finishpic" label="판매완료 사진" />
-        </q-tabs>
-
-        <q-separator />
-
-        <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="remainpic">
-            <Remainpic></Remainpic>
-          </q-tab-panel>
-          <q-tab-panel name="finishpic">
-            <Finishpic></Finishpic>
-          </q-tab-panel>
-        </q-tab-panels>
+        <div class="row">
+          <Picturecomp></Picturecomp>
+          <Picturecomp></Picturecomp>
+          <Picturecomp></Picturecomp>
+          <Picturecomp></Picturecomp>
+          <Picturecomp></Picturecomp>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { defineComponent } from "vue";
-import { ref } from "vue";
-import Remainpic from "../banner/components/remainpic.vue";
-import Finishpic from "../banner/components/finishpic.vue";
+import Picturecomp from "../banner/components/picture-comp.vue";
 import "@/styles/banner.scss";
 
 export default defineComponent({
   name: "picture",
   components: {
-    Remainpic,
-    Finishpic,
+    Picturecomp,
   },
   setup() {
-    return {
-      tab: ref("remainpic"),
-    };
+    return {};
   },
 });
 </script>

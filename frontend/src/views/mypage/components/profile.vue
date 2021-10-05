@@ -9,8 +9,8 @@
         </q-responsive>
       </div>
     </div>
-    <!-- <span class="text-h6">🤎 {{ state.name }}님 환영합니다 🤎</span> -->
-    <div class="text-h6 q-my-sm">🤎 디두님 환영합니다 🤎</div>
+    <div class="text-h6">🤎 {{ state.name }}님 환영합니다 🤎</div>
+    <!-- <div class="text-h6 q-my-sm">🤎 디두님 환영합니다 🤎</div> -->
     <div>디두가 원하는대로 고쳐</div>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default defineComponent({
     });
     onBeforeMount(() => {
       const userinfo = JSON.parse(localStorage.getItem("userInfo"));
-      // state.name = userinfo.name;
+      state.name = userinfo.name;
     });
     const modifyProfile = () => {
       router.push("modify");
