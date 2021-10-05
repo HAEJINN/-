@@ -20,9 +20,6 @@ import org.web3j.tuples.generated.Tuple3;
 import org.web3j.tx.gas.ContractGasProvider;
 
 import java.math.BigInteger;
-import java.util.Optional;
-
-import static org.reflections.Reflections.log;
 
 @Service
 @RequiredArgsConstructor
@@ -40,12 +37,10 @@ public class NftService {
     //    private BusinessLogin businessLogin = credentialsUtils.getInstance();
 
     public Item createNftToken(NftRequest nftRequest) throws Exception {
-        log.info("nft test start");
         TransactionReceipt r = businessLogin.mint(nftRequest.getCID(),nftRequest.getWalletAddress()).send();
         BigInteger tokenId = businessLogin.getCount().send();
         int count = Integer.parseInt(String.valueOf(tokenId)) - 1;
         Tuple3<String, BigInteger, String> c = businessLogin.charactors(BigInteger.valueOf(count)).send();
-        log.info("nft test end");
 
         User user = userRepository.findById(nftRequest.getUserId()).orElseThrow(IllegalArgumentException::new);
 
