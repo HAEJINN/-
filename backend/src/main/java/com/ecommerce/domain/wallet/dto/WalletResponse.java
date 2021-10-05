@@ -12,27 +12,27 @@ import java.math.BigInteger;
 public class WalletResponse {
 
     private Long id;
-    private String walletAddress;
-    private String credentialsAddress;
+    private String address;
+    private String fileName;
     private int wallet_cash;
     private BigInteger balance;
     private String userName;
 
     public static final WalletResponse ofWallet(final Wallet wallet) {
         final Long id = wallet.getId();
-        final String walletAddress = wallet.getWalletAddress();
-        final String credentialsAddress = wallet.getCredentialsAddress();
+        final String address = wallet.getAddress();
+        final String fileName = wallet.getFileName();
         final int walletCash = wallet.getWalletCash();
         final BigInteger balance = wallet.getBalance();
         final String userName = wallet.getUser().getName();
-        return new WalletResponse(id, walletAddress, credentialsAddress, walletCash, balance, userName);
+        return new WalletResponse(id, address, fileName, walletCash, balance, userName);
     }
 
-    private WalletResponse(final Long id, final String walletAddress, final String credentialsAddress,
+    private WalletResponse(final Long id, final String address, final String fileName,
                           final int wallet_cash, final BigInteger balance, final String userName) {
         this.id = id;
-        this.walletAddress = walletAddress;
-        this.credentialsAddress = credentialsAddress;
+        this.address = address;
+        this.fileName = fileName;
         this.wallet_cash = wallet_cash;
         this.balance = balance;
         this.userName = userName;

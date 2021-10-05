@@ -1,6 +1,7 @@
 package com.ecommerce.domain.user.domain;
 
 import com.ecommerce.domain.follow.domain.Follow;
+import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.global.common.BaseTimeEntity;
 import com.ecommerce.domain.photo.domain.Photo;
 import lombok.*;
@@ -40,6 +41,9 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "photo_id")
     private Photo photo;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Wallet wallet;
+
     @OneToMany(mappedBy = "follower" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Follow> myFollowing = new HashSet<>();
 
@@ -47,13 +51,13 @@ public class User extends BaseTimeEntity {
     private Set<Follow> myFollower = new HashSet<>();
 
     @Builder
-    public User(final String email, final String name, final String password, final UserStatus status,
-                final Photo photo, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
+    public User(final String email, final String name, final String password, final UserStatus status, final Photo photo, final Wallet wallet, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.status = UserStatus.ACTIVITY;
+        this.status = status;
         this.photo = photo;
+        this.wallet = wallet;
         this.myFollowing = myFollowing;
         this.myFollower = myFollower;
     }
@@ -67,6 +71,12 @@ public class User extends BaseTimeEntity {
     public User changePhoto(final Photo photo) {
         validateNull(photo);
         this.photo = photo;
+        return this;
+    }
+
+    public User changeWallet(final Wallet wallet) {
+        validateNull(wallet);
+        this.wallet = wallet;
         return this;
     }
 
@@ -95,6 +105,5 @@ public class User extends BaseTimeEntity {
         myFollower.add(follower);
         follower.changeFollowing(this);
     }
-
 
 }

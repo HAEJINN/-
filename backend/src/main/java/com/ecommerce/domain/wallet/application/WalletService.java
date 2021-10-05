@@ -25,6 +25,7 @@ import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
@@ -42,24 +43,32 @@ public class WalletService {
     private static final int HEX = 16;
     private String adminEthAddress = "0x2bd661bad97160c81eb0704ae29cb97bcbec6f8a";
 
-
-
     private final WalletRepository walletRepository;
     private final UserRepository userRepository;
     private final Web3j web3j;
     private final Admin admin;
     List<String> addressList;
 
+
     @Transactional
-    public Wallet createWallet(final User request) throws CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
-        final ECKeyPair ecKeyPair = Keys.createEcKeyPair();
-        final String address = address(ecKeyPair);
-        final String privateKey = privateKey(ecKeyPair);
-        final Credentials credentials = Credentials.create(privateKey);
-        final User user = userRepository.findByEmail(request.getEmail()).orElseThrow(IllegalArgumentException::new);
-        final EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
-        final Wallet wallet = wallet(address, credentials, user, ethGetBalance.getBalance());
+    public Wallet createWallet(final String email) throws CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
+        final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+        if(user.getWallet() != null) {
+            return user.getWallet();
+        }
+        final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), new File(Wallet.walletDirectory));
+        final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.walletDirectory + walletFile));
+        final EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
+        final Wallet wallet = wallet(credentials, walletFile, user, ethGetBalance.getBalance());
         return walletRepository.save(wallet);
+    }
+
+    @Transactional
+    public Wallet getBalance(final String address) throws IOException {
+        final Web3j web3j = Web3j.build(new HttpService());
+        final EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
+        final Wallet wallet = walletRepository.findByAddress(address).orElseThrow(IllegalArgumentException::new);
+        return wallet.changeBalance(ethGetBalance.getBalance());
     }
 
     public Wallet getWalletAddressByUser(final String email){
@@ -67,29 +76,10 @@ public class WalletService {
         return walletRepository.findByUser(user).orElseThrow(IllegalArgumentException::new);
     }
 
-    @Transactional
-    public Wallet getBalance(final String address) throws IOException {
-        final Web3j web3j = Web3j.build(new HttpService());
-        final EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
-        final Wallet wallet = walletRepository.findByCredentialsAddress(address).orElseThrow(IllegalArgumentException::new);
-        return wallet.changeBalance(ethGetBalance.getBalance());
-    }
-
-    private String address(final ECKeyPair ecKeyPair) throws CipherException {
-        final String seed = UUID.randomUUID().toString();
-        final WalletFile wallet = org.web3j.crypto.Wallet.createLight(seed, ecKeyPair);
-        return String.format(OX, wallet.getAddress());
-    }
-
-    private String privateKey(final ECKeyPair ecKeyPair) {
-        final BigInteger privateKeyInDec = ecKeyPair.getPrivateKey();
-        return privateKeyInDec.toString(HEX);
-    }
-
-    private Wallet wallet(final String address, final Credentials credentials, final User user, final BigInteger balance) {
+    private Wallet wallet(final Credentials credentials, final String walletFile, final User user, final BigInteger balance) {
         return Wallet.builder()
-                .credentials_address(credentials.getAddress())
-                .wallet_address(address)
+                .address(credentials.getAddress())
+                .fileName(walletFile)
                 .user(user)
                 .balance(balance)
                 .build();
@@ -131,8 +121,5 @@ public class WalletService {
         return transaction;
 
     }
-
-
-
 
 }

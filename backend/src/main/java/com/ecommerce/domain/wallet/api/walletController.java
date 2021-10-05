@@ -2,27 +2,19 @@ package com.ecommerce.domain.wallet.api;
 
 
 import com.ecommerce.domain.auth.domain.SessionUser;
-import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.wallet.application.WalletService;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.domain.wallet.dto.WalletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.TypeReference;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
-import org.web3j.protocol.admin.methods.response.PersonalListAccounts;
-import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.Request;
 import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +23,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,8 +36,9 @@ public class walletController{
     List<String> addressList;
 
     @PostMapping("/wallet/create")
-    public ResponseEntity<?> createWallet(@RequestBody User user) throws Exception {
-        final Wallet wallet = walletService.createWallet(user);
+    public ResponseEntity<?> createWallet(final HttpSession httpSession) throws Exception {
+        final SessionUser user = (SessionUser)httpSession.getAttribute("user");
+        final Wallet wallet = walletService.createWallet(user.getEmail());
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
@@ -54,7 +46,6 @@ public class walletController{
     public ResponseEntity<?> getBalance(final String address) throws Exception {
         final Wallet wallet = walletService.getBalance(address);
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
-
     }
 
     @GetMapping("/wallet/getaddress")
