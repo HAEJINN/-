@@ -6,12 +6,12 @@ spring:
   session:
     store-type: redis
   redis:
-    host: 3.34.135.3
+    host: localhost
     password:
     port: 6379
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.34.135.3:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: ssafy
   jpa:
