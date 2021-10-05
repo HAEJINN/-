@@ -9,7 +9,7 @@ spring:
     cache-duration: PT1H
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.34.135.3:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/bcssafy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: ssafy
   jpa:
@@ -30,7 +30,7 @@ eth:
   encrypted:
     password: Pn0OlSN0SdhjNK5X2EhUPQ==
   erc721:
-    contract: fe031e1193f2ad53901ff9f33e3dd75586c074e0
+    contract: 7d2026d684f19deaa4134c39dde786605dcc90d4
   purchase:
     record:
       contract: 0x0c2BC3cAB0036D1E51734B4D6e6cb8BCB046A2C7
