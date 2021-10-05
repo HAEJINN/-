@@ -1,7 +1,6 @@
 package com.ecommerce.domain.wallet.domain;
 
 import com.ecommerce.domain.user.domain.User;
-import com.ecommerce.domain.wallet.domain.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

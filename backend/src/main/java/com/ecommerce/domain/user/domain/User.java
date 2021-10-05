@@ -1,16 +1,17 @@
 package com.ecommerce.domain.user.domain;
 
 import com.ecommerce.domain.follow.domain.Follow;
+import com.ecommerce.domain.photo.domain.Photo;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.global.common.BaseTimeEntity;
-import com.ecommerce.domain.photo.domain.Photo;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

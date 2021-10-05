@@ -8,6 +8,10 @@ import com.ecommerce.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -25,7 +29,9 @@ public class AuthApi {
     public ResponseEntity<LoginResponse> login(final HttpSession httpSession, @RequestBody final LoginRequest request) {
         final User user = userService.login(request.toEntity());
         final LoginResponse loginResponse = new LoginResponse(user);
-        httpSession.setAttribute("user", new SessionUser(user));
+        final SecurityContext context = SecurityContextHolder.getContext();
+        final Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+        context.setAuthentication(authentication);
         return ResponseEntity.ok().body(loginResponse);
     }
 

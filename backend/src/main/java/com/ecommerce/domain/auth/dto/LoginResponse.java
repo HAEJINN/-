@@ -1,6 +1,5 @@
 package com.ecommerce.domain.auth.dto;
 
-import com.ecommerce.domain.photo.domain.Photo;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserStatus;
 import lombok.AccessLevel;

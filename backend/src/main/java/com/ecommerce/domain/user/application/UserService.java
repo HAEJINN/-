@@ -6,7 +6,6 @@ import com.ecommerce.domain.user.domain.UserRepository;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.domain.wallet.domain.WalletRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +15,6 @@ import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
-import org.web3j.protocol.http.HttpService;
 
 import java.io.File;
 import java.io.IOException;
