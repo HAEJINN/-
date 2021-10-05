@@ -60,7 +60,7 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
   web3j:
-    client-address: http://3.36.50.29:8545
+    client-address: http://localhost:8545
     admin-client: true
 eth:
   encrypted:

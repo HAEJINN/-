@@ -7,6 +7,7 @@ import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.domain.wallet.dto.WalletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,9 +37,8 @@ public class walletController{
     List<String> addressList;
 
     @PostMapping("/wallet/create")
-    public ResponseEntity<?> createWallet(final HttpSession httpSession) throws Exception {
-        final SessionUser user = (SessionUser)httpSession.getAttribute("user");
-        final Wallet wallet = walletService.createWallet(user.getEmail());
+    public ResponseEntity<?> createWallet(@AuthenticationPrincipal final String email) throws Exception {
+        final Wallet wallet = walletService.createWallet(email);
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
@@ -49,9 +49,8 @@ public class walletController{
     }
 
     @GetMapping("/wallet/getaddress")
-    public ResponseEntity<?> getAddress(HttpSession httpSession) {
-        final SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        final Wallet wallet = walletService.getWalletAddressByUser(user.getEmail());
+    public ResponseEntity<?> getAddress(@AuthenticationPrincipal final String email) {
+        final Wallet wallet = walletService.getWalletAddressByUser(email);
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
