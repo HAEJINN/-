@@ -1,21 +1,14 @@
 package com.ecommerce.domain.auth.api;
 
-import com.ecommerce.domain.auth.domain.SessionUser;
 import com.ecommerce.domain.auth.dto.LoginRequest;
 import com.ecommerce.domain.auth.dto.LoginResponse;
 import com.ecommerce.domain.user.application.UserService;
 import com.ecommerce.domain.user.domain.User;
+import com.ecommerce.global.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,13 +17,13 @@ import javax.servlet.http.HttpSession;
 public class AuthApi {
 
     private final UserService userService;
+    private final JwtService jwtProvider;
 
     @PostMapping("/api/v1/login")
-    public ResponseEntity<LoginResponse> login(final HttpSession httpSession, @RequestBody final LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@RequestBody final LoginRequest request) {
         final User user = userService.login(request.toEntity());
-        final LoginResponse loginResponse = new LoginResponse(user);
-        httpSession.setAttribute("user", new SessionUser(user));
-        System.out.println(httpSession.getId());
+        final String jwtToken = jwtProvider.createToken(user);
+        final LoginResponse loginResponse = new LoginResponse(user, jwtToken);
         return ResponseEntity.ok().body(loginResponse);
     }
 

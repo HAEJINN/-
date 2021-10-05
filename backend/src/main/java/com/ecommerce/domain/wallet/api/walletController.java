@@ -33,32 +33,28 @@ public class walletController{
     private String adminEthAddress = "0x2bd661bad97160c81eb0704ae29cb97bcbec6f8a";
 
     private final WalletService walletService;
-    private Admin admin;
-    List<String> addressList;
 
-    @PostMapping("/wallet/create")
+    @PostMapping("/api/v1/wallet/create")
     public ResponseEntity<?> createWallet(HttpSession httpSession) throws Exception {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         final Wallet wallet = walletService.createWallet(user.getEmail());
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
-    @GetMapping("/wallet/balance")
+    @GetMapping("/api/v1/wallet/balance")
     public ResponseEntity<?> getBalance(final String address) throws Exception {
         final Wallet wallet = walletService.getBalance(address);
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
-    @GetMapping("/wallet/getaddress")
-    public ResponseEntity<?> getAddress(HttpSession httpSession) {
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        System.out.println(httpSession.getId());
-        final Wallet wallet = walletService.getWalletAddressByUser(user.getEmail());
+    @GetMapping("/api/v1/wallet/getaddress")
+    public ResponseEntity<?> getAddress(@AuthenticationPrincipal final String email) {
+        final Wallet wallet = walletService.getWalletAddressByUser(email);
         return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
     //충전 한번하기
-    @PostMapping("/wallet/sendeth")
+    @PostMapping("/api/v1/wallet/sendeth")
     public boolean reqEth( String receiver) throws IOException {
         final Web3j web3j = Web3j.build(new HttpService());
         String amount = "100";

@@ -52,11 +52,11 @@ public class User extends BaseTimeEntity {
     private Set<Follow> myFollower = new HashSet<>();
 
     @Builder
-    public User(final String email, final String name, final String password, final UserStatus status, final Photo photo, final Wallet wallet, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
+    public User(final String email, final String name, final String password, final Photo photo, final Wallet wallet, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.status = status;
+        this.status = UserStatus.ACTIVITY;
         this.photo = photo;
         this.wallet = wallet;
         this.myFollowing = myFollowing;
