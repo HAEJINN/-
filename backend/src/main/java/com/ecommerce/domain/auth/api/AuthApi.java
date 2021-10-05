@@ -29,9 +29,8 @@ public class AuthApi {
     public ResponseEntity<LoginResponse> login(final HttpSession httpSession, @RequestBody final LoginRequest request) {
         final User user = userService.login(request.toEntity());
         final LoginResponse loginResponse = new LoginResponse(user);
-        final SecurityContext context = SecurityContextHolder.getContext();
-        final Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-        context.setAuthentication(authentication);
+        httpSession.setAttribute("user", new SessionUser(user));
+        System.out.println(httpSession.getId());
         return ResponseEntity.ok().body(loginResponse);
     }
 
