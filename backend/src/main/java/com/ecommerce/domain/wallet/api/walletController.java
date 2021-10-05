@@ -57,8 +57,9 @@ public class walletController{
 
     //충전 한번하기
     @PostMapping("/wallet/sendeth")
-    public boolean reqEth( String receiver, String amount) throws IOException {
+    public boolean reqEth( String receiver) throws IOException {
         final Web3j web3j = Web3j.build(new HttpService());
+        String amount = "100";
         BigInteger charge = new BigInteger(amount);
 
         List<Type> inputParmeters = new ArrayList<>();
