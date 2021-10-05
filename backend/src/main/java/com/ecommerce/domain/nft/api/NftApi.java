@@ -4,6 +4,7 @@ import com.ecommerce.domain.item.domain.Item;
 import com.ecommerce.domain.nft.domain.NftRequest;
 import com.ecommerce.domain.nft.application.NftService;
 import com.ecommerce.domain.nft.domain.NftTransferRequest;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +16,20 @@ import org.springframework.web.bind.annotation.*;
 public class NftApi {
     private final NftService nftService;
 
+    @ApiOperation(value = "Add NFT")
     @PostMapping("/api/v1/nft")
     public ResponseEntity<?> addNft(NftRequest nftRequest) throws Exception {
         Item item = nftService.createNftToken(nftRequest);
         return new ResponseEntity<Item>(item, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Smart Contract Deploy")
     @GetMapping("/api/v1/deploy")
     public String deploy() throws Exception {
         return nftService.deployCredential();
     }
 
+    @ApiOperation(value = "Buy NFT")
     @PostMapping("/api/v1/nft/buy")
     public ResponseEntity<?> buyNft(NftTransferRequest nftTransferRequest) throws Exception {
         boolean result = nftService.transferNft(nftTransferRequest.getFromAddress(), nftTransferRequest.getToAddress(), nftTransferRequest.getTokenId());
