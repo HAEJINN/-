@@ -1,8 +1,10 @@
 package com.ecommerce.domain.follow.domain;
 
 import com.ecommerce.domain.user.domain.User;
-import com.ecommerce.global.common.BaseTimeEntity;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 

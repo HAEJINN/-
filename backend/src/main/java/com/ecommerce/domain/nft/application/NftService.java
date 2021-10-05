@@ -33,9 +33,7 @@ public class NftService {
     private final WalletRepository walletRepository;
     private final BusinessLogin businessLogin;
 
-
     //    private BusinessLogin businessLogin = credentialsUtils.getInstance();
-
     public Item createNftToken(NftRequest nftRequest) throws Exception {
         TransactionReceipt r = businessLogin.mint(nftRequest.getCID(),nftRequest.getWalletAddress()).send();
         BigInteger tokenId = businessLogin.getCount().send();
