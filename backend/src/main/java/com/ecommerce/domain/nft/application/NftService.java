@@ -75,7 +75,8 @@ public class NftService {
     }
 
     public String deployCredential() throws Exception {
-        Credentials credentials = WalletUtils.loadCredentials("eth0second", "C:\\Users\\multicampus\\BCSSAFY\\0928\\backend\\src\\main\\resources\\key\\test.wallet");
+//        Credentials credentials = WalletUtils.loadCredentials("eth0second", "C:\\Users\\multicampus\\BCSSAFY\\0928\\backend\\src\\main\\resources\\key\\test.wallet");
+        Credentials cr = Credentials.create("0x2Bd661bAD97160C81eB0704AE29Cb97bCBec6F8a");
         ContractGasProvider contractGasProvider = new ContractGasProvider() {
             @Override
             public BigInteger getGasPrice(String contractFunc) {
@@ -97,7 +98,7 @@ public class NftService {
                 return BigInteger.valueOf(8000000);
             }
         };
-        BusinessLogin businessLogin = BusinessLogin.deploy(web3j, credentials, contractGasProvider).send();
+        BusinessLogin businessLogin = BusinessLogin.deploy(web3j, cr, contractGasProvider).send();
         return businessLogin.getContractAddress();
     }
 
