@@ -46,15 +46,7 @@ public class Web3JConfig {
     @Bean
     public BusinessLogin businessLogin(){
         Web3j web3j = Web3j.build(new HttpService());
-        Credentials credentials = null;
-        try {
-            credentials = WalletUtils.loadCredentials("eth0second", "C:\\Users\\multicampus\\BCSSAFY\\0928\\backend\\src\\main\\resources\\key\\test.wallet");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (CipherException e) {
-            e.printStackTrace();
-        }
-        Credentials cr = Credentials.create(credentials.getEcKeyPair().getPrivateKey().toString(16));
+        Credentials cr = Credentials.create("0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0");
         ContractGasProvider contractGasProvider = new ContractGasProvider() {
             @Override
             public BigInteger getGasPrice(String contractFunc) {
