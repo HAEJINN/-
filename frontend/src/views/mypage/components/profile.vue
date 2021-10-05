@@ -11,7 +11,7 @@
     </div>
     <div class="text-h6">🤎 {{ state.name }}님 환영합니다 🤎</div>
     <!-- <div class="text-h6 q-my-sm">🤎 디두님 환영합니다 🤎</div> -->
-    <div>디두가 원하는대로 고쳐</div>
+    <div>프로필을 수정해서 자신을 소개해 주세요!</div>
   </div>
 </template>
 <script>

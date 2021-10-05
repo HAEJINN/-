@@ -36,7 +36,7 @@
       </div>
       <div class="col-6">
         <q-toolbar-title @click="mvMain" class="najakhwa text-white">
-          나만의 작은 화실
+          나 작 화
         </q-toolbar-title>
       </div>
       <div class="col-3">

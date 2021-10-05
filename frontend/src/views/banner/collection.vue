@@ -1,14 +1,47 @@
 <template>
   <div>
-    <div class="bg-accent">
-      <div class="text-h5 q-py-lg text-bold">컬렉션이란?</div>
-      <div class="text-h6 q-pb-lg">📷개인이 가지고 있는 화실📷</div>
-      <div class="q-pb-sm">내가 올리거나 구매한 사진을 확인할 수 있다.</div>
-      <div class="q-pb-lg">타인의 컬렉션도 구경 가능하다</div>
+    <div class="collection-banner bg-accent column justify-center items-center">
+      <div class="text-h3 q-py-lg text-bold">컬렉션이란?</div>
+      <div class="text-h4 q-pb-lg">
+        📷 나작화에서만 가질 수 있는 개인의 화실 📷
+      </div>
+      <div class="text-h6 q-pb-sm">
+        내가 올린, 구매한 사진들을 볼 수 있어요!
+      </div>
+      <q-btn class="bg-dark" text-color="white" @click="mvcollections"
+        >컬렉션 모아보기로 이동</q-btn
+      >
     </div>
-    <q-btn class="q-mb-xl q-mt-xl" @click="mvcollections"
-      >컬렉션 모아보기로 이동</q-btn
-    >
+    <div class="row items-center justify-center q-mt-sm q-mb-sm">
+      <div class="col-lg-4 col-xs-12 q-pa-md">
+        <div class="profile-image"></div>
+      </div>
+      <div class="col-lg-4 col-xs-12 q-pa-md">
+        <div class="text-h4 q-pa-md">다른사람의 사진을 구경하고 싶을 땐</div>
+        <div class="text-h4 q-pa-md">프로필 사진을 클릭해 보세요!</div>
+      </div>
+    </div>
+    <div class="row items-center justify-center q-mt-sm q-mb-sm">
+      <div class="col-lg-4 col-xs-12 q-pa-md">
+        <div class="text-h4 q-pa-md">화실에 있는</div>
+        <div class="text-h4 q-pa-md">다양한 사진을</div>
+        <div class="text-h4 q-pa-md">볼 수 있어요!</div>
+      </div>
+      <div class="col-lg-4 col-xs-12 q-pa-md">
+        <div class="profile-image"></div>
+      </div>
+    </div>
+    <div class="row items-center justify-center q-mt-sm q-mb-sm">
+      <div class="col-lg-4 col-xs-12 q-pa-md row justify-center">
+        <div class="collection-najakhwa-logo"></div>
+      </div>
+
+      <div class="col-lg-4 col-xs-12 q-pa-md">
+        <div class="text-h4 q-pa-md">숨겨진</div>
+        <div class="text-h4 q-pa-md">나작화 로고를 통해</div>
+        <div class="text-h4 q-pa-md">볼 수 있어요!</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -23,6 +56,7 @@ export default defineComponent({
     const mvcollections = () => {
       router.push("/collections");
     };
+
     return {
       mvcollections,
     };
