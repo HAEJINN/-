@@ -2,7 +2,6 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.asciidoctor.convert' version '1.5.8'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id "org.web3j" version "4.8.7"
     id 'java'
 }
@@ -10,6 +9,7 @@ plugins {
 group = 'com.ecommerce'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+targetCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -34,7 +34,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
-    implementation 'com.querydsl:querydsl-jpa'
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'org.hyperledger.fabric-sdk-java:fabric-sdk-java:2.2.8'
     implementation 'com.google.guava:guava:30.0-jre'
@@ -63,20 +62,5 @@ test {
 asciidoctor {
     inputs.dir snippetsDir
     dependsOn test
-}
-
-def querydslDir = "$buildDir/generated/querydsl"
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-sourceSets {
-    main.java.srcDir querydslDir
-}
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
 }
 
