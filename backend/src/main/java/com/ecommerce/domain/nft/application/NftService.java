@@ -76,7 +76,7 @@ public class NftService {
 
     public String deployCredential() throws Exception {
 //        Credentials credentials = WalletUtils.loadCredentials("eth0second", "C:\\Users\\multicampus\\BCSSAFY\\0928\\backend\\src\\main\\resources\\key\\test.wallet");
-        Credentials cr = Credentials.create("0x2Bd661bAD97160C81eB0704AE29Cb97bCBec6F8a");
+        Credentials cr = Credentials.create("0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0");
         ContractGasProvider contractGasProvider = new ContractGasProvider() {
             @Override
             public BigInteger getGasPrice(String contractFunc) {
