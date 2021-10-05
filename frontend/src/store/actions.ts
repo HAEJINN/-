@@ -3,15 +3,9 @@ import { User, UserResponse, UserRequest } from "@/types/user";
 
 // 로그인
 export async function requestUserLogin(
-  // email: any,
-  // password: any
   commit: any,
   user: User
 ): Promise<UserResponse> {
-  // const data = {
-  //   email: email,
-  //   password: password,
-  // };
   const data = {
     email: user.email,
     password: user.password,
@@ -59,4 +53,14 @@ export function request_picupload(commit: any, data: any) {
 export function request_walletaddress(commit: any) {
   const url = "/wallet/getaddress";
   return axios.get(url);
+}
+
+export function request_sendeth(commit: any, account: any) {
+  const url = "/wallet/sendeth";
+  return axios.post(url, account);
+}
+
+export function request_getbalance(commit: any, account: any) {
+  const url = "/wallet/balance";
+  return axios.get(url, account);
 }
