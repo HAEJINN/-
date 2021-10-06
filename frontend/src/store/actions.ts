@@ -44,25 +44,32 @@ export async function request_pinata(commit: any, image: any) {
   });
 }
 
-export function request_picupload(commit: any, data: any) {
-  console.log(data);
-  const url = "/items";
-  return axios.post(url, data);
+// 사진 올리기
+export function request_picupload(commit: any, nftRequest: any) {
+  console.log(nftRequest);
+  const url = "/nft";
+  return axios.post(url, nftRequest);
 }
 
+// 지갑 주소, 잔액 조회
 export function request_walletaddress(commit: any, jwtToken: string) {
   const url = "/wallet/getaddress";
-  console.log(jwtToken);
   return axios.get(url, {
     headers: {
-      Authorization: `TOKEN ${jwtToken}`,
+      Authorization: `Bearer ${jwtToken}`,
     },
   });
 }
 
-export function request_sendeth(commit: any, account: any) {
+// 이더 충전하기
+export function request_sendeth(commit: any, ...data: any[]) {
+  console.log(data[0].address, data[0].jwtToken);
   const url = "/wallet/sendeth";
-  return axios.post(url, account);
+  return axios.post(url, data[0].address, {
+    headers: {
+      Authorization: `Bearer ${data[0].jwtToken}`,
+    },
+  });
 }
 
 export function request_getbalance(commit: any, account: any) {

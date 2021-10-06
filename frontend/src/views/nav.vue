@@ -123,6 +123,7 @@ export default {
     const clickLoginLogout = () => {
       if (localStorage.getItem("userInfo") != null) {
         localStorage.removeItem("userInfo");
+        localStorage.removeItem("address");
         alert("로그아웃 되었습니다");
         state.isLogin = false;
         router.push("/");

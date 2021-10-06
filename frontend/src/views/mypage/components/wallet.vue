@@ -3,12 +3,11 @@
     <div class="column items-center">
       <div class="wallet"></div>
       <div class="row items-start justify-center">
-        <div class="text-h3">999ETH</div>
-        <!-- <div class="text-h3">{{ state.balance}}</div> -->
+        <div class="text-h3">{{ state.wallet.balance }}</div>
         <div class="add-btn" @click="chargeCoin"></div>
       </div>
       <div class="text-h6 q-my-md">계좌주소</div>
-      <!-- <div class="text-h6 q-my-md">{{ state.address }}</div> -->
+      <div class="text-h6 q-my-md">{{ state.wallet.address }}</div>
     </div>
   </div>
 </template>
@@ -37,6 +36,9 @@ export default defineComponent({
         .dispatch("root/request_walletaddress", state.jwtToken)
         .then((response) => {
           console.log(response);
+          state.wallet.address = response.data.address;
+          state.wallet.balance = response.data.balance;
+          localStorage.setItem("address", JSON.stringify(state.wallet.address));
         })
         .catch((error) => {
           console.error(error);
@@ -47,7 +49,10 @@ export default defineComponent({
       var yesno = confirm("충전하시겠습니끼?");
       if (yesno) {
         store
-          .dispatch("root/request_sendeth")
+          .dispatch("root/request_sendeth", {
+            address: state.wallet.address,
+            jwtToken: state.jwtToken,
+          })
           .then((response) => {
             console.log(response);
           })
