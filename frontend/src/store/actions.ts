@@ -72,8 +72,8 @@ export function request_random_picture() {
 }
 
 // 사용자의 컬렉션 사진 받아오기
-export function request_collection_picture(commit: any, user: User) {
-  const url = `/items/${user.id}`;
+export function request_collection_picture(commit: any, user_id: number) {
+  const url = `/items/collection/${user_id}`;
   return axios.get(url);
 }
 
@@ -91,12 +91,10 @@ export function request_walletaddress(commit: any, jwtToken: string) {
 // 이더 충전하기
 export function request_sendeth(commit: any, receiver: string) {
   const url = "/wallet/sendeth";
-  // console.log(receiver); 이전..
   const data = {
     receiver: receiver,
   };
-  // return axios.post(url, receiver); 이전
-  return axios.post(url, data);
+  return axios.post(url, JSON.stringify(data));
 }
 
 //잔액 조회하기
