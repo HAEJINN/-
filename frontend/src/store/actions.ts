@@ -102,4 +102,38 @@ export function request_getbalance(commit: any, account: any) {
   const url = "/wallet/balance";
   return axios.get(url, account);
 }
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ마이페이지ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+// 팔로잉수
+export function request_followingcount(commit: any, jwtToken: string) {
+  const url = "/follow/followings/count";
+  console.log(jwtToken);
+  return axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  });
+}
+
+//팔로워수
+export function request_followercount(commit: any, jwtToken: string) {
+  const url = "/follow/followers/count";
+  return axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  });
+}
+
+//팔로잉리스트
+export function request_followings(commit: any, id: any) {
+  const url = `/follow/followings/${id}`;
+  return axios.get(url);
+}
+
+//팔로워리스트
+export function request_followers(commit: any, id: any) {
+  const url = `/follow/followers/${id}`;
+  return axios.get(url);
+}
