@@ -2,8 +2,12 @@ package com.ecommerce.domain.user.application;
 
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
+import com.ecommerce.domain.user.dto.UserFindListResponse;
+import com.ecommerce.domain.user.dto.UserFindResponse;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +25,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -59,8 +64,17 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserFindListResponse> findAll() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserFindListResponse(user))
+                .collect(Collectors.toList());
+    }
+
+    public List<UserFindListResponse> findAllLatest() {
+        final PageRequest pageRequest = PageRequest.of(0, 4, Sort.Direction.DESC, "createdAt");
+        return userRepository.findAll(pageRequest).stream()
+                .map(user -> new UserFindListResponse(user))
+                .collect(Collectors.toList());
     }
 
     public User login(final User loginUser) {
