@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <picture-comp
-      v-for="(collection, idx) in state.collection_list"
+      v-for="(collection, idx) in collection_list"
       :key="idx"
       :collection="collection"
     ></picture-comp>
@@ -19,16 +19,14 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const state = reactive({
-      collection_list: ref([]),
-    });
+    const collection_list = ref([]);
     onBeforeMount(() => {
       const userinfo = JSON.parse(localStorage.getItem("userInfo"));
       store
         .dispatch("root/request_collection_picture", userinfo.id)
         .then((response) => {
-          // console.log(response);
-          state.collection_list = response;
+          collection_list.value = response.data;
+          console.log(collection_list.value);
         })
         .catch((error) => {
           console.log(error);
@@ -36,7 +34,7 @@ export default defineComponent({
     });
 
     return {
-      state,
+      collection_list,
       onBeforeMount,
     };
   },

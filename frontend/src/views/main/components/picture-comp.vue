@@ -8,19 +8,19 @@
         <div class="text-subtitle2 self-end">작가</div>
       </q-card-section>
     </q-card>
-    <picture-dialog
+    <!-- <picture-dialog
       v-model="state.picture"
       :title="state.title"
       :name="state.name"
       :description="state.description"
       :price="state.price"
       @mvPurchase="mvPurchase"
-    ></picture-dialog>
-    <!-- <picture-dialog
+    ></picture-dialog> -->
+    <picture-dialog
       v-model="state.picture"
       :collection="collection"
       @mvPurchase="mvPurchase"
-    ></picture-dialog> -->
+    ></picture-dialog>
   </div>
 </template>
 
@@ -35,11 +35,11 @@ export default defineComponent({
   components: {
     PictureDialog,
   },
-  // props: {
-  //   collection: {
-  //     type: Object,
-  //   },
-  // },
+  props: {
+    collection: {
+      type: Object,
+    },
+  },
   setup(props, { emit }) {
     const router = useRouter();
     const mvPurchase = () => {

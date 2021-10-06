@@ -60,13 +60,13 @@ export function request_picupload(commit: any, nftRequest: any) {
 }
 
 // 최근 사진 4개 받아오기
-export function request_latest_picture() {
+export function request_latest_picture(commit: any) {
   const url = "/items/four";
   return axios.get(url);
 }
 
 // 랜덤 사진 12개 받아오기
-export function request_random_picture() {
+export function request_random_picture(commit: any) {
   const url = "/items/random";
   return axios.get(url);
 }

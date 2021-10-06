@@ -2,15 +2,15 @@
   <div class="q-pa-sm q-my-md">
     <div class="text-center text-h5 q-mb-md">최근 사진</div>
     <div class="row">
+      <!-- <PictureComp></PictureComp>
       <PictureComp></PictureComp>
       <PictureComp></PictureComp>
-      <PictureComp></PictureComp>
-      <PictureComp></PictureComp>
-      <!-- <PictureComp
-        v-for="(collection, idx) in state.collection_list"
+      <PictureComp></PictureComp> -->
+      <PictureComp
+        v-for="(collection, idx) in collection_list"
         :key="idx"
         :collection="collection"
-      ></PictureComp> -->
+      ></PictureComp>
     </div>
   </div>
 </template>
@@ -24,26 +24,24 @@ export default defineComponent({
   components: {
     PictureComp,
   },
-  // setup() {
-  //   const store = useStore();
-  //   const state = reactive({
-  //     collection_list: ref([]),
-  //   });
-  //   onBeforeMount(() => {
-  //     store
-  //       .dispatch("/root/request_latest_picture")
-  //       .then((response) => {
-  //         state.collection_list = response;
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   });
-  //   return {
-  //     state,
-
-  //     onBeforeMount,
-  //   };
-  // },
+  setup() {
+    const store = useStore();
+    const collection_list = ref([]);
+    onBeforeMount(() => {
+      store
+        .dispatch("root/request_latest_picture")
+        .then((response) => {
+          console.log(response);
+          collection_list.value = response;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+    return {
+      collection_list,
+      onBeforeMount,
+    };
+  },
 });
 </script>

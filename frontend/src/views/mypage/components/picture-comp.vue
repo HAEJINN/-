@@ -1,7 +1,7 @@
 <template>
   <div class="picture-comp col-lg-3 col-xs-6">
     <q-card class="q-ma-sm" @click="openPictureDialog">
-      <img src="https://cdn.quasar.dev/img/mountains.jpg" />
+      <img :src="state.collection_url" />
     </q-card>
     <picture-dialog
       v-model="state.picture"
@@ -28,6 +28,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    // console.log(props.collection.name);
     const router = useRouter();
     const mvPurchase = () => {
       router.push("/purchase");
@@ -35,7 +36,8 @@ export default defineComponent({
 
     const state = reactive({
       picture: ref(false),
-      collection: {},
+      collection_url:
+        "https://gateway.pinata.cloud/ipfs/" + props.collection.cid,
     });
 
     const openPictureDialog = () => {

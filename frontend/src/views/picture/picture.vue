@@ -88,16 +88,10 @@ export default defineComponent({
       emit("mvPurchase");
     };
     const state = reactive({
-      ImageUrl: ref(""),
-    });
-
-    onBeforeMount(() => {
-      state.ImageUrl =
-        "https://gateway.pinata.cloud/ipfs/" + props.collection.cid;
+      ImageUrl: "https://gateway.pinata.cloud/ipfs/" + props.collection.cid,
     });
 
     return {
-      // malang: require("@/assets/mypage/malang.png"),
       slide: ref(1),
       fullscreen: ref(false),
 
