@@ -19,7 +19,7 @@ public class FollowingListResponse {
     }
 
     private static FollowingListResponse ofUser(final User user) {
-        return new FollowingListResponse(user.getId(), user.getName(), user.getPhoto().getPath());
+        return new FollowingListResponse(user.getId(), user.getName(), user.getProfileImage());
     }
 
     public FollowingListResponse(final Long id, final String name, final String photo) {
