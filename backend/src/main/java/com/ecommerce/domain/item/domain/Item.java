@@ -21,13 +21,14 @@ public class Item {
     private String name;
     private String description;
     private int price;
+    private String author;
 
     @Column(name = "token_id")
     private BigInteger tokenId;
 
     private String cid;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -40,6 +41,7 @@ public class Item {
         this.tokenId = tokenId;
         this.cid = cid;
         this.user = user;
+        this.author = user.getName();
     }
 
     public Item updateUser(final User buyer) {
