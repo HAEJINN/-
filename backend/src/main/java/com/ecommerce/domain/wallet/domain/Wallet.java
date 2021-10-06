@@ -15,7 +15,7 @@ import java.math.BigInteger;
 @Entity
 public class Wallet {
 
-    public static final String walletDirectory = "S3://najakwha/";
+    public static final String walletDirectory = System.getProperty("user.home");
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wallet_id")
