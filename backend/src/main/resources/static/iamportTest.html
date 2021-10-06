@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        function requestPay() {
+            var IMP = window.IMP; // 생략 가능
+            IMP.init("imp35616277"); // 예: imp00000000
+            IMP.request_pay({ // param
+                pg: "html5_inicis",                                 // 이니시스로 결제 진행
+                pay_method: "card",                                 // 결제 수단
+                merchant_uid: 'merchant_' + new Date().getTime(),   // 가맹점에서 구별할 수 있는 고유한id
+                name: "이더림움 충전",                                  // 웨이 충전
+                amount: 100,                                        // 결제 긍액
+                buyer_email: "testestesttset@gmail.com",                          // 고객 이메일
+                buyer_name: "홍길동"                                 // 고객 이름
+            }, function (rsp) { // callback
+                if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                    jQuery.ajax({
+                        url: "http:localhost:8080/api/v1/payments",     // 애플리케이션 주소
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        data: {
+                            amount: 100,
+                            receiver: "지갑 주소값",
+                            impUid: rsp.imp_uid,
+                            merchantUid: rsp.merchant_uid
+                        }
+                    }).done(function (data) {
+                        alert("결제 성공");
+                    })
+                } else {
+                    alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<button onclick="requestPay()">결제하기</button>
+
+
+</body>
+</html>
