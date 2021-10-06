@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.web3j.crypto.CipherException;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
@@ -56,10 +52,12 @@ public class UserApi {
         userService.delete(id);
     }
 
-    @PostMapping("/api/v1/photos")
-    public ResponseEntity<String> upload(@AuthenticationPrincipal final String email, @RequestParam("photo") final MultipartFile multipartFile) throws IOException {
-        final String fileName = s3Service.uploadFile(email, multipartFile);
-        return ResponseEntity.ok().body(fileName);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/api/v1/users")
+    public void update(@AuthenticationPrincipal final String email,
+                                         @RequestParam final String description,
+                                         @RequestParam final MultipartFile photo) throws IOException {
+        s3Service.uploadFile(email, description, photo);
     }
 
     @GetMapping("/api/v1/download/{fileName}")
