@@ -62,14 +62,10 @@ export function request_walletaddress(commit: any, jwtToken: string) {
 }
 
 // 이더 충전하기
-export function request_sendeth(commit: any, ...data: any[]) {
-  console.log(data[0].address, data[0].jwtToken);
+export function request_sendeth(commit: any, receiver: string) {
   const url = "/wallet/sendeth";
-  return axios.post(url, data[0].address, {
-    headers: {
-      Authorization: `Bearer ${data[0].jwtToken}`,
-    },
-  });
+  console.log(receiver);
+  return axios.post(url, receiver);
 }
 
 export function request_getbalance(commit: any, account: any) {

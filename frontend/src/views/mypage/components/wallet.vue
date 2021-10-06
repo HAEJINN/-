@@ -48,11 +48,10 @@ export default defineComponent({
     const chargeCoin = () => {
       var yesno = confirm("충전하시겠습니끼?");
       if (yesno) {
+        const receiver = state.wallet.address;
+        console.log(receiver);
         store
-          .dispatch("root/request_sendeth", {
-            address: state.wallet.address,
-            jwtToken: state.jwtToken,
-          })
+          .dispatch("root/request_sendeth", receiver)
           .then((response) => {
             console.log(response);
           })
