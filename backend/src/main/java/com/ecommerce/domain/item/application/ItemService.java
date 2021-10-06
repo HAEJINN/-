@@ -1,12 +1,21 @@
 package com.ecommerce.domain.item.application;
 
+import com.ecommerce.domain.follow.dto.FollowerListResponse;
 import com.ecommerce.domain.item.domain.Item;
 import com.ecommerce.domain.item.domain.ItemRepository;
+import com.ecommerce.domain.item.dto.ItemListResponse;
+import com.ecommerce.domain.user.domain.User;
+import com.ecommerce.domain.user.domain.UserRepository;
+import com.ecommerce.domain.user.dto.UserFindListResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -14,6 +23,7 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Item save(Item item) {
@@ -36,8 +46,32 @@ public class ItemService {
         return itemRepository.findById(itemId).orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<Item> findAll() {
-        return itemRepository.findAll();
+    public List<ItemListResponse> findFour(){
+        final PageRequest pageRequest = PageRequest.of(0, 4, Sort.Direction.DESC, "id");
+        return itemRepository.findAll(pageRequest).stream()
+                .map(ItemListResponse::ofItem)
+                .collect(Collectors.toList());
+    }
+
+    public List<ItemListResponse> findRandom() {
+        int count = 0;
+        List<Item> itemList = itemRepository.findAll();
+        List<ItemListResponse> items = new ArrayList<>();
+        count = itemList.size();
+        int repeat = count<12?count:12;
+        for(int i=0; i<repeat; i++){
+            int random = (int)(Math.random()*count);
+            items.add(ItemListResponse.ofItem(itemList.get(random)));
+        }
+        return items;
+    }
+
+    public List<ItemListResponse> findByUserId(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+        List<Item> items = itemRepository.findByUser(user);
+        return items.stream()
+                .map(ItemListResponse::ofItem)
+                .collect(Collectors.toList());
     }
 
 }
