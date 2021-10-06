@@ -1,13 +1,10 @@
-package com.ecommerce.domain.photo.application;
+package com.ecommerce.domain.user.application;
 
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
-import com.ecommerce.domain.photo.domain.Photo;
-import com.ecommerce.domain.photo.domain.PhotoRepository;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,31 +16,27 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class PhotoS3Service {
+public class S3Service {
 
     private final AmazonS3Client amazonS3Client;
     private final UserRepository userRepository;
-    private final PhotoRepository photoRepository;
 
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
-    public String uploadFile(String email, MultipartFile file) {
+    public void uploadFile(String email, String description, MultipartFile file) {
         final File fileObj = convertMultiPartFileToFile(file);
         final String fileName = fileName(file);
 
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
-        final Photo profileImage = photoRepository.save(new Photo(fileName));
-        user.changePhoto(profileImage);
-
+        user.changeProfileImage(fileName)
+                .chageDescription(description);
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, fileObj));
         fileObj.delete();
-        return fileName;
     }
 
     private String fileName(final MultipartFile file) {

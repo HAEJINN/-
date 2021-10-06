@@ -1,10 +1,8 @@
 package com.ecommerce.domain.user.application;
 
-import com.ecommerce.domain.photo.domain.Photo;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import com.ecommerce.domain.wallet.domain.Wallet;
-import com.ecommerce.domain.wallet.domain.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,14 +21,12 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class UserService {
 
-    private final WalletRepository walletRepository;
     private final UserRepository userRepository;
     private final Web3j web3j;
     private final PasswordEncoder passwordEncoder;
@@ -41,8 +37,7 @@ public class UserService {
         final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.walletDirectory + walletFile));
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = wallet(credentials, walletFile, user, ethGetBalance.getBalance());
-        final Photo photo = new Photo("profile.jpg");
-        user.changePhoto(photo)
+        user.changeProfileImage("profile.jpg")
                 .changeWallet(wallet)
                 .passwordEncode(passwordEncoder);
         return userRepository.save(user);

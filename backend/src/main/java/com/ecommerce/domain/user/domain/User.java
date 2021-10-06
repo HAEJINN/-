@@ -1,7 +1,6 @@
 package com.ecommerce.domain.user.domain;
 
 import com.ecommerce.domain.follow.domain.Follow;
-import com.ecommerce.domain.photo.domain.Photo;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.global.common.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -34,13 +33,15 @@ public class User extends BaseTimeEntity {
     @Column(name = "user_password")
     private String password;
 
+    @Column(name = "user_profileImage")
+    private String profileImage;
+
+    @Column(name = "user_description")
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "user_status")
     private UserStatus status;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "photo_id")
-    private Photo photo;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Wallet wallet;
@@ -52,12 +53,14 @@ public class User extends BaseTimeEntity {
     private Set<Follow> myFollower = new HashSet<>();
 
     @Builder
-    public User(final String email, final String name, final String password, final Photo photo, final Wallet wallet, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
+    public User(final String email, final String name, final String password, final String profileImage, final String description,
+                final Wallet wallet, final Set<Follow> myFollowing, final Set<Follow> myFollower) {
         this.email = email;
         this.name = name;
         this.password = password;
         this.status = UserStatus.ACTIVITY;
-        this.photo = photo;
+        this.description = description;
+        this.profileImage = profileImage;
         this.wallet = wallet;
         this.myFollowing = myFollowing;
         this.myFollower = myFollower;
@@ -69,9 +72,14 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public User changePhoto(final Photo photo) {
-        validateNull(photo);
-        this.photo = photo;
+    public User changeProfileImage(final String profileImage) {
+        validateNull(profileImage);
+        this.profileImage = profileImage;
+        return this;
+    }
+
+    public User chageDescription(final String description) {
+        this.description = description;
         return this;
     }
 
