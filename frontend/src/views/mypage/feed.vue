@@ -18,10 +18,12 @@
         <div class="follow-btn">팔로우</div>
       </div>
     </div>
-    <div class="bg-accent q-py-sm q-mb-sm feed-user">📷 ooo님의 화실 📷</div>
+    <div class="bg-accent q-py-lg q-mb-sm text-h4">
+      📷 {{ state.user.name }}님의 화실 📷
+    </div>
     <div class="row justify-center">
       <div class="row justify-center col-lg-8 col-xs-11">
-        <Picture></Picture>
+        <Picture :user_id="user_id"></Picture>
       </div>
     </div>
   </div>
@@ -37,20 +39,35 @@ export default defineComponent({
   components: {
     Picture,
   },
-  setup() {
+  props: {
+    user_id: Number,
+  },
+  setup(props, { emit }) {
     const state = reactive({
+      user: {},
       followings: "",
       followers: "",
       jwtToken: "",
     });
     onBeforeMount(() => {
+      store
+        .dispatch("root/request_userinfo_byid", {
+          id: props.user_id,
+        })
+        .then((response) => {
+          console.log(response);
+          state.user = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       const userinfo = JSON.parse(localStorage.getItem("userInfo"));
       state.jwtToken = userinfo.jwtToken;
       // 팔로잉
       store
         .dispatch("root/request_followingcount", state.jwtToken)
         .then((response) => {
-          // console.log(response);
           state.followings = response.data.count;
         })
         .catch((error) => {
@@ -60,7 +77,6 @@ export default defineComponent({
       store
         .dispatch("root/request_followercount", state.jwtToken)
         .then((response) => {
-          // console.log(response);
           state.followers = response.data.count;
         })
         .catch((error) => {

@@ -19,7 +19,15 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const mvfeed = () => {
-      router.push("/feed");
+      const userinfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+      // const userinfo = JSON.parse(localStorage.getItem("userInfo")!);
+      console.log(userinfo.id);
+      router.push({
+        name: "feed",
+        params: {
+          user_id: userinfo.id,
+        },
+      });
     };
     const addpicture = () => {
       router.push("/addpic");

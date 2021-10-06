@@ -30,6 +30,13 @@ export async function requestUserRegister(
   const url = "/users";
   return await axios.post(url, data);
 }
+export async function request_userinfo_byid(
+  commit: any,
+  user: User
+): Promise<UserResponse> {
+  const url = `/users/${user.id}`;
+  return await axios.get(url);
+}
 
 // 최근 유저 받아오기
 export function request_latestuser(commit: any) {

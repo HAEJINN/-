@@ -19,16 +19,11 @@
     <div class="row justify-center">
       <div class="col-lg-8 col-xs-12">
         <div class="row">
-          <Picturecomp></Picturecomp>
-          <Picturecomp></Picturecomp>
-          <Picturecomp></Picturecomp>
-          <Picturecomp></Picturecomp>
-          <Picturecomp></Picturecomp>
-          <!-- <Picturecomp
+          <Picturecomp
             v-for="(collection, idx) in state.collection_list"
             :key="idx"
             :collection="collection"
-          ></Picturecomp> -->
+          ></Picturecomp>
         </div>
       </div>
     </div>
@@ -45,25 +40,25 @@ export default defineComponent({
   components: {
     Picturecomp,
   },
-  // setup() {
-  //   const store = useStore();
-  //   const state = reactive({
-  //     collection_list: ref([]),
-  //   });
-  //   onBeforeMount(() => {
-  //     store
-  //       .dispatch("root/request_random_picture")
-  //       .then((response) => {
-  //         state.collection_list = response;
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   });
-  //   return {
-  //     state,
-  //     onBeforeMount,
-  //   };
-  // },
+  setup() {
+    const store = useStore();
+    const state = reactive({
+      collection_list: ref([]),
+    });
+    onBeforeMount(() => {
+      store
+        .dispatch("root/request_random_picture")
+        .then((response) => {
+          state.collection_list = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+    return {
+      state,
+      onBeforeMount,
+    };
+  },
 });
 </script>

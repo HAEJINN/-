@@ -16,6 +16,7 @@ const routes = [
   {
     path: "/feed",
     name: "feed",
+    props: true,
     component: () => import("../views/mypage/feed.vue"),
   },
   {
@@ -29,16 +30,6 @@ const routes = [
     component: () => import("../views/mypage/modifyme.vue"),
   },
   /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ     작품     ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-  // {
-  //   path: "/item",
-  //   name: "item",
-  //   component: () => import("../views/item/item.vue"),
-  // },
-  // {
-  //   path: "/item/create",
-  //   name: "item-create",
-  //   component: () => import("../views/item/create.vue"),
-  // },
   {
     path: "/purchase",
     name: "purchase",

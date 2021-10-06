@@ -2,10 +2,6 @@
   <div class="q-pa-sm q-my-md">
     <div class="text-center text-h5 q-mb-md">최근 사진</div>
     <div class="row">
-      <!-- <PictureComp></PictureComp>
-      <PictureComp></PictureComp>
-      <PictureComp></PictureComp>
-      <PictureComp></PictureComp> -->
       <PictureComp
         v-for="(collection, idx) in collection_list"
         :key="idx"
@@ -32,7 +28,7 @@ export default defineComponent({
         .dispatch("root/request_latest_picture")
         .then((response) => {
           console.log(response);
-          collection_list.value = response;
+          collection_list.value = response.data;
         })
         .catch((error) => {
           console.error(error);

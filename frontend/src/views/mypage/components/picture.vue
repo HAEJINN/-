@@ -17,13 +17,16 @@ export default defineComponent({
   components: {
     PictureComp,
   },
-  setup() {
+  props: {
+    user_id: Number,
+  },
+  setup(props, { emit }) {
+    console.log(props.user_id);
     const store = useStore();
     const collection_list = ref([]);
     onBeforeMount(() => {
-      const userinfo = JSON.parse(localStorage.getItem("userInfo"));
       store
-        .dispatch("root/request_collection_picture", userinfo.id)
+        .dispatch("root/request_collection_picture", props.user_id)
         .then((response) => {
           collection_list.value = response.data;
           console.log(collection_list.value);

@@ -1,26 +1,18 @@
 <template>
   <div class="picture-comp col-lg-4 col-xs-12">
     <q-card class="q-ma-sm" @click="openPictureDialog">
-      <img src="https://cdn.quasar.dev/img/mountains.jpg" />
+      <img :src="state.collection_url" />
 
       <q-card-section class="column">
-        <div class="text-h6 self-start">작품 이름</div>
-        <div class="text-subtitle2 self-end">작가</div>
+        <div class="text-h6 self-start">{{ collection.name }}</div>
+        <div class="text-subtitle2 self-end">{{ collection.author }}</div>
       </q-card-section>
     </q-card>
     <picture-dialog
       v-model="state.picture"
-      :title="state.title"
-      :name="state.name"
-      :description="state.description"
-      :price="state.price"
-      @mvPurchase="mvPurchase"
-    ></picture-dialog>
-    <!-- <picture-dialog
-      v-model="state.picture"
       :collection="collection"
       @mvPurchase="mvPurchase"
-    ></picture-dialog> -->
+    ></picture-dialog>
   </div>
 </template>
 
@@ -35,11 +27,11 @@ export default defineComponent({
   components: {
     PictureDialog,
   },
-  // props: {
-  //   collection: {
-  //     type: Object,
-  //   },
-  // },
+  props: {
+    collection: {
+      type: Object,
+    },
+  },
   setup(props, { emit }) {
     const router = useRouter();
     const mvPurchase = () => {
@@ -48,10 +40,8 @@ export default defineComponent({
 
     const state = reactive({
       picture: ref(false),
-      title: "maple",
-      name: "nexon",
-      description: "MapleStory on LALA",
-      price: "100,000,000",
+      collection_url:
+        "https://gateway.pinata.cloud/ipfs/" + props.collection.cid,
     });
 
     const openPictureDialog = () => {
