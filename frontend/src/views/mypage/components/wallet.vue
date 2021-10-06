@@ -27,13 +27,14 @@ export default defineComponent({
         address: "",
         balance: "",
       },
-      // email: "",
+      jwtToken: "",
     });
     onBeforeMount(() => {
-      //  const userinfo = JSON.parse(localStorage.getItem("userInfo"));
-      // state.email = userinfo.email;
+      const userinfo = JSON.parse(localStorage.getItem("userInfo"));
+      state.jwtToken = userinfo.jwtToken;
+      console.log(state.jwtToken);
       store
-        .dispatch("root/request_walletaddress")
+        .dispatch("root/request_walletaddress", state.jwtToken)
         .then((response) => {
           console.log(response);
         })

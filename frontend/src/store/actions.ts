@@ -11,7 +11,7 @@ export async function requestUserLogin(
     password: user.password,
   };
   console.log(data);
-  const url = "/api/v1/login";
+  const url = "/login";
   return await axios.post(url, data);
 }
 
@@ -26,7 +26,7 @@ export async function requestUserRegister(
     name: user.name,
     password: user.password,
   };
-  const url = "/api/v1/users";
+  const url = "/users";
   return await axios.post(url, data);
 }
 
@@ -46,13 +46,18 @@ export async function request_pinata(commit: any, image: any) {
 
 export function request_picupload(commit: any, data: any) {
   console.log(data);
-  const url = "/api/v1/items";
+  const url = "/items";
   return axios.post(url, data);
 }
 
-export function request_walletaddress(commit: any) {
+export function request_walletaddress(commit: any, jwtToken: string) {
   const url = "/wallet/getaddress";
-  return axios.get(url);
+  console.log(jwtToken);
+  return axios.get(url, {
+    headers: {
+      Authorization: `TOKEN ${jwtToken}`,
+    },
+  });
 }
 
 export function request_sendeth(commit: any, account: any) {
