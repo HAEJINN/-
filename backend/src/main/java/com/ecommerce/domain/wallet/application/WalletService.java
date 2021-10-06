@@ -56,8 +56,8 @@ public class WalletService {
         if(user.getWallet() != null) {
             return user.getWallet();
         }
-        final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), new File(Wallet.walletDirectory));
-        final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.walletDirectory + walletFile));
+        final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), new File(Wallet.WALLET_DIRECTORY));
+        final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.WALLET_DIRECTORY + walletFile));
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = wallet(credentials, walletFile, user, ethGetBalance.getBalance());
         return walletRepository.save(wallet);
