@@ -25,7 +25,7 @@ public class Payment {
     @Column(name = "payment_merchant_uid", updatable = false)
     private String merchantUid;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PaymentHistory> paymentHistories = new ArrayList<>();
 
     @Builder
