@@ -1,12 +1,17 @@
 package com.ecommerce.domain.item.application;
 
+import com.ecommerce.domain.follow.dto.FollowerListResponse;
 import com.ecommerce.domain.item.domain.Item;
 import com.ecommerce.domain.item.domain.ItemRepository;
+import com.ecommerce.domain.item.dto.ItemListResponse;
+import com.ecommerce.domain.user.domain.User;
+import com.ecommerce.domain.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -14,6 +19,7 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Item save(Item item) {
@@ -38,6 +44,14 @@ public class ItemService {
 
     public List<Item> findAll() {
         return itemRepository.findAll();
+    }
+
+    public List<ItemListResponse> findByUserId(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+        List<Item> items = itemRepository.findByUser(user);
+        return items.stream()
+                .map(ItemListResponse::ofItem)
+                .collect(Collectors.toList());
     }
 
 }
