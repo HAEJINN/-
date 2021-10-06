@@ -3,6 +3,7 @@ package com.ecommerce.domain.nft.api;
 import com.ecommerce.domain.item.domain.Item;
 import com.ecommerce.domain.nft.application.NftService;
 import com.ecommerce.domain.nft.domain.NftRequest;
+import com.ecommerce.domain.nft.domain.NftResponse;
 import com.ecommerce.domain.nft.domain.NftTransferRequest;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,10 @@ public class NftApi {
     @ApiOperation(value = "Add NFT")
     @PostMapping("/api/v1/nft")
     public ResponseEntity<?> addNft(NftRequest nftRequest) throws Exception {
+        System.out.println("NFT 등록 컨트롤러");
         Item item = nftService.createNftToken(nftRequest);
-        return new ResponseEntity<Item>(item, HttpStatus.OK);
+        NftResponse nftResponse = new NftResponse(item);
+        return ResponseEntity.ok().body(nftResponse);
     }
 
     @ApiOperation(value = "Smart Contract Deploy")
