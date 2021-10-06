@@ -22,11 +22,11 @@ public class ItemApi {
         return ResponseEntity.ok().body(item);
     }
 
-    @GetMapping("/api/v1/items")
-    public ResponseEntity<?> findAll() {
-        final List<Item> items = itemService.findAll();
-        return ResponseEntity.ok().body(items);
-    }
+//    @GetMapping("/api/v1/items")
+//    public ResponseEntity<?> findAll() {
+//        final List<Item> items = itemService.findAll();
+//        return ResponseEntity.ok().body(items);
+//    }
 
     /*
              id: userinfo.id,
@@ -51,6 +51,18 @@ public class ItemApi {
     @GetMapping("/api/v1/items/collection/{userId}")
     public ResponseEntity<?> getItemList(@PathVariable Long userId){
         List<ItemListResponse> items = itemService.findByUserId(userId);
+        return ResponseEntity.ok().body(items);
+    }
+
+    @GetMapping("/api/v1/items/random")
+    public ResponseEntity<?> getItemListRandom(){
+        List<ItemListResponse> items = itemService.findRandom();
+        return ResponseEntity.ok().body(items);
+    }
+
+    @GetMapping("/api/v1/items/four")
+    public ResponseEntity<?> getItemListFour(){
+        List<ItemListResponse> items = itemService.findFour();
         return ResponseEntity.ok().body(items);
     }
 
