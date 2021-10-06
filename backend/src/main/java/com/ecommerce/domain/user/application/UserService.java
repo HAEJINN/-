@@ -3,7 +3,6 @@ package com.ecommerce.domain.user.application;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import com.ecommerce.domain.user.dto.UserFindListResponse;
-import com.ecommerce.domain.user.dto.UserFindResponse;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +26,8 @@ import java.security.NoSuchProviderException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ecommerce.domain.wallet.domain.Wallet.WALLET_DIRECTORY;
+
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -38,8 +39,10 @@ public class UserService {
 
     @Transactional
     public User save(final User user) throws IOException, CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
-        final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), new File(Wallet.walletDirectory));
-        final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.walletDirectory + walletFile));
+        final File file = new File(WALLET_DIRECTORY);
+        file.mkdirs();
+        final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), file);
+        final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(WALLET_DIRECTORY + walletFile));
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = wallet(credentials, walletFile, user, ethGetBalance.getBalance());
         user.changeProfileImage("profile.jpg")

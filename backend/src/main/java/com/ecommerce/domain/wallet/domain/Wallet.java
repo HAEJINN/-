@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.File;
 import java.math.BigInteger;
 
 @Getter
@@ -15,7 +16,7 @@ import java.math.BigInteger;
 @Entity
 public class Wallet {
 
-    public static final String walletDirectory = System.getProperty("user.home");
+    public static final String WALLET_DIRECTORY = System.getProperty("user.home")+ File.separator+"wallet"+File.separator;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wallet_id")
