@@ -16,11 +16,16 @@
       :price="state.price"
       @mvPurchase="mvPurchase"
     ></picture-dialog>
+    <!-- <picture-dialog
+      v-model="state.picture"
+      :collection="collection"
+      @mvPurchase="mvPurchase"
+    ></picture-dialog> -->
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref, onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
 import PictureDialog from "@/views/picture/picture";
 import "../../../styles/main.scss";
@@ -30,6 +35,11 @@ export default defineComponent({
   components: {
     PictureDialog,
   },
+  // props: {
+  //   collection: {
+  //     type: Object,
+  //   },
+  // },
   setup(props, { emit }) {
     const router = useRouter();
     const mvPurchase = () => {
@@ -51,10 +61,12 @@ export default defineComponent({
     const closePictureDailog = () => {
       state.picture = false;
     };
+
     return {
       state,
 
       mvPurchase,
+
       openPictureDialog,
       closePictureDailog,
     };

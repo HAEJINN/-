@@ -16,6 +16,11 @@
       :price="state.price"
       @mvPurchase="mvPurchase"
     ></picture-dialog>
+    <!-- <picture-dialog
+      v-model="state.picture"
+      :collection="collection"
+      @mvPurchase="mvPurchase"
+    ></picture-dialog> -->
   </div>
 </template>
 
@@ -30,6 +35,11 @@ export default defineComponent({
   components: {
     PictureDialog,
   },
+  // props: {
+  //   collection: {
+  //     type: Object,
+  //   },
+  // },
   setup(props, { emit }) {
     const router = useRouter();
     const mvPurchase = () => {

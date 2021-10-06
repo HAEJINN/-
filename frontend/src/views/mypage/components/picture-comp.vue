@@ -5,10 +5,7 @@
     </q-card>
     <picture-dialog
       v-model="state.picture"
-      :title="state.title"
-      :name="state.name"
-      :description="state.description"
-      :price="state.price"
+      :collection="collection"
       @mvPurchase="mvPurchase"
     ></picture-dialog>
   </div>
@@ -25,6 +22,11 @@ export default defineComponent({
   components: {
     PictureDialog,
   },
+  props: {
+    collection: {
+      type: Object,
+    },
+  },
   setup(props, { emit }) {
     const router = useRouter();
     const mvPurchase = () => {
@@ -33,10 +35,7 @@ export default defineComponent({
 
     const state = reactive({
       picture: ref(false),
-      title: "maple",
-      name: "nexon",
-      description: "MapleStory on LALA",
-      price: "100,000,000",
+      collection: {},
     });
 
     const openPictureDialog = () => {

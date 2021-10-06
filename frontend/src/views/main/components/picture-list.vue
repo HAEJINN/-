@@ -6,11 +6,17 @@
       <PictureComp></PictureComp>
       <PictureComp></PictureComp>
       <PictureComp></PictureComp>
+      <!-- <PictureComp
+        v-for="(collection, idx) in state.collection_list"
+        :key="idx"
+        :collection="collection"
+      ></PictureComp> -->
     </div>
   </div>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, reactive, ref, onBeforeMount } from "vue";
+import { useStore } from "vuex";
 import PictureComp from "../components/picture-comp.vue";
 
 export default defineComponent({
@@ -18,5 +24,26 @@ export default defineComponent({
   components: {
     PictureComp,
   },
+  // setup() {
+  //   const store = useStore();
+  //   const state = reactive({
+  //     collection_list: ref([]),
+  //   });
+  //   onBeforeMount(() => {
+  //     store
+  //       .dispatch("/root/request_latest_picture")
+  //       .then((response) => {
+  //         state.collection_list = response;
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   });
+  //   return {
+  //     state,
+
+  //     onBeforeMount,
+  //   };
+  // },
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <picture-comp
-      v-for="(collection, idx) in collection_list"
+      v-for="(collection, idx) in state.collection_list"
       :key="idx"
       :collection="collection"
     ></picture-comp>
@@ -27,8 +27,8 @@ export default defineComponent({
       store
         .dispatch("root/request_collection_picture", userinfo.id)
         .then((response) => {
-          console.log(response);
-          // state.collection_list = response;
+          // console.log(response);
+          state.collection_list = response;
         })
         .catch((error) => {
           console.log(error);

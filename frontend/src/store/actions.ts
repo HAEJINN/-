@@ -61,7 +61,7 @@ export function request_picupload(commit: any, nftRequest: any) {
 
 // 최근 사진 4개 받아오기
 export function request_latest_picture() {
-  const url = "/items/latest";
+  const url = "/items/four";
   return axios.get(url);
 }
 
@@ -78,6 +78,8 @@ export function request_collection_picture(commit: any, user_id: number) {
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 지갑 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+import { Payment, PaymentRequest, PaymentResponse } from "@/types/payment";
+
 // 지갑 주소, 잔액 조회
 export function request_walletaddress(commit: any, jwtToken: string) {
   const url = "/wallet/getaddress";
@@ -89,12 +91,25 @@ export function request_walletaddress(commit: any, jwtToken: string) {
 }
 
 // 이더 충전하기
-export function request_sendeth(commit: any, receiver: string) {
-  const url = "/wallet/sendeth";
-  const data = {
-    receiver: receiver,
-  };
-  return axios.post(url, JSON.stringify(data));
+// export function request_sendeth(commit: any, receiver: string) {
+//   const url = "/wallet/sendeth";
+//   const data = {
+//     receiver: receiver,
+//   };
+//   return axios.post(url, JSON.stringify(data));
+// }
+export function request_sendeth(
+  commit: any,
+  payment: PaymentRequest
+): Promise<PaymentResponse> {
+  console.log(payment);
+  const url = "/payments";
+  const data = payment.data;
+  return axios.post(url, data, {
+    headers: {
+      Authorization: `Bearer ${payment.jwtToken}`,
+    },
+  });
 }
 
 //잔액 조회하기

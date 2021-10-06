@@ -24,13 +24,19 @@
           <Picturecomp></Picturecomp>
           <Picturecomp></Picturecomp>
           <Picturecomp></Picturecomp>
+          <!-- <Picturecomp
+            v-for="(collection, idx) in state.collection_list"
+            :key="idx"
+            :collection="collection"
+          ></Picturecomp> -->
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, reactive, ref, onBeforeMount } from "vue";
+import { useStore } from "vuex";
 import Picturecomp from "../banner/components/picture-comp.vue";
 import "@/styles/banner.scss";
 
@@ -39,8 +45,25 @@ export default defineComponent({
   components: {
     Picturecomp,
   },
-  setup() {
-    return {};
-  },
+  // setup() {
+  //   const store = useStore();
+  //   const state = reactive({
+  //     collection_list: ref([]),
+  //   });
+  //   onBeforeMount(() => {
+  //     store
+  //       .dispatch("root/request_random_picture")
+  //       .then((response) => {
+  //         state.collection_list = response;
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   });
+  //   return {
+  //     state,
+  //     onBeforeMount,
+  //   };
+  // },
 });
 </script>
