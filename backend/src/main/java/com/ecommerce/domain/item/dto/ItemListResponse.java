@@ -21,12 +21,13 @@ public class ItemListResponse {
     private BigInteger tokenId;
     private String cid;
     private Long userId;
+    private String userName;
 
     public static ItemListResponse ofItem(final Item item) {
-        return new ItemListResponse(item.getId(),item.getName(), item.getDescription(), item.getPrice(), item.getAuthor(), item.getTokenId(),item.getCid(),item.getUser().getId());
+        return new ItemListResponse(item.getId(),item.getName(), item.getDescription(), item.getPrice(), item.getAuthor(), item.getTokenId(),item.getCid(),item.getUser());
     }
 
-    public ItemListResponse(Long id, String name, String description, int price, String author, BigInteger tokenId, String cid, Long userId) {
+    public ItemListResponse(Long id, String name, String description, int price, String author, BigInteger tokenId, String cid, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -34,6 +35,7 @@ public class ItemListResponse {
         this.author = author;
         this.tokenId = tokenId;
         this.cid = cid;
-        this.userId = userId;
+        this.userName = user.getName();
+        this.userId = user.getId();
     }
 }
