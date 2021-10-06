@@ -14,7 +14,7 @@ public class FollowingSaveResponse {
     private String name;
 
     public static FollowingSaveResponse ofFollow(final Follow follow) {
-        return ofUser(follow.getFollower());
+        return ofUser(follow.getFollowing());
     }
 
     private static FollowingSaveResponse ofUser(final User user) {
