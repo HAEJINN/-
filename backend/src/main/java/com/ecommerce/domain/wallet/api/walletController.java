@@ -4,13 +4,12 @@ package com.ecommerce.domain.wallet.api;
 import com.ecommerce.domain.auth.domain.SessionUser;
 import com.ecommerce.domain.wallet.application.WalletService;
 import com.ecommerce.domain.wallet.domain.Wallet;
+import com.ecommerce.domain.wallet.dto.WalletRequest;
 import com.ecommerce.domain.wallet.dto.WalletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.web3j.abi.datatypes.Address;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.protocol.Web3j;
@@ -55,21 +54,25 @@ public class walletController{
 
     //충전 한번하기
     @PostMapping("/api/v1/wallet/sendeth")
-    public boolean reqEth( String receiver) throws IOException {
+    public ResponseEntity<?> reqEth(@RequestBody WalletRequest walletRequest) throws IOException {
         final Web3j web3j = Web3j.build(new HttpService());
         String amount = "100";
         BigInteger charge = new BigInteger(amount);
 
         List<Type> inputParmeters = new ArrayList<>();
         inputParmeters.add(new Address(adminEthAddress));
-        inputParmeters.add(new Address(receiver));
+        inputParmeters.add(new Address(walletRequest.getReceiver()));
         inputParmeters.add(new Address(charge));
+
+        System.out.println("나옴1");
 
         // amount 도 같이 보내준 이유가 list에서 charge만 뽑는 법을 모르겠슴둥..
         Transaction thash = walletService.transactionFunction("reqEth", inputParmeters, Collections.emptyList(), amount);
         web3j.ethSendTransaction(thash);
 
-        return true;
+        final Wallet wallet = walletService.getBalance(walletRequest.getReceiver());
+
+        return ResponseEntity.ok().body(WalletResponse.ofWallet(wallet));
     }
 
 

@@ -116,7 +116,6 @@ public class WalletService {
         String to = String.valueOf(inputParameters.get(1));
         Transaction transaction = Transaction.createFunctionCallTransaction(addressList.get(0), nonce,Transaction.DEFAULT_GAS,null,to,value,FunctionEncoder.encode(function));
 
-
         EthSendTransaction test = web3j.ethSendTransaction(transaction).send();
         return transaction;
 
