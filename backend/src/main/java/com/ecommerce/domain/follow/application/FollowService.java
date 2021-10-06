@@ -70,27 +70,18 @@ public class FollowService {
     }
 
     @Transactional
-    public Follow saveFollowing(final String userEmail, final Long followingId) {
-        final User user = userRepository.findByEmail(userEmail).orElseThrow(IllegalArgumentException::new);
+    public Follow saveMyFollowing(final String userEmail, final Long followingId) {
+        final User me = userRepository.findByEmail(userEmail).orElseThrow(IllegalArgumentException::new);
         final User following = userRepository.findById(followingId).orElseThrow(IllegalArgumentException::new);
-        final Follow follow = follower(user, following);
-        user.addFollowing(follow);
+        final Follow follow = follower(following, me);
+        me.addFollowing(follow);
         return followRepository.save(follow);
     }
 
-    @Transactional
-    public Follow saveFollower(final String userEmail, final Long followerId) {
-        final User user = userRepository.findByEmail(userEmail).orElseThrow(IllegalArgumentException::new);
-        final User follower = userRepository.findById(followerId).orElseThrow(IllegalArgumentException::new);
-        final Follow follow = follower(follower, user);
-        user.addFollower(follow);
-        return followRepository.save(follow);
-    }
-
-    private static Follow follower(final User user, final User following) {
+    private static Follow follower(final User following, final User follower) {
         return Follow.builder()
-                .follower(user)
                 .following(following)
+                .follower(follower)
                 .build();
     }
 

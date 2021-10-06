@@ -1,6 +1,29 @@
-POST http://localhost:8080/api/v1/follow/followers/2
-Authorization: TOKEN eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaXNzIjoibmFqYWt3aGEiLCJleHAiOjE2MzM0MzIzOTAsImlhdCI6MTYzMzQzMDU5MH0.0ftOOhdd_CsQ_K1-k-8kTzCfRLU-mvx1xd9cHJ6STfYJyL_T_1m3GswylPJst_UO5hrG0sL5VyXjypA6AyZ6ig
+### Login
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
 
-###
-GET http://localhost:8080/api/v1/follow/followers
-Authorization: TOKEN eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaXNzIjoibmFqYWt3aGEiLCJleHAiOjE2MzM0MzIzOTAsImlhdCI6MTYzMzQzMDU5MH0.0ftOOhdd_CsQ_K1-k-8kTzCfRLU-mvx1xd9cHJ6STfYJyL_T_1m3GswylPJst_UO5hrG0sL5VyXjypA6AyZ6ig
+{
+  "email": "test1@jake.jake",
+  "password" : "password1"
+}
+
+> {%
+ client.global.set("Authorization", response.body.user.token.accessToken);
+ client.log("생성된 Authorization : " + client.global.get("Authorization"));
+%}
+
+### 1번이 2번 팔로우(팔로잉함)
+POST http://localhost:8080/api/v1/follow/followings/2
+Authorization: Bearer {{Authorization}}
+
+### 1번이 3번 팔로우(팔로잉함)
+POST http://localhost:8080/api/v1/follow/followings/3
+Authorization: Bearer {{Authorization}}
+
+### 1번이 4번 팔로우(팔로잉함)
+POST http://localhost:8080/api/v1/follow/followings/4
+Authorization: Bearer {{Authorization}}
+
+### 1번의 팔로잉들
+GET http://localhost:8080/api/v1/follow/followings/1
+Authorization: Bearer {{Authorization}}

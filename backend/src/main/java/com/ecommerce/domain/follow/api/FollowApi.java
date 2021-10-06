@@ -51,21 +51,15 @@ public class FollowApi {
         return ResponseEntity.ok().body(followers);
     }
 
-    @PostMapping("/api/v1/follow/followings/{id}")
+    @GetMapping("/api/v1/follow/followings/{id}")
     public ResponseEntity<List<FollowingListResponse>> findFollowings(@PathVariable Long id) {
         List<FollowingListResponse> followings = followService.findFollowings(id);
         return ResponseEntity.ok().body(followings);
     }
 
-    @PostMapping("/api/v1/follow/followers/{id}")
-    public ResponseEntity<FollowerSaveResponse> saveFollowers(@AuthenticationPrincipal final String email, @PathVariable Long id) {
-        final Follow follow = followService.saveFollower(email, id);
-        return ResponseEntity.ok().body(FollowerSaveResponse.ofFollow(follow));
-    }
-
     @PostMapping("/api/v1/follow/followings/{id}")
     public ResponseEntity<FollowingSaveResponse> saveFollowings(@AuthenticationPrincipal final String email, @PathVariable Long id) {
-        final Follow follow = followService.saveFollowing(email, id);
+        final Follow follow = followService.saveMyFollowing(email, id);
         return ResponseEntity.ok().body(FollowingSaveResponse.ofFollow(follow));
     }
 

@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    @EntityGraph(attributePaths = {"wallet", "photo"})
+    @EntityGraph(attributePaths = {"wallet"})
     Optional<User> findByEmail(String email);
 
-    @EntityGraph(attributePaths = {"wallet", "photo"})
+    @EntityGraph(attributePaths = {"wallet"})
     Optional<User> findById(Long id);
 
 }

@@ -63,7 +63,7 @@ public class UserApi {
     }
 
     @GetMapping("api/v1/users/latest")
-    public ResponseEntity<List<UserFindListResponse>> findLatest() {
+    public ResponseEntity<List<UserFindListResponse>> findAllLatest() {
         final List<UserFindListResponse> latest = userService.findAllLatest();
         return ResponseEntity.ok().body(latest);
     }
