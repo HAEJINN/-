@@ -28,15 +28,15 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
-    public String uploadFile(String email, MultipartFile file) {
+    public void uploadFile(String email, String description, MultipartFile file) {
         final File fileObj = convertMultiPartFileToFile(file);
         final String fileName = fileName(file);
 
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
-        user.changePhoto(fileName);
+        user.changeProfileImage(fileName)
+                .chageDescription(description);
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, fileObj));
         fileObj.delete();
-        return fileName;
     }
 
     private String fileName(final MultipartFile file) {

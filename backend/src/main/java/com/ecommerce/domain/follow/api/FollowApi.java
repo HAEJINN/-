@@ -1,22 +1,16 @@
 package com.ecommerce.domain.follow.api;
 
-import com.ecommerce.domain.auth.domain.SessionUser;
 import com.ecommerce.domain.follow.application.FollowService;
 import com.ecommerce.domain.follow.domain.Follow;
 import com.ecommerce.domain.follow.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,14 +34,26 @@ public class FollowApi {
     }
 
     @GetMapping("/api/v1/follow/followers")
-    public ResponseEntity<List<FollowerListResponse>> findFollowers(@AuthenticationPrincipal final String email) {
-        final List<FollowerListResponse> followers = followService.findFollowers(email);
+    public ResponseEntity<List<FollowerListResponse>> findMyFollowers(@AuthenticationPrincipal final String email) {
+        final List<FollowerListResponse> followers = followService.findMyFollowers(email);
         return ResponseEntity.ok().body(followers);
     }
 
     @GetMapping("/api/v1/follow/followings")
-    public ResponseEntity<List<FollowingListResponse>> findFollowings(@AuthenticationPrincipal final String email) {
-        final List<FollowingListResponse> followings = followService.findFollowings(email);
+    public ResponseEntity<List<FollowingListResponse>> findMyFollowings(@AuthenticationPrincipal final String email) {
+        final List<FollowingListResponse> followings = followService.findMyFollowings(email);
+        return ResponseEntity.ok().body(followings);
+    }
+
+    @GetMapping("/api/v1/follow/followers/{id}")
+    public ResponseEntity<List<FollowerListResponse>> findFollowers(@PathVariable Long id) {
+        final List<FollowerListResponse> followers = followService.findFollowers(id);
+        return ResponseEntity.ok().body(followers);
+    }
+
+    @PostMapping("/api/v1/follow/followings/{id}")
+    public ResponseEntity<List<FollowingListResponse>> findFollowings(@PathVariable Long id) {
+        List<FollowingListResponse> followings = followService.findFollowings(id);
         return ResponseEntity.ok().body(followings);
     }
 
