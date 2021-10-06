@@ -35,7 +35,7 @@ public class NftService {
 
     //    private BusinessLogin businessLogin = credentialsUtils.getInstance();
     public Item createNftToken(NftRequest nftRequest) throws Exception {
-        TransactionReceipt r = businessLogin.mint(nftRequest.getCID(),nftRequest.getWalletAddress()).send();
+        TransactionReceipt r = businessLogin.mint(nftRequest.getCid(),nftRequest.getWalletAddress()).send();
         BigInteger tokenId = businessLogin.getCount().send();
         int count = Integer.parseInt(String.valueOf(tokenId)) - 1;
         Tuple3<String, BigInteger, String> c = businessLogin.charactors(BigInteger.valueOf(count)).send();
@@ -46,7 +46,7 @@ public class NftService {
                 .name(nftRequest.getName())
                 .description(nftRequest.getDescription())
                 .price(nftRequest.getPrice())
-                .cid(nftRequest.getCID())
+                .cid(nftRequest.getCid())
                 .tokenId(c.component2())
                 .user(user)
                 .build();
