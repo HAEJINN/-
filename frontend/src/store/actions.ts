@@ -1,6 +1,7 @@
 import axios from "@/lib/axios";
 import { User, UserResponse, UserRequest } from "@/types/user";
 
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // 로그인
 export async function requestUserLogin(
   commit: any,
@@ -30,6 +31,13 @@ export async function requestUserRegister(
   return await axios.post(url, data);
 }
 
+// 최근 유저 받아오기
+export function request_latestuser(commit: any) {
+  const url = "/users/latest";
+  return axios.get(url);
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 사진 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // cid 받아오기
 export async function request_pinata(commit: any, image: any) {
   const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
@@ -51,6 +59,25 @@ export function request_picupload(commit: any, nftRequest: any) {
   return axios.post(url, nftRequest);
 }
 
+// 최근 사진 4개 받아오기
+export function request_latest_picture() {
+  const url = "/items/latest";
+  return axios.get(url);
+}
+
+// 랜덤 사진 12개 받아오기
+export function request_random_picture() {
+  const url = "/items/random";
+  return axios.get(url);
+}
+
+// 사용자의 컬렉션 사진 받아오기
+export function request_collection_picture(commit: any, user: User) {
+  const url = `/items/${user.id}`;
+  return axios.get(url);
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 지갑 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // 지갑 주소, 잔액 조회
 export function request_walletaddress(commit: any, jwtToken: string) {
   const url = "/wallet/getaddress";
@@ -72,13 +99,9 @@ export function request_sendeth(commit: any, receiver: string) {
   return axios.post(url, data);
 }
 
+//잔액 조회하기
 export function request_getbalance(commit: any, account: any) {
   const url = "/wallet/balance";
   return axios.get(url, account);
 }
-
-// 최근 유저 받아오기
-export function request_latestuser(commit: any) {
-  const url = "/users/latest";
-  return axios.get(url);
-}
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */

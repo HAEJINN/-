@@ -13,6 +13,7 @@
         <q-carousel v-model="slide" :fullscreen="fullscreen">
           <q-carousel-slide :name="1" class="carousel-slide">
             <q-img :src="malang" fit="contain" class="carousel-image"></q-img>
+            <!-- <q-img :src="pictureurl" fit="contain" class="carousel-image"></q-img> -->
           </q-carousel-slide>
           <template v-slot:control>
             <q-carousel-control position="bottom-right" :offset="[18, 18]">
@@ -35,7 +36,7 @@
             {{ title }}
           </div>
           <div class="text-right text-h6 text-weight-medium q-ml-md self-end">
-            {{ name }}
+            {{ author }}/{{ onwer }}
           </div>
           <q-btn class="self-end" flat round dense>
             <q-img
@@ -80,9 +81,10 @@ export default defineComponent({
   name: "picture",
   props: {
     title: String,
-    name: String,
+    author: String,
+    onwer: String,
     description: String,
-    price: String,
+    price: Number,
   },
   setup(props, { emit }) {
     const mvPurchase = () => {
