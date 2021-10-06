@@ -1,5 +1,6 @@
 package com.ecommerce.domain.wallet.application;
 
+import com.ecommerce.domain.payment.dto.PaymentSaveRequest;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import com.ecommerce.domain.wallet.domain.Wallet;
@@ -7,8 +8,7 @@ import com.ecommerce.domain.wallet.domain.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.TypeReference;
+import org.web3j.abi.datatypes.Address;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.crypto.CipherException;
@@ -22,7 +22,6 @@ import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 
 import java.io.File;
@@ -34,26 +33,32 @@ import java.security.NoSuchProviderException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static java.lang.String.valueOf;
+import static java.util.Collections.emptyList;
+import static org.web3j.abi.FunctionEncoder.encode;
+import static org.web3j.protocol.core.methods.request.Transaction.DEFAULT_GAS;
+import static org.web3j.protocol.core.methods.request.Transaction.createFunctionCallTransaction;
+
 @Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class WalletService {
 
-    private static final String OX = "0x%s";
-    private static final int HEX = 16;
-    private String adminEthAddress = "0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0";
+    private static final String temp = "0x2bd661bad97160c81eb0704ae29cb97bcbec6f8a";
+    private static final String ADMIN_ETH_ADDRESS = "0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0";
+    private static final String FUNCTION_NAME = "reqEth";
+    private static final int COIN_BASE = 0;
+    private static final int 여기_문제_있는_것_같아요 = 1;
 
     private final WalletRepository walletRepository;
     private final UserRepository userRepository;
     private final Web3j web3j;
     private final Admin admin;
-    List<String> addressList;
-
 
     @Transactional
     public Wallet createWallet(final String email) throws CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
-        if(user.getWallet() != null) {
+        if (user.getWallet() != null) {
             return user.getWallet();
         }
         final String walletFile = WalletUtils.generateNewWalletFile(user.getPassword(), new File(Wallet.WALLET_DIRECTORY));
@@ -71,7 +76,7 @@ public class WalletService {
         return wallet.changeBalance(ethGetBalance.getBalance());
     }
 
-    public Wallet getWalletAddressByUser(final String email){
+    public Wallet getWalletAddressByUser(final String email) {
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
         return walletRepository.findByUser(user).orElseThrow(IllegalArgumentException::new);
     }
@@ -89,36 +94,46 @@ public class WalletService {
     // user 테이블에 1회 충전이 되었는지 속성 필요
     // 1회 충전을 눌렀을 때 -> user테이블에서 검사하고 user.charge -> boolean 값으로 만들고 만약 fasle이면
     // 충전 가능
-    public Transaction transactionFunction(String functionName, List<Type> inputParameters, List<TypeReference<?>> outputParameters, String amount) throws IOException{
-        final Web3j web3j = Web3j.build(new HttpService());
-        final Admin admin = Admin.build(new HttpService());
-        PersonalListAccounts personalListAccounts = admin.personalListAccounts().send();
-        addressList = personalListAccounts.getAccountIds();
+    public void transactionFunction(final PaymentSaveRequest paymentSaveRequest) throws IOException, ExecutionException, InterruptedException {
+        unLockAdminAccount();
+        final List<Type> inputParameters = inputParameters(paymentSaveRequest);
+        final List<String> addresses = addressList();
+        final Transaction transaction = createFunctionCallTransaction(
+                addresses.get(COIN_BASE),
+                transactionCount(addresses),
+                DEFAULT_GAS,
+                null,
+                valueOf(inputParameters.get(여기_문제_있는_것_같아요)),
+                paymentSaveRequest.getAmount(),
+                encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
+        );
+        web3j.ethSendTransaction(transaction).send();
+    }
 
-        PersonalUnlockAccount personalUnlockAccount = admin.personalUnlockAccount(adminEthAddress,"1234").send();
-        Boolean isUnlocked = personalUnlockAccount.accountUnlocked();
+    private void unLockAdminAccount() throws IOException {
+        PersonalUnlockAccount personalUnlockAccount = admin.personalUnlockAccount(ADMIN_ETH_ADDRESS, "1234").send();
+        personalUnlockAccount.accountUnlocked();
+    }
 
-        //contract function 만들기
-        Function function = new Function(functionName, inputParameters, outputParameters);
+    private List<String> addressList() throws IOException {
+        final PersonalListAccounts personalListAccounts = admin.personalListAccounts().send();
+        return personalListAccounts.getAccountIds();
+    }
 
-        // nonce 체크
-        EthGetTransactionCount ethGetTransactionCount = null;
-        try{
-            ethGetTransactionCount = web3j.ethGetTransactionCount(addressList.get(0), DefaultBlockParameterName.LATEST)
-                    .sendAsync().get();
-        } catch(InterruptedException | ExecutionException e1){
-            e1.printStackTrace();
-        }
+    private BigInteger transactionCount(final List<String> addresses) throws ExecutionException, InterruptedException {
+        final EthGetTransactionCount ethGetTransactionCount =
+                web3j.ethGetTransactionCount(
+                        addresses.get(COIN_BASE),
+                        DefaultBlockParameterName.LATEST).sendAsync().get();
+        return ethGetTransactionCount.getTransactionCount();
+    }
 
-        BigInteger value = new BigInteger(amount);
-        BigInteger nonce =  ethGetTransactionCount.getTransactionCount();
-
-        String to = String.valueOf(inputParameters.get(1));
-        Transaction transaction = Transaction.createFunctionCallTransaction(addressList.get(0), nonce,Transaction.DEFAULT_GAS,null,to,value,FunctionEncoder.encode(function));
-
-        EthSendTransaction test = web3j.ethSendTransaction(transaction).send();
-        return transaction;
-
+    private List<Type> inputParameters(final PaymentSaveRequest paymentSaveRequest) {
+        return List.of(
+                new Address(ADMIN_ETH_ADDRESS),
+                new Address(paymentSaveRequest.getReceiver()),
+                new Address(paymentSaveRequest.getAmount())
+        );
     }
 
 }

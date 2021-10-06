@@ -11,11 +11,13 @@ import java.math.BigInteger;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PaymentSaveRequest {
 
+    private String receiver;
     private String impUid;
     private String merchantUid;
     private BigInteger amount;
 
-    public PaymentSaveRequest(final String impUid, final String merchantUid, final BigInteger amount) {
+    public PaymentSaveRequest(final String receiver, final String impUid, final String merchantUid, final BigInteger amount) {
+        this.receiver = receiver;
         this.impUid = impUid;
         this.merchantUid = merchantUid;
         this.amount = amount;
