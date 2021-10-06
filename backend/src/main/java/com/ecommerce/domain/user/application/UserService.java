@@ -1,6 +1,5 @@
 package com.ecommerce.domain.user.application;
 
-import com.ecommerce.domain.photo.domain.Photo;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
 import com.ecommerce.domain.wallet.domain.Wallet;
