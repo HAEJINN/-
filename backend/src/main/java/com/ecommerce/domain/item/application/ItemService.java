@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
@@ -67,11 +68,15 @@ public class ItemService {
     }
 
     public List<ItemListResponse> findByUserId(Long userId){
-        User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
-        List<Item> items = itemRepository.findByUser(user);
-        return items.stream()
-                .map(ItemListResponse::ofItem)
-                .collect(Collectors.toList());
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent()){
+            List<Item> items = itemRepository.findByUser(user.get());
+            return items.stream()
+                    .map(ItemListResponse::ofItem)
+                    .collect(Collectors.toList());
+        }
+        return null;
+
     }
 
 }

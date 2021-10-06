@@ -51,6 +51,9 @@ public class ItemApi {
     @GetMapping("/api/v1/items/collection/{userId}")
     public ResponseEntity<?> getItemList(@PathVariable Long userId){
         List<ItemListResponse> items = itemService.findByUserId(userId);
+        if(items==null){
+            return new ResponseEntity<>("fail", HttpStatus.NO_CONTENT);
+        }
         return ResponseEntity.ok().body(items);
     }
 
