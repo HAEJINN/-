@@ -6,7 +6,7 @@
         <div class="text-h3">{{ state.wallet.balance }}</div>
         <div class="add-btn" @click="chargeCoin"></div>
       </div>
-      <div class="text-h6 q-my-md">계좌주소</div>
+      <div class="text-h6 q-my-xs">계좌주소</div>
       <div class="text-h6 q-my-md">{{ state.wallet.address }}</div>
     </div>
   </div>

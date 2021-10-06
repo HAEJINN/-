@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import Banner from "@/views/main/components/banner.vue";
 import PictureList from "@/views/main/components/picture-list.vue";
