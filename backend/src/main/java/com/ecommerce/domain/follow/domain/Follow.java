@@ -19,27 +19,27 @@ public class Follow extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "follower_id")
-    private User follower;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "following_id")
     private User following;
 
-    @Builder
-    public Follow(final Long id, final User follower, final User following) {
-        this.id = id;
-        this.follower = follower;
-        this.following = following;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "follower_id")
+    private User follower;
 
-    public Follow changeFollower(final User follower) {
+    @Builder
+    public Follow(final Long id, final User following, final User follower) {
+        this.id = id;
+        this.following = following;
         this.follower = follower;
-        return this;
     }
 
     public Follow changeFollowing(final User following) {
         this.following = following;
+        return this;
+    }
+
+    public Follow changeFollower(final User follower) {
+        this.follower = follower;
         return this;
     }
 

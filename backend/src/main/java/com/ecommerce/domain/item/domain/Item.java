@@ -21,9 +21,12 @@ public class Item {
     private String name;
     private String description;
     private int price;
+
     @Column(name = "token_id")
     private BigInteger tokenId;
+
     private String cid;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private User user;
@@ -47,4 +50,5 @@ public class Item {
     public void update(final Item updateData) {
 
     }
+
 }

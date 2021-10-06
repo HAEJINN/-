@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
-public class UserSaveResponse {
+public class UserFindResponse {
 
     private Long id;
     private String email;
     private String name;
     private UserStatus status;
 
-    public UserSaveResponse(final User user) {
+    public UserFindResponse(final User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.name = user.getName();
@@ -25,4 +25,3 @@ public class UserSaveResponse {
     }
 
 }
-

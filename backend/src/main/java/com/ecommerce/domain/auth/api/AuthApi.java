@@ -8,6 +8,7 @@ import com.ecommerce.global.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -29,8 +30,8 @@ public class AuthApi {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/api/v1/logout")
-    public void logout(final HttpSession httpSession) {
-        httpSession.removeAttribute("user");
+    public void logout() {
+        SecurityContextHolder.clearContext();
     }
 
 }

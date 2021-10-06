@@ -3,9 +3,9 @@ POST http://localhost:8080/api/v1/users
 Content-Type: application/json
 
 {
-    "name": "test4567",
-    "email": "test4567@jake.jake",
-    "password" : "password3"
+    "name": "test1",
+    "email": "test1@jake.jake",
+    "password" : "password1"
 }
 
 ### signup2
@@ -13,9 +13,41 @@ POST http://localhost:8080/api/v1/users
 Content-Type: application/json
 
 {
-"name": "jaker",
-"email": "jaker2@jaker.jaker",
-"password" : "password2"
+  "name": "test2",
+  "email": "test2@jake.jake",
+  "password" : "password2"
+}
+
+### signup3
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "test3",
+  "email": "test3@jake.jake",
+  "password" : "password3"
+}
+
+
+### signup4
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "test4",
+  "email": "test4@jake.jake",
+  "password" : "password4"
+}
+
+
+### signup5
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "test5",
+  "email": "test5@jake.jake",
+  "password" : "password5"
 }
 
 ### Login
@@ -23,18 +55,16 @@ POST http://localhost:8080/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "jaker2@jaker.jaker",
-  "password" : "password2"
+  "email": "test1@jake.jake",
+  "password" : "password1"
 }
+
+> {%
+ client.global.set("Authorization", response.body.jwtToken);
+ client.log("생성된 Authorization : " + client.global.get("Authorization"));
+%}
 
 ### Logout
 POST http://localhost:8080/api/v1/logout
-
-### RE-Login
-POST http://localhost:8080/api/v1/login
 Content-Type: application/json
-
-{
-  "email": "test4567@jake.jake",
-  "password" : "password3"
-}
+Authorization: Bearer {{Authorization}}
