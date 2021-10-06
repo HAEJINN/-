@@ -41,8 +41,7 @@ public class UserService {
         final Credentials credentials = WalletUtils.loadCredentials(user.getPassword(), new File(Wallet.walletDirectory + walletFile));
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = wallet(credentials, walletFile, user, ethGetBalance.getBalance());
-        final Photo photo = new Photo("profile.jpg");
-        user.changePhoto(photo)
+        user.changePhoto("profile.jpg")
                 .changeWallet(wallet)
                 .passwordEncode(passwordEncoder);
         return userRepository.save(user);
