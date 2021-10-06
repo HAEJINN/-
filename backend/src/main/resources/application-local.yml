@@ -24,6 +24,10 @@ spring:
   web3j:
     client-address: http://localhost:8545
     admin-client: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 eth:
   erc20:
     contract: dd

@@ -104,7 +104,7 @@ public class WalletService {
                 DEFAULT_GAS,
                 null,
                 valueOf(inputParameters.get(TO_INDEX)),
-                paymentSaveRequest.getAmount(),
+                new BigInteger(paymentSaveRequest.getAmount()),
                 encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
         );
         web3j.ethSendTransaction(transaction).send();

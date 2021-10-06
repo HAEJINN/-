@@ -1,0 +1,35 @@
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "test1",
+  "email": "test1@jake.jake",
+  "password" : "password1"
+}
+
+### Login
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
+
+{
+  "email": "test1@jake.jake",
+  "password" : "password1"
+}
+
+> {%
+ client.global.set("Authorization", response.body.jwtToken);
+ client.log("생성된 Authorization : " + client.global.get("Authorization"));
+%}
+
+
+###
+POST http://localhost:8080/api/v1/payments
+Content-Type: application/json
+Authorization: Bearer {{Authorization}}
+
+{
+    "receiver": "0x82ea29cabde731fda251209b9fefce96b50c044b",
+    "amount": "100",
+    "impUid": "rsp.imp_uid",
+    "merchantUid": "rsp.merchant_uid"
+}

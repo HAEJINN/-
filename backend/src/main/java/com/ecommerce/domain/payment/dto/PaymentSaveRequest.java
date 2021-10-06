@@ -1,26 +1,33 @@
 package com.ecommerce.domain.payment.dto;
 
 import com.ecommerce.domain.payment.domain.Payment;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigInteger;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PaymentSaveRequest {
 
+    @JsonProperty("receiver")
     private String receiver;
-    private String impUid;
-    private String merchantUid;
-    private BigInteger amount;
 
-    public PaymentSaveRequest(final String receiver, final String impUid, final String merchantUid, final BigInteger amount) {
+    @JsonProperty("amount")
+    private String amount;
+
+    @JsonProperty("impUid")
+    private String impUid;
+
+    @JsonProperty("merchantUid")
+    private String merchantUid;
+
+
+    public PaymentSaveRequest(final String receiver, final String amount, final String impUid, final String merchantUid) {
         this.receiver = receiver;
+        this.amount = amount;
         this.impUid = impUid;
         this.merchantUid = merchantUid;
-        this.amount = amount;
     }
 
     public Payment toEntity() {

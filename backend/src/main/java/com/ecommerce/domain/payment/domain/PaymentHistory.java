@@ -11,7 +11,6 @@ import java.math.BigInteger;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "PaymentLists")
 @Entity
 public class PaymentHistory {
 

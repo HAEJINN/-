@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "Payments")
 @Entity
 public class Payment {
 
@@ -26,7 +26,7 @@ public class Payment {
     private String merchantUid;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PaymentHistory> paymentHistories;
+    private List<PaymentHistory> paymentHistories = new ArrayList<>();
 
     @Builder
     public Payment(final String impUid, final String merchantUid) {
