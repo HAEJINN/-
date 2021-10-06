@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class PaymentService {
         final PaymentHistory paymentHistory = PaymentHistory.builder()
                 .user(user)
                 .payment(payment)
-                .amount(paymentSaveRequest.getAmount()).build();
+                .amount(new BigInteger(paymentSaveRequest.getAmount())).build();
         payment.addPaymentHistories(paymentHistory);
         return paymentRepository.save(payment);
     }
