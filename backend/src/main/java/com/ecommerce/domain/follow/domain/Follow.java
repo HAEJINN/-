@@ -1,6 +1,7 @@
 package com.ecommerce.domain.follow.domain;
 
 import com.ecommerce.domain.user.domain.User;
+import com.ecommerce.global.common.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "follows")
 @Entity
-public class Follow {
+public class Follow extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

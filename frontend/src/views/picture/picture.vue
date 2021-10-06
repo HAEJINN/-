@@ -37,7 +37,14 @@
           <div class="text-right text-h6 text-weight-medium q-ml-md self-end">
             {{ name }}
           </div>
-          <q-btn class="self-end" flat round dense icon="home"></q-btn>
+          <q-btn class="self-end" flat round dense>
+            <q-img
+              src="../../assets/Najakhwa_logo_red.png"
+              fit="contain"
+              :ratio="1"
+              class="picture-najakhwa-logo"
+            ></q-img>
+          </q-btn>
         </div>
       </q-card-section>
 

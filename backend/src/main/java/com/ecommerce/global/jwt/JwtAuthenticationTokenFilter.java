@@ -20,7 +20,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    private static final Pattern SCHEMA = Pattern.compile("^Token$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern SCHEMA = Pattern.compile("^Bearer$", Pattern.CASE_INSENSITIVE);
 
     private final JwtService jwtProvider;
 
