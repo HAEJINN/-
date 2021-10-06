@@ -29,7 +29,7 @@ import java.util.List;
 public class walletController{
 
     //내 local admin 지갑
-    private String adminEthAddress = "0x2bd661bad97160c81eb0704ae29cb97bcbec6f8a";
+    private String adminEthAddress = "0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0";
 
     private final WalletService walletService;
 
