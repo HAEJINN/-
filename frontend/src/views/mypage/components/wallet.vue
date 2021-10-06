@@ -46,12 +46,14 @@ export default defineComponent({
     });
 
     const chargeCoin = () => {
-      var yesno = confirm("충전하시겠습니끼?");
+      var yesno = confirm("충전하시겠습니끼? 충전금액은 100원입니다");
       if (yesno) {
-        const receiver = state.wallet.address;
-        console.log(receiver);
         store
-          .dispatch("root/request_sendeth", receiver)
+          .dispatch("root/request_sendeth", {
+            jwtToken: state.jwtToken,
+            receiver: state.wallet.address,
+            amount: 100,
+          })
           .then((response) => {
             console.log(response);
           })

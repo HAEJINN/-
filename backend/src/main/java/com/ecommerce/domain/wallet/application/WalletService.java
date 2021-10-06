@@ -48,7 +48,7 @@ public class WalletService {
     private static final String ADMIN_ETH_ADDRESS = "0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0";
     private static final String FUNCTION_NAME = "reqEth";
     private static final int COIN_BASE = 0;
-    private static final int 여기_문제_있는_것_같아요 = 1;
+    private static final int TO_INDEX = 1;
 
     private final WalletRepository walletRepository;
     private final UserRepository userRepository;
@@ -103,7 +103,7 @@ public class WalletService {
                 transactionCount(addresses),
                 DEFAULT_GAS,
                 null,
-                valueOf(inputParameters.get(여기_문제_있는_것_같아요)),
+                valueOf(inputParameters.get(TO_INDEX)),
                 paymentSaveRequest.getAmount(),
                 encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
         );
