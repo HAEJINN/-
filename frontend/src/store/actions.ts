@@ -64,11 +64,21 @@ export function request_walletaddress(commit: any, jwtToken: string) {
 // 이더 충전하기
 export function request_sendeth(commit: any, receiver: string) {
   const url = "/wallet/sendeth";
-  console.log(receiver);
-  return axios.post(url, receiver);
+  // console.log(receiver); 이전..
+  const data = {
+    receiver: receiver,
+  };
+  // return axios.post(url, receiver); 이전
+  return axios.post(url, data);
 }
 
 export function request_getbalance(commit: any, account: any) {
   const url = "/wallet/balance";
   return axios.get(url, account);
+}
+
+// 최근 유저 받아오기
+export function request_latestuser(commit: any) {
+  const url = "/users/latest";
+  return axios.get(url);
 }
