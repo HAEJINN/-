@@ -49,10 +49,9 @@ export default defineComponent({
       followers: "",
     });
     onBeforeMount(() => {
+      console.log(props.user_id);
       store
-        .dispatch("root/request_userinfo_byid", {
-          id: props.user_id,
-        })
+        .dispatch("root/request_userinfo_byid", props.user_id)
         .then((response) => {
           console.log(response);
           state.user = response.data;

@@ -30,11 +30,10 @@ export async function requestUserRegister(
   const url = "/users";
   return await axios.post(url, data);
 }
-export async function request_userinfo_byid(
-  commit: any,
-  user: User
-): Promise<UserResponse> {
-  const url = `/users/${user.id}`;
+
+// 유저 아이디로 정보 받아오기
+export async function request_userinfo_byid(commit: any, user_id: number) {
+  const url = `/users/${user_id}`;
   return await axios.get(url);
 }
 
