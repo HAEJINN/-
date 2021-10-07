@@ -78,7 +78,7 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public User chageDescription(final String description) {
+    public User changeDescription(final String description) {
         this.description = description;
         return this;
     }

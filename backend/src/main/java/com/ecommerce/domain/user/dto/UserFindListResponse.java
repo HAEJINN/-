@@ -14,12 +14,14 @@ public class UserFindListResponse {
 
     private Long id;
     private String email;
+    private String profileImage;
     private String name;
     private UserStatus status;
 
     public UserFindListResponse(final User user) {
         this.id = user.getId();
         this.email = user.getEmail();
+        this.profileImage = user.getProfileImage();
         this.name = user.getName();
         this.status = user.getStatus();
     }
