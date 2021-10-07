@@ -61,12 +61,12 @@ public class UserApi {
         userService.delete(id);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PostMapping("/api/v1/users")
-    public void update(@AuthenticationPrincipal final String email,
+    @PostMapping("/api/v1/users/upload")
+    public ResponseEntity<?> update(@AuthenticationPrincipal final String email,
                                          @RequestParam final String description,
                                          @RequestParam final MultipartFile photo) throws IOException {
         s3Service.uploadFile(email, description, photo);
+        return ResponseEntity.ok().body("ok");
     }
 
     @GetMapping("api/v1/users/latest")
