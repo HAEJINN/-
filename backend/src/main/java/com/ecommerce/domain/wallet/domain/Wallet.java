@@ -53,4 +53,18 @@ public class Wallet {
         return this;
     }
 
+    public Wallet addBalance(final BigInteger amount) {
+        final BigInteger result = balance.add(amount);
+        this.balance = result;
+        return this;
+    }
+
+    public Wallet subtractBalance(final BigInteger amount) {
+        final BigInteger result = balance.subtract(amount);
+        if(result.longValue() >= 0) {
+            this.balance = result;
+        }
+        return this;
+    }
+
 }

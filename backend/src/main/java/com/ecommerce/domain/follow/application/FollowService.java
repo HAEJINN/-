@@ -78,12 +78,15 @@ public class FollowService {
         return followRepository.save(follow);
     }
 
+    public void followable(final String email, final Long id) {
+
+    }
+
     private static Follow follower(final User following, final User follower) {
         return Follow.builder()
                 .following(following)
                 .follower(follower)
                 .build();
     }
-
 
 }
