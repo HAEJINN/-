@@ -1,7 +1,7 @@
 <template>
   <div class="picture-comp col-lg-4 col-xs-12">
     <q-card class="q-ma-sm" @click="openPictureDialog">
-      <img :src="state.collection_url" />
+      <img :src="state.collection_url" style="max-height: 500px" />
 
       <q-card-section class="column">
         <div class="text-h6 self-start">{{ collection.name }}</div>

@@ -17,23 +17,44 @@
     <div class="row justify-center q-mb-lg">
       <div class="col-lg-8 col-xs-12">
         <div class="row justify-around">
-          <UserComp></UserComp>
-          <UserComp></UserComp>
-          <UserComp></UserComp>
-          <UserComp></UserComp>
-          <UserComp></UserComp>
+          <UserComp
+            v-for="(user, idx) in state.user_list"
+            :key="idx"
+            :user="user"
+          ></UserComp>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, reactive, ref, onBeforeMount } from "vue";
+import { useStore } from "vuex";
 import UserComp from "../banner/components/user-comp.vue";
 export default defineComponent({
   name: "user",
   components: {
     UserComp,
+  },
+  setup() {
+    const store = useStore();
+    const state = reactive({
+      user_list: ref([]),
+    });
+    onBeforeMount(() => {
+      store
+        .dispatch("root/request_random_user")
+        .then((response) => {
+          state.user_list = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+    return {
+      state,
+      onBeforeMount,
+    };
   },
 });
 </script>

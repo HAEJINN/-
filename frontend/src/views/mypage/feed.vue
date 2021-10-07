@@ -47,7 +47,6 @@ export default defineComponent({
       user: {},
       followings: "",
       followers: "",
-      jwtToken: "",
     });
     onBeforeMount(() => {
       store
@@ -62,25 +61,15 @@ export default defineComponent({
           console.log(error);
         });
 
-      const userinfo = JSON.parse(localStorage.getItem("userInfo"));
-      state.jwtToken = userinfo.jwtToken;
-      // 팔로잉
       store
-        .dispatch("root/request_followingcount", state.jwtToken)
+        .dispatch("root/request_followcount", props.user_id)
         .then((response) => {
-          state.followings = response.data.count;
+          console.log(response);
+          state.followers = response.data.followerCount;
+          state.followings = response.data.followingCount;
         })
         .catch((error) => {
-          console.error(error);
-        });
-
-      store
-        .dispatch("root/request_followercount", state.jwtToken)
-        .then((response) => {
-          state.followers = response.data.count;
-        })
-        .catch((error) => {
-          console.error(error);
+          console.log(error);
         });
     });
     return {

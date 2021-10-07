@@ -9,6 +9,7 @@
 <script>
 import "../../../styles/main.scss";
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "artist-comp",
@@ -18,8 +19,15 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const router = useRouter();
     const mvUserCollection = () => {
-      alert(props.user.id);
+      // alert(props.user.id);
+      router.push({
+        name: "feed",
+        params: {
+          user_id: props.user.id,
+        },
+      });
     };
 
     return {

@@ -5,6 +5,9 @@
       :key="idx"
       :collection="collection"
     ></picture-comp>
+    <div v-if="collection_list.length == 0" class="text-h5 q-py-xl">
+      화실에 사진이 없습니다
+    </div>
   </div>
 </template>
 <script>

@@ -60,28 +60,33 @@ export async function request_pinata(commit: any, image: any) {
 }
 
 // 사진 올리기
-export function request_picupload(commit: any, nftRequest: any) {
+export async function request_picupload(commit: any, nftRequest: any) {
   console.log(nftRequest);
   const url = "/nft";
-  return axios.post(url, nftRequest);
+  return await axios.post(url, nftRequest);
 }
 
 // 최근 사진 4개 받아오기
-export function request_latest_picture(commit: any) {
+export async function request_latest_picture(commit: any) {
   const url = "/items/four";
-  return axios.get(url);
+  return await axios.get(url);
 }
 
 // 랜덤 사진 12개 받아오기
-export function request_random_picture(commit: any) {
+export async function request_random_picture(commit: any) {
   const url = "/items/random";
-  return axios.get(url);
+  return await axios.get(url);
+}
+
+export async function request_random_user(commit: any) {
+  const url = "/users/random";
+  return await axios.get(url);
 }
 
 // 사용자의 컬렉션 사진 받아오기
-export function request_collection_picture(commit: any, user_id: number) {
+export async function request_collection_picture(commit: any, user_id: number) {
   const url = `/items/collection/${user_id}`;
-  return axios.get(url);
+  return await axios.get(url);
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 지갑 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -127,25 +132,10 @@ export function request_getbalance(commit: any, account: any) {
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ마이페이지ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
-// 팔로잉수
-export function request_followingcount(commit: any, jwtToken: string) {
-  const url = "/follow/followings/count";
-  console.log(jwtToken);
-  return axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  });
-}
-
-//팔로워수
-export function request_followercount(commit: any, jwtToken: string) {
-  const url = "/follow/followers/count";
-  return axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  });
+// 팔로잉/팔로워수
+export function request_followcount(commit: any, id: any) {
+  const url = `/follow/${id}/count`;
+  return axios.get(url);
 }
 
 //팔로잉리스트
