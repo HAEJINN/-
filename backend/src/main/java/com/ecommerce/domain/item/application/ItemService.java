@@ -57,8 +57,9 @@ public class ItemService {
 
     public List<ItemListResponse> findRandom() {
         final List<Item> itemList = itemRepository.findAll();
+        int count = itemList.size();
         Collections.shuffle(itemList);
-        return itemList.subList(0, 12).stream()
+        return itemList.subList(0, count<12?count:12).stream()
                 .map(ItemListResponse::ofItem)
                 .collect(Collectors.toList());
     }
