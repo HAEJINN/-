@@ -90,8 +90,18 @@ export default defineComponent({
         .dispatch("root/requestUserLogin", data)
         .then((response) => {
           console.log(response);
+          store
+            .dispatch("root/request_walletaddress", response.data.jwtToken)
+            .then((response) => {
+              localStorage.setItem(
+                "address",
+                JSON.stringify(response.data.address)
+              );
+            })
+            .catch((error) => {
+              console.error(error);
+            });
           localStorage.setItem("userInfo", JSON.stringify(response.data));
-
           alert("로그인이 완료되었습니다.");
           loginSuccess();
           router.go();

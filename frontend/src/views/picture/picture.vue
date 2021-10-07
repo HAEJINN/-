@@ -62,10 +62,11 @@
           <div class="col-7"></div>
           <div class="col-3 text-center">{{ collection.price }} 원</div>
           <q-btn
+            v-if="state.user.id != collection.userId"
             class="bg-dark col-2"
             text-color="white"
             label="구매하기"
-            @click="mvPurchase"
+            @click="buyItem"
           ></q-btn>
         </div>
       </q-card-section>
@@ -75,7 +76,8 @@
 <script>
 import "../../styles/picture.scss";
 import { defineComponent, reactive, ref, onBeforeMount } from "vue";
-
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default defineComponent({
   name: "picture",
   props: {
@@ -84,21 +86,48 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const mvPurchase = () => {
-      emit("mvPurchase");
-    };
+    const store = useStore();
+    const router = useRouter();
     const state = reactive({
+      user: JSON.parse(localStorage.getItem("userInfo")),
+      address: JSON.parse(localStorage.getItem("address")),
       ImageUrl: "https://gateway.pinata.cloud/ipfs/" + props.collection.cid,
     });
-
+    const buyItem = () => {
+      var yesno = confirm(
+        "구매하시겠습니까? 구매금액은" + props.collection.price + "원 입니다"
+      );
+      if (yesno) {
+        const reuqset_data = {
+          amount: "" + props.collection.price,
+          fromAddress: state.address,
+          tokenId: props.collection.tokenId,
+          userId: props.collection.userId,
+        };
+        store
+          .dispatch("root/request_purchase_picture", reuqset_data)
+          .then((response) => {
+            console.log(response);
+            alert("구매에 성공 하였습니다.");
+            router.go();
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("구매에 실패 하였습니다.");
+          });
+      } else {
+        alert("구매를 취소하였습니다.");
+      }
+    };
     return {
       slide: ref(1),
       fullscreen: ref(false),
 
       state,
 
+      buyItem,
+
       onBeforeMount,
-      mvPurchase,
     };
   },
 });

@@ -77,6 +77,7 @@ export async function request_random_picture(commit: any) {
   return await axios.get(url);
 }
 
+// 랜덤 유저 12명 받아오기
 export async function request_random_user(commit: any) {
   const url = "/users/random";
   return await axios.get(url);
@@ -86,6 +87,16 @@ export async function request_random_user(commit: any) {
 export async function request_collection_picture(commit: any, user_id: number) {
   const url = `/items/collection/${user_id}`;
   return await axios.get(url);
+}
+
+// 사진 구매하기
+export async function request_purchase_picture(
+  commit: any,
+  nftTransferRequest: any
+) {
+  console.log(nftTransferRequest);
+  const url = "/nft/buy";
+  return await axios.post(url, nftTransferRequest);
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 지갑 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
