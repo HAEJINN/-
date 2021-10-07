@@ -78,6 +78,14 @@ public class FollowService {
         return followRepository.save(follow);
     }
 
+    @Transactional
+    public void unFollowing(final String email, final Long id) {
+        final User me = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+        final User following = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        final Follow follow = followRepository.findByFollowerAndFollowing(me, following).orElseThrow(IllegalArgumentException::new);
+        followRepository.delete(follow);
+    }
+
     public boolean followable(final String email, final Long id) {
         final User me = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
         final User target = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
@@ -90,5 +98,6 @@ public class FollowService {
                 .follower(follower)
                 .build();
     }
+
 
 }
