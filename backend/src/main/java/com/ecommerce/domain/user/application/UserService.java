@@ -99,8 +99,13 @@ public class UserService {
     public List<UserFindListResponse> findAllRandom() {
         final List<User> all = userRepository.findAll();
         Collections.shuffle(all);
-        return all.subList(0, 12).stream()
+        int lastIndex = 12;
+        if (all.size() < 12) {
+            lastIndex = all.size();
+        }
+        return all.subList(0, lastIndex).stream()
                 .map(user -> new UserFindListResponse(user))
                 .collect(Collectors.toList());
     }
+
 }
