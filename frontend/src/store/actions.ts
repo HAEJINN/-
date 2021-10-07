@@ -114,9 +114,10 @@ export function request_sendeth(
   commit: any,
   payment: PaymentRequest
 ): Promise<PaymentResponse> {
-  console.log(payment);
   const url = "/payments";
-  const data = payment.data;
+  console.log(payment.data);
+  console.log(payment.jwtToken);
+  const data = JSON.stringify(payment.data);
   return axios.post(url, data, {
     headers: {
       Authorization: `Bearer ${payment.jwtToken}`,
