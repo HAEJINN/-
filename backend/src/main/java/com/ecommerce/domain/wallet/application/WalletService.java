@@ -144,7 +144,7 @@ public class WalletService {
                 new BigInteger(paymentSaveRequest.getAmount()),
                 encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
         );
-        web3j.ethSendTransaction(transaction);
+        web3j.ethSendTransaction(transaction).send();
     }
 
     public void transactionFunction(final String from, final String to, final String amount) throws IOException, ExecutionException, InterruptedException {
@@ -160,7 +160,7 @@ public class WalletService {
                 new BigInteger(amount),
                 encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
         );
-        web3j.ethSendTransaction(transaction);
+        web3j.ethSendTransaction(transaction).send();
     }
 
     private void unLockAdminAccount() throws IOException {
