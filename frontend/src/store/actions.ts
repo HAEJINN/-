@@ -1,4 +1,5 @@
 import axios from "@/lib/axios";
+import $axios from "axios";
 import { User, UserResponse, UserRequest } from "@/types/user";
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -45,9 +46,10 @@ export function request_latestuser(commit: any) {
 
 // 프로필 수정
 export function request_modiuser(commit: any, request: any) {
-  const url = "/users";
-  return axios.patch(url, request.formData, {
+  const url = "/api/v1/users/upload";
+  return $axios.post(url, request.formData, {
     headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${request.jwtToken}`,
     },
   });

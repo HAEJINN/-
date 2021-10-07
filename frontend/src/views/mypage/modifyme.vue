@@ -69,7 +69,7 @@ export default defineComponent({
       const userinfo = JSON.parse(localStorage.getItem("userInfo"));
       const formData = new FormData();
       formData.append("description", state.modi.description);
-      formData.append("image", document.getElementById("chooseFile").files[0]);
+      formData.append("photo", document.getElementById("chooseFile").files[0]);
       const data = {
         jwtToken: userinfo.jwtToken,
         formData: formData,
