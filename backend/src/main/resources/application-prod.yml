@@ -30,7 +30,7 @@ eth:
   encrypted:
     password: Pn0OlSN0SdhjNK5X2EhUPQ==
   erc721:
-    contract: 7d2026d684f19deaa4134c39dde786605dcc90d4
+    contract: 69a0364aac5254817ee60327a9c6cbb9335924b2
   purchase:
     record:
       contract: 0x0c2BC3cAB0036D1E51734B4D6e6cb8BCB046A2C7
