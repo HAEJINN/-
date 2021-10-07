@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public class walletController {
 
     //내 local admin 지갑
-    private String adminEthAddress = "0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0";
+    private String adminEthAddress = "0x22510CbFA46e5dC4b625BD16f854024f2E6114b5";
 
     private final WalletService walletService;
 
