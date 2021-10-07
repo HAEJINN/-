@@ -62,7 +62,7 @@ public class UserApi {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping("/api/v1/users")
+    @PostMapping("/api/v1/users")
     public void update(@AuthenticationPrincipal final String email,
                                          @RequestParam final String description,
                                          @RequestParam final MultipartFile photo) throws IOException {
