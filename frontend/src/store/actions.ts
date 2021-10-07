@@ -43,6 +43,16 @@ export function request_latestuser(commit: any) {
   return axios.get(url);
 }
 
+// 프로필 수정
+export function request_modiuser(commit: any, request: any) {
+  const url = "/users";
+  return axios.patch(url, request.formData, {
+    headers: {
+      Authorization: `Bearer ${request.jwtToken}`,
+    },
+  });
+}
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 사진 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // cid 받아오기
 export async function request_pinata(commit: any, image: any) {

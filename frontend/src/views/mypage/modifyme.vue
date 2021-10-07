@@ -41,11 +41,13 @@ import "../../styles/mypage.scss";
 import { defineComponent } from "vue";
 import { reactive } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "addpic",
   setup() {
     const store = useStore();
+    const router = useRouter();
     const state = reactive({
       modi: {
         description: "",
@@ -65,22 +67,25 @@ export default defineComponent({
 
     const clickUpload = () => {
       const userinfo = JSON.parse(localStorage.getItem("userInfo"));
+      const formData = new FormData();
+      formData.append("description", state.modi.description);
+      formData.append("image", document.getElementById("chooseFile").files[0]);
       const data = {
-        // id: userinfo.id,
-        description: state.modi.description,
-        image: document.getElementById("chooseFile").files[0],
+        jwtToken: userinfo.jwtToken,
+        formData: formData,
       };
       console.log(data);
-      // store
-      //   .dispatch("root/request_picupload", data)
-      //   .then((response) => {
-      //     console.log(response);
-      //     alert('사진이 등록되었습니다.');
-      //     router.push("/mypage");
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+      store
+        .dispatch("root/request_modiuser", data)
+        .then((response) => {
+          console.log(response);
+          alert("프로필이 수정되었습니다.");
+          router.push("/mypage");
+        })
+        .catch((error) => {
+          alert("프로필 수정 실패");
+          console.error(error);
+        });
     };
 
     return {
