@@ -25,9 +25,9 @@
         <q-btn
           v-if="user_id != state.myId && state.followable"
           class="follow-btn"
-          disable
+          @click="unfollow"
         >
-          팔로우완료
+          언팔로우
         </q-btn>
       </div>
     </div>
@@ -46,6 +46,7 @@ import "../../styles/mypage.scss";
 import { defineComponent, onBeforeMount, reactive, ref } from "vue";
 import Picture from "../mypage/components/picture.vue";
 import store from "../../lib/store";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "feed",
@@ -56,6 +57,7 @@ export default defineComponent({
     user_id: Number,
   },
   setup(props, { emit }) {
+    const router = useRouter();
     const state = reactive({
       user: {},
       followings: "",
@@ -73,7 +75,11 @@ export default defineComponent({
         .catch((error) => {
           console.log(error);
         });
+      followcount();
+      followable();
+    });
 
+    const followcount = () => {
       store
         .dispatch("root/request_followcount", props.user_id)
         .then((response) => {
@@ -84,7 +90,9 @@ export default defineComponent({
         .catch((error) => {
           console.log(error);
         });
+    };
 
+    const followable = () => {
       const data = {
         id: props.user_id,
         jwtToken: JSON.parse(localStorage.getItem("userInfo")).jwtToken,
@@ -99,7 +107,7 @@ export default defineComponent({
         .catch((error) => {
           console.error(error);
         });
-    });
+    };
 
     const following = () => {
       const data = {
@@ -111,16 +119,39 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           alert("팔로우 성공");
+          followcount();
+          followable();
         })
         .catch((error) => {
           console.error(error);
           alert("팔로우 실패");
         });
     };
+
+    const unfollow = () => {
+      const data = {
+        id: props.user_id,
+        jwtToken: JSON.parse(localStorage.getItem("userInfo")).jwtToken,
+      };
+      store
+        .dispatch("root/request_unfollow", data)
+        .then((response) => {
+          console.log(response);
+          alert("언팔로우 성공");
+          followcount();
+          followable();
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("언팔로우 실패");
+        });
+    };
+
     return {
       state,
       onBeforeMount,
       following,
+      unfollow,
     };
   },
 });

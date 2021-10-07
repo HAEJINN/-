@@ -196,3 +196,16 @@ export function request_following(commit: any, data: any) {
     },
   });
 }
+
+// 언팔로우
+export function request_unfollow(commit: any, data: any) {
+  const id = data.id;
+  const jwtToken = data.jwtToken;
+  console.log(id), console.log(jwtToken);
+  const url = `/follow/unfollowing/${id}`;
+  return axios.post(url, id, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  });
+}
