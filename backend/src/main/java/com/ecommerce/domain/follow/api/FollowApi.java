@@ -4,12 +4,10 @@ import com.ecommerce.domain.follow.application.FollowService;
 import com.ecommerce.domain.follow.domain.Follow;
 import com.ecommerce.domain.follow.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -61,6 +59,12 @@ public class FollowApi {
     public ResponseEntity<FollowingSaveResponse> saveFollowings(@AuthenticationPrincipal final String email, @PathVariable Long id) {
         final Follow follow = followService.saveMyFollowing(email, id);
         return ResponseEntity.ok().body(FollowingSaveResponse.ofFollow(follow));
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping("/api/v1/follow/unfollowing/{id}")
+    public void unFollowings(@AuthenticationPrincipal final String email, @PathVariable Long id) {
+        followService.unFollowing(email, id);
     }
 
 }

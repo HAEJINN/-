@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FollowRepository extends JpaRepository<Follow, Long> {
     long countByFollower(User follower);
@@ -15,6 +16,8 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
 
     @EntityGraph(attributePaths = {"follower", "following"})
     List<Follow> findByFollower(User follower);
+
+    Optional<Follow> findByFollowerAndFollowing(User follower, User following);
 
     boolean existsByFollowerAndFollowing(User follower, User following);
 
