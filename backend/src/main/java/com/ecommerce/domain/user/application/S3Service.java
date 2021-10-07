@@ -34,7 +34,7 @@ public class S3Service {
 
         final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
         user.changeProfileImage(fileName)
-                .chageDescription(description);
+                .changeDescription(description);
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, fileObj));
         fileObj.delete();
     }
