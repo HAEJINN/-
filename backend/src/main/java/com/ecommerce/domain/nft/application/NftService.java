@@ -3,8 +3,10 @@ package com.ecommerce.domain.nft.application;
 import com.ecommerce.domain.item.domain.Item;
 import com.ecommerce.domain.item.domain.ItemRepository;
 import com.ecommerce.domain.nft.domain.NftRequest;
+import com.ecommerce.domain.nft.domain.NftTransferRequest;
 import com.ecommerce.domain.user.domain.User;
 import com.ecommerce.domain.user.domain.UserRepository;
+import com.ecommerce.domain.wallet.application.WalletService;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import com.ecommerce.domain.wallet.domain.WalletRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.web3j.businesslogin.BusinessLogin;
 import org.web3j.crypto.Credentials;
-import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
@@ -20,6 +21,7 @@ import org.web3j.tuples.generated.Tuple3;
 import org.web3j.tx.gas.ContractGasProvider;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +35,12 @@ public class NftService {
     private final WalletRepository walletRepository;
     private final BusinessLogin businessLogin;
 
+    private final WalletService walletService;
+
     //    private BusinessLogin businessLogin = credentialsUtils.getInstance();
     public Item createNftToken(NftRequest nftRequest) throws Exception {
+        Optional<Item> searchItem = itemRepository.findByCid(nftRequest.getCid());
+        if(searchItem.isPresent()) return null;
         TransactionReceipt r = businessLogin.mint(nftRequest.getCid(),nftRequest.getWalletAddress()).send();
         BigInteger tokenId = businessLogin.getCount().send();
         int count = Integer.parseInt(String.valueOf(tokenId)) - 1;
@@ -59,14 +65,39 @@ public class NftService {
         return true;
     }
 
+    public boolean transferNft(NftTransferRequest nftTransferRequest) throws Exception {
+        User toUser = userRepository.findById(nftTransferRequest.getUserId()).orElseThrow(IllegalArgumentException::new);
+        Wallet toWallet = walletRepository.findByUser(toUser).orElseThrow(IllegalArgumentException::new);
+
+        walletService.transactionFunction(nftTransferRequest.getFromAddress(),toWallet.getAddress(),nftTransferRequest.getAmount());
+        walletService.getBalance(nftTransferRequest.getFromAddress(),toWallet.getAddress(),nftTransferRequest.getAmount());
+
+        approveAddress(nftTransferRequest.getTokenId(), toWallet.getAddress());
+        businessLogin.transferFrom(nftTransferRequest.getFromAddress(),toWallet.getAddress(),BigInteger.valueOf(nftTransferRequest.getTokenId())).send();
+
+        Item item = itemRepository.findByTokenId(BigInteger.valueOf(nftTransferRequest.getTokenId())).orElseThrow(IllegalArgumentException::new);
+        Wallet wallet = walletRepository.findByAddress(toWallet.getAddress()).orElseThrow(IllegalArgumentException::new);
+        System.out.println(wallet.toString());
+
+        User user = userRepository.findById(wallet.getUser().getId()).orElseThrow(IllegalArgumentException::new);
+        System.out.println(user.toString());
+
+        item.updateUser(user);
+        itemRepository.save(item);
+        return true;
+    }
+
     public boolean transferNft(String fromAddress, String toAddress, int tokenId) throws Exception {
         approveAddress(tokenId,toAddress);
         businessLogin.transferFrom(fromAddress,toAddress,BigInteger.valueOf(tokenId)).send();
+
         Item item = itemRepository.findByTokenId(BigInteger.valueOf(tokenId)).orElseThrow(IllegalArgumentException::new);
         Wallet wallet = walletRepository.findByAddress(toAddress).orElseThrow(IllegalArgumentException::new);
         System.out.println(wallet.toString());
+
         User user = userRepository.findById(wallet.getUser().getId()).orElseThrow(IllegalArgumentException::new);
         System.out.println(user.toString());
+
         item.updateUser(user);
         itemRepository.save(item);
         return true;

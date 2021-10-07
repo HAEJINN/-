@@ -13,4 +13,5 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
     Optional<Item> findByTokenId(BigInteger tokenId);
     @EntityGraph(attributePaths = {"user"})
     List<Item> findByUser(User user);
+    Optional<Item> findByCid(String cid);
 }

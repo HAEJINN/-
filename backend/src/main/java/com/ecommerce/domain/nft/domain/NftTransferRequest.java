@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class NftTransferRequest {
     private String fromAddress;
-    private String toAddress;
     private int tokenId;
+    private String amount;
+    private Long userId;
 }
