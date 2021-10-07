@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,26 +56,11 @@ public class ItemService {
     }
 
     public List<ItemListResponse> findRandom() {
-        int count = 0;
-        List<Item> itemList = itemRepository.findAll();
-        List<ItemListResponse> items = new ArrayList<>();
-        count = itemList.size();
-        int repeat = count<12?count:12;
-        int[] dupl = new int[repeat];
-        for(int i=0; i<repeat; i++){
-            int random = (int)(Math.random()*count);
-            if(i>0){
-                for(int j=0; j<i; j++){
-                    if(random == dupl[j]) {
-                        i--;
-                        continue;
-                    }
-                }
-            }
-            dupl[i] = random;
-            items.add(ItemListResponse.ofItem(itemList.get(random)));
-        }
-        return items;
+        final List<Item> itemList = itemRepository.findAll();
+        Collections.shuffle(itemList);
+        return itemList.subList(0, 12).stream()
+                .map(ItemListResponse::ofItem)
+                .collect(Collectors.toList());
     }
 
     public List<ItemListResponse> findByUserId(Long userId){
