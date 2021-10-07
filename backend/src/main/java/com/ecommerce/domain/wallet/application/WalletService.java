@@ -47,7 +47,7 @@ import static org.web3j.protocol.core.methods.request.Transaction.createFunction
 public class WalletService {
 
     private static final String temp = "0x2bd661bad97160c81eb0704ae29cb97bcbec6f8a";
-    private static final String ADMIN_ETH_ADDRESS = "0xa950f8e8a1d275aac181a6bbeb61767db7fc18f0";
+    private static final String ADMIN_ETH_ADDRESS = "0x22510CbFA46e5dC4b625BD16f854024f2E6114b5";
     private static final String FUNCTION_NAME = "reqEth";
     private static final int COIN_BASE = 0;
     private static final int TO_INDEX = 1;
