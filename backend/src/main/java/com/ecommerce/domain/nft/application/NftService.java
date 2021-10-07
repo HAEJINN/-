@@ -111,22 +111,22 @@ public class NftService {
         ContractGasProvider contractGasProvider = new ContractGasProvider() {
             @Override
             public BigInteger getGasPrice(String contractFunc) {
-                return BigInteger.valueOf(100_000_0L);
+                return BigInteger.valueOf(146L);
             }
 
             @Override
             public BigInteger getGasPrice() {
-                return BigInteger.valueOf(100_000_0L);
+                return BigInteger.valueOf(146L);
             }
 
             @Override
             public BigInteger getGasLimit(String contractFunc) {
-                return BigInteger.valueOf(8000000);
+                return BigInteger.valueOf(30000000);
             }
 
             @Override
             public BigInteger getGasLimit() {
-                return BigInteger.valueOf(8000000);
+                return BigInteger.valueOf(30000000);
             }
         };
         BusinessLogin businessLogin = BusinessLogin.deploy(web3j, cr, contractGasProvider).send();
