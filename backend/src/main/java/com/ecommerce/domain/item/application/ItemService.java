@@ -60,8 +60,18 @@ public class ItemService {
         List<ItemListResponse> items = new ArrayList<>();
         count = itemList.size();
         int repeat = count<12?count:12;
+        int[] dupl = new int[repeat];
         for(int i=0; i<repeat; i++){
             int random = (int)(Math.random()*count);
+            if(i>0){
+                for(int j=0; j<i; j++){
+                    if(random == dupl[j]) {
+                        i--;
+                        continue;
+                    }
+                }
+            }
+            dupl[i] = random;
             items.add(ItemListResponse.ofItem(itemList.get(random)));
         }
         return items;
