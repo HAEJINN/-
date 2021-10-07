@@ -16,4 +16,6 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     @EntityGraph(attributePaths = {"follower", "following"})
     List<Follow> findByFollower(User follower);
 
+    boolean existsByFollowerAndFollowing(User follower, User following);
+
 }
