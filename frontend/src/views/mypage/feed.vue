@@ -2,7 +2,7 @@
   <div>
     <div class="row justify-center items-center bg-secondary q-py-lg">
       <div class="col-lg-2 col-xs-4">
-        <div class="feed-profile"></div>
+        <img :src="state.profileImage" class="feed-profile" />
       </div>
       <div class="col-lg-4 col-xs-7">
         <div class="row justify-center q-mb-md">
@@ -45,7 +45,8 @@
 import "../../styles/mypage.scss";
 import { defineComponent, onBeforeMount, reactive, ref } from "vue";
 import Picture from "../mypage/components/picture.vue";
-import store from "../../lib/store";
+// import store from "../../lib/store";
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -58,12 +59,14 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const router = useRouter();
+    const store = useStore();
     const state = reactive({
       user: {},
       followings: "",
       followers: "",
       myId: JSON.parse(localStorage.getItem("userInfo")).id,
       followable: ref(false),
+      profileImage: "",
     });
     onBeforeMount(() => {
       store
@@ -71,6 +74,9 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           state.user = response.data;
+          state.profileImage =
+            "https://najakwha.s3.ap-northeast-2.amazonaws.com/" +
+            state.user.profileImage;
         })
         .catch((error) => {
           console.log(error);

@@ -1,14 +1,14 @@
 <template>
   <div class="artist-comp col-lg-3 col-xs-6" @click="mvUserCollection">
     <q-avatar class="q-my-md" color="primary" size="160px">
-      <img src="../../../assets/profile.png" />
+      <img :src="state.profileImage" />
     </q-avatar>
     <div>{{ user.name }}</div>
   </div>
 </template>
 <script>
 import "../../../styles/main.scss";
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeMount, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -20,8 +20,15 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter();
+    const state = reactive({
+      profileImage: "",
+    });
+    onBeforeMount(() => {
+      state.profileImage =
+        "https://najakwha.s3.ap-northeast-2.amazonaws.com/" +
+        props.user.profileImage;
+    });
     const mvUserCollection = () => {
-      // alert(props.user.id);
       router.push({
         name: "feed",
         params: {
@@ -31,6 +38,8 @@ export default defineComponent({
     };
 
     return {
+      state,
+      onBeforeMount,
       mvUserCollection,
     };
   },

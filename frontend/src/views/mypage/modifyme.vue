@@ -80,7 +80,20 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           alert("프로필이 수정되었습니다.");
-          router.push("/mypage");
+          const userid = userinfo.id;
+          store
+            .dispatch("root/request_userinfo_byid", userid)
+            .then((response) => {
+              const res = response.data;
+              res.jwtToken = data.jwtToken;
+              localStorage.setItem("userInfo", JSON.stringify(res));
+              // console.log(localStorage.getItem("userInfo"));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+          router.go(-1);
         })
         .catch((error) => {
           alert("프로필 수정 실패");
