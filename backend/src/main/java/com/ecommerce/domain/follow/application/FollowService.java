@@ -78,8 +78,10 @@ public class FollowService {
         return followRepository.save(follow);
     }
 
-    public void followable(final String email, final Long id) {
-
+    public boolean followable(final String email, final Long id) {
+        final User me = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+        final User target = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return followRepository.existsByFollowerAndFollowing(me, target);
     }
 
     private static Follow follower(final User following, final User follower) {
