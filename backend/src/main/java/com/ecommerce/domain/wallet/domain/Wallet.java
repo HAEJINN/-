@@ -61,9 +61,10 @@ public class Wallet {
 
     public Wallet subtractBalance(final BigInteger amount) {
         final BigInteger result = balance.subtract(amount);
-        if(result.longValue() >= 0) {
-            this.balance = result;
+        if(result.longValue() < 0) {
+            throw new IllegalArgumentException();
         }
+        this.balance = result;
         return this;
     }
 
