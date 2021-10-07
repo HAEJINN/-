@@ -50,7 +50,7 @@ public class walletController {
     @PostMapping("/api/v1/wallet/sendeth")
     public ResponseEntity<WalletResponse> reqEth(@RequestBody final PaymentSaveRequest paymentSaveRequest) throws IOException, ExecutionException, InterruptedException {
         walletService.transactionFunction(paymentSaveRequest);
-        final Wallet wallet = walletService.getBalance(paymentSaveRequest.getReceiver());
+        final Wallet wallet = walletService.getBalance(paymentSaveRequest);
         final WalletResponse walletResponse = WalletResponse.ofWallet(wallet);
         return ResponseEntity.ok().body(walletResponse);
     }

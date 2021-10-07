@@ -71,6 +71,28 @@ public class WalletService {
     }
 
     @Transactional
+    public void getBalance(final String fromAddress, final String toAddress, final String amount) throws IOException {
+        EthGetBalance fromAddressGetBalance = web3j.ethGetBalance(fromAddress, DefaultBlockParameterName.LATEST).send();
+        EthGetBalance toAddressGetBalance = web3j.ethGetBalance(toAddress, DefaultBlockParameterName.LATEST).send();
+        BigInteger fromBalance = fromAddressGetBalance.getBalance();
+        BigInteger toBalance = toAddressGetBalance.getBalance();
+
+        final Wallet fromWallet = walletRepository.findByAddress(fromAddress).orElseThrow(IllegalArgumentException::new);
+        final Wallet toWallet = walletRepository.findByAddress(toAddress).orElseThrow(IllegalArgumentException::new);
+        final BigInteger amountValue = new BigInteger(amount);
+
+        fromWallet.subtractBalance(amountValue);
+        toWallet.addBalance(amountValue);
+
+        while (fromBalance.equals(fromWallet.getBalance()) && toBalance.equals(toWallet.getBalance())) {
+            fromAddressGetBalance = web3j.ethGetBalance(fromAddress, DefaultBlockParameterName.LATEST).send();
+            toAddressGetBalance = web3j.ethGetBalance(toAddress, DefaultBlockParameterName.LATEST).send();
+            fromBalance = fromAddressGetBalance.getBalance();
+            toBalance = toAddressGetBalance.getBalance();
+        }
+    }
+
+    @Transactional
     public Wallet getBalance(final String address) throws IOException {
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = walletRepository.findByAddress(address).orElseThrow(IllegalArgumentException::new);
@@ -111,7 +133,7 @@ public class WalletService {
     // 충전 가능
     public void transactionFunction(final PaymentSaveRequest paymentSaveRequest) throws IOException, ExecutionException, InterruptedException {
         unLockAdminAccount();
-        final List<Type> inputParameters = inputParameters(paymentSaveRequest);
+        final List<Type> inputParameters = inputParameters(ADMIN_ETH_ADDRESS, paymentSaveRequest.getReceiver(), paymentSaveRequest.getAmount());
         final List<String> addresses = addressList();
         final Transaction transaction = createFunctionCallTransaction(
                 addresses.get(COIN_BASE),
@@ -120,6 +142,22 @@ public class WalletService {
                 null,
                 valueOf(inputParameters.get(TO_INDEX)),
                 new BigInteger(paymentSaveRequest.getAmount()),
+                encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
+        );
+        web3j.ethSendTransaction(transaction);
+    }
+
+    public void transactionFunction(final String from, final String to, final String amount) throws IOException, ExecutionException, InterruptedException {
+        unLockAdminAccount();
+        final List<Type> inputParameters = inputParameters(from, to, amount);
+        final List<String> addresses = addressList();
+        final Transaction transaction = createFunctionCallTransaction(
+                from,
+                transactionCount(addresses),
+                DEFAULT_GAS,
+                null,
+                valueOf(to),
+                new BigInteger(amount),
                 encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
         );
         web3j.ethSendTransaction(transaction);
@@ -143,11 +181,11 @@ public class WalletService {
         return ethGetTransactionCount.getTransactionCount();
     }
 
-    private List<Type> inputParameters(final PaymentSaveRequest paymentSaveRequest) {
+    private List<Type> inputParameters(final String from, final String to, final String amount) {
         return List.of(
-                new Address(ADMIN_ETH_ADDRESS),
-                new Address(paymentSaveRequest.getReceiver()),
-                new Address(paymentSaveRequest.getAmount())
+                new Address(from),
+                new Address(to),
+                new Address(amount)
         );
     }
 

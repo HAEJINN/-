@@ -27,6 +27,11 @@ public class FollowApi {
         return ResponseEntity.ok().body(followCount);
     }
 
+//    @GetMapping("/api/v1/follow/{id}/followable")
+//    public ResponseEntity<Boolean> followable(@AuthenticationPrincipal final String email, @PathVariable Long id) {
+//        followService.followable(email, id);
+//    }
+
     @GetMapping("/api/v1/follow/followers")
     public ResponseEntity<List<FollowerListResponse>> findMyFollowers(@AuthenticationPrincipal final String email) {
         final List<FollowerListResponse> followers = followService.findMyFollowers(email);
