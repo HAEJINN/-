@@ -9,6 +9,10 @@ import com.ecommerce.domain.user.dto.UserSaveRequest;
 import com.ecommerce.domain.user.dto.UserSaveResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +24,10 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.Collections;
 import java.util.List;
+
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @RequiredArgsConstructor
 @RestController
@@ -63,9 +70,15 @@ public class UserApi {
     }
 
     @GetMapping("api/v1/users/latest")
-    public ResponseEntity<List<UserFindListResponse>> findAllLatest() {
-        final List<UserFindListResponse> latest = userService.findAllLatest();
+    public ResponseEntity<List<UserFindListResponse>> findAllLatest(@PageableDefault(
+            page = 0, size = 4, sort = "createdAt", direction = ASC) final Pageable pageable) {
+        final List<UserFindListResponse> latest = userService.findAllLatest(pageable);
         return ResponseEntity.ok().body(latest);
+    }
+
+    @GetMapping("api/v1/users/random")
+    public ResponseEntity<List<UserFindListResponse>> findAllRandom() {
+        return ResponseEntity.ok().body(userService.findAllRandom());
     }
 
 //    프로필 사진 취소시 말씀해주세요

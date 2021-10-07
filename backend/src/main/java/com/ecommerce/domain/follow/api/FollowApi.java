@@ -19,18 +19,12 @@ public class FollowApi {
 
     private final FollowService followService;
 
-    @GetMapping("/api/v1/follow/followers/count")
-    public ResponseEntity<FollowerCount> countFollower(@AuthenticationPrincipal final String email) {
-        final long count = followService.countFollower(email);
-        final FollowerCount followerCount = new FollowerCount(count);
-        return ResponseEntity.ok().body(followerCount);
-    }
-
-    @GetMapping("/api/v1/follow/followings/count")
-    public ResponseEntity<FollowerCount> countFollowing(@AuthenticationPrincipal final String email) {
-        final long count = followService.countFollowing(email);
-        final FollowerCount followerCount = new FollowerCount(count);
-        return ResponseEntity.ok().body(followerCount);
+    @GetMapping("/api/v1/follow/{userId}/count")
+    public ResponseEntity<FollowCount> countFollower(@PathVariable final Long userId) {
+        final long followerCount = followService.countFollower(userId);
+        final long followingCount = followService.countFollowing(userId);
+        final FollowCount followCount = new FollowCount(followerCount, followingCount);
+        return ResponseEntity.ok().body(followCount);
     }
 
     @GetMapping("/api/v1/follow/followers")

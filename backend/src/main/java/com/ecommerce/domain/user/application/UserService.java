@@ -6,6 +6,7 @@ import com.ecommerce.domain.user.dto.UserFindListResponse;
 import com.ecommerce.domain.wallet.domain.Wallet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,9 +75,8 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public List<UserFindListResponse> findAllLatest() {
-        final PageRequest pageRequest = PageRequest.of(0, 4, Sort.Direction.DESC, "createdAt");
-        return userRepository.findAll(pageRequest).stream()
+    public List<UserFindListResponse> findAllLatest(final Pageable pageable) {
+        return userRepository.findAll(pageable).stream()
                 .map(user -> new UserFindListResponse(user))
                 .collect(Collectors.toList());
     }
@@ -95,4 +96,11 @@ public class UserService {
                 .build();
     }
 
+    public List<UserFindListResponse> findAllRandom() {
+        final List<User> all = userRepository.findAll();
+        Collections.shuffle(all);
+        return all.subList(0, 12).stream()
+                .map(user -> new UserFindListResponse(user))
+                .collect(Collectors.toList());
+    }
 }
