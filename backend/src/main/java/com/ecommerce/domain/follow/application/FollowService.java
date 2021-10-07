@@ -22,14 +22,14 @@ public class FollowService {
     private final UserRepository userRepository;
 
     // 내가 기준이여서 내가 following 인 경우의 수를 센다.
-    public long countFollower(final String email) {
-        final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+    public long countFollower(final Long userId) {
+        final User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
         return followRepository.countByFollowing(user);
     }
 
     // 내가 기준이여서 내가 follower 인 경우의 수를 센다.
-    public long countFollowing(final String email) {
-        final User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+    public long countFollowing(final Long userId) {
+        final User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
         return followRepository.countByFollower(user);
     }
 

@@ -73,7 +73,9 @@ public class WalletService {
         final Web3j web3j = Web3j.build(new HttpService());
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = walletRepository.findByAddress(address).orElseThrow(IllegalArgumentException::new);
-        return wallet.changeBalance(ethGetBalance.getBalance());
+        final BigInteger balance = ethGetBalance.getBalance();
+        System.out.println("태헌님 여기에요 = " + balance);
+        return wallet.changeBalance(balance);
     }
 
     public Wallet getWalletAddressByUser(final String email) {
