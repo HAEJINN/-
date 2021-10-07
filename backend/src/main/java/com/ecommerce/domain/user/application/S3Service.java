@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -28,6 +29,7 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
+    @Transactional
     public void uploadFile(String email, String description, MultipartFile file) {
         final File fileObj = convertMultiPartFileToFile(file);
         final String fileName = fileName(file);
@@ -43,6 +45,7 @@ public class S3Service {
         return System.currentTimeMillis() + "_" + file.getOriginalFilename();
     }
 
+    @Transactional
     public byte[] downloadFile(String fileName) {
         S3Object s3Object = amazonS3Client.getObject(bucket, fileName);
         S3ObjectInputStream inputStream = s3Object.getObjectContent();
