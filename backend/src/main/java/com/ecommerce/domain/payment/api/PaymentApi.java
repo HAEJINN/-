@@ -27,7 +27,7 @@ public class PaymentApi {
     public ResponseEntity<PaymentResponse> save(@AuthenticationPrincipal final String email,
                                                 @RequestBody final PaymentSaveRequest paymentSaveRequest) throws IOException, ExecutionException, InterruptedException {
         walletService.transactionFunction(paymentSaveRequest);
-        final Wallet wallet = walletService.getBalance(paymentSaveRequest.getReceiver());
+        final Wallet wallet = walletService.getBalance(paymentSaveRequest);
         final Payment payment = paymentService.save(email, paymentSaveRequest);
         final PaymentResponse paymentResponse = new PaymentResponse(payment, wallet);
         return ResponseEntity.ok().body(paymentResponse);

@@ -22,7 +22,9 @@ import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.Transfer;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,12 +72,23 @@ public class WalletService {
 
     @Transactional
     public Wallet getBalance(final String address) throws IOException {
-        final Web3j web3j = Web3j.build(new HttpService());
         final EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
         final Wallet wallet = walletRepository.findByAddress(address).orElseThrow(IllegalArgumentException::new);
-        final BigInteger balance = ethGetBalance.getBalance();
-        System.out.println("태헌님 여기에요 = " + balance);
-        return wallet.changeBalance(balance);
+        return wallet.changeBalance(ethGetBalance.getBalance());
+    }
+
+    @Transactional
+    public Wallet getBalance(final PaymentSaveRequest paymentSaveRequest) throws IOException {
+        final String address = paymentSaveRequest.getReceiver();
+        EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
+        final Wallet wallet = walletRepository.findByAddress(address).orElseThrow(IllegalArgumentException::new);
+        final BigInteger walletBalance = wallet.getBalance();
+        final BigInteger amount = new BigInteger(paymentSaveRequest.getAmount());
+        final BigInteger expectedValue = walletBalance.add(amount);
+        while (!ethGetBalance.getBalance().equals(expectedValue)) {
+            ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
+        }
+        return wallet.changeBalance(ethGetBalance.getBalance());
     }
 
     public Wallet getWalletAddressByUser(final String email) {
@@ -109,7 +122,7 @@ public class WalletService {
                 new BigInteger(paymentSaveRequest.getAmount()),
                 encode(new Function(FUNCTION_NAME, inputParameters, emptyList()))
         );
-        web3j.ethSendTransaction(transaction).send();
+        web3j.ethSendTransaction(transaction);
     }
 
     private void unLockAdminAccount() throws IOException {
