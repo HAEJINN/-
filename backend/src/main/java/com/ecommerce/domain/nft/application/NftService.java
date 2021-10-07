@@ -66,6 +66,7 @@ public class NftService {
     }
 
     public boolean transferNft(NftTransferRequest nftTransferRequest) throws Exception {
+        System.out.println("NFT BUY START");
         User toUser = userRepository.findById(nftTransferRequest.getUserId()).orElseThrow(IllegalArgumentException::new);
         Wallet toWallet = walletRepository.findByUser(toUser).orElseThrow(IllegalArgumentException::new);
 
@@ -76,7 +77,7 @@ public class NftService {
         businessLogin.transferFrom(nftTransferRequest.getFromAddress(),toWallet.getAddress(),BigInteger.valueOf(nftTransferRequest.getTokenId())).send();
 
         Item item = itemRepository.findByTokenId(BigInteger.valueOf(nftTransferRequest.getTokenId())).orElseThrow(IllegalArgumentException::new);
-        Wallet wallet = walletRepository.findByAddress(toWallet.getAddress()).orElseThrow(IllegalArgumentException::new);
+        Wallet wallet = walletRepository.findByAddress(nftTransferRequest.getFromAddress()).orElseThrow(IllegalArgumentException::new);
         System.out.println(wallet.toString());
 
         User user = userRepository.findById(wallet.getUser().getId()).orElseThrow(IllegalArgumentException::new);

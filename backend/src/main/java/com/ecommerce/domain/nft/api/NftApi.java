@@ -41,7 +41,7 @@ public class NftApi {
 
     @ApiOperation(value = "Buy NFT")
     @PostMapping("/api/v1/nft/buy")
-    public ResponseEntity<?> buyNft(NftTransferRequest nftTransferRequest) throws Exception {
+    public ResponseEntity<?> buyNft(@RequestBody NftTransferRequest nftTransferRequest) throws Exception {
         boolean result = nftService.transferNft(nftTransferRequest);
         if(result) return new ResponseEntity<>("success",HttpStatus.OK);
         else return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
