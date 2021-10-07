@@ -160,3 +160,29 @@ export function request_followers(commit: any, id: any) {
   const url = `/follow/followers/${id}`;
   return axios.get(url);
 }
+
+// 팔로우 가능여부
+export function request_followable(commit: any, data: any) {
+  const id = data.id;
+  const jwtToken = data.jwtToken;
+  console.log(id), console.log(jwtToken);
+  const url = `/follow/${id}/followable`;
+  return axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  });
+}
+
+// 팔로잉
+export function request_following(commit: any, data: any) {
+  const id = data.id;
+  const jwtToken = data.jwtToken;
+  console.log(id), console.log(jwtToken);
+  const url = `/follow/followings/${id}`;
+  return axios.post(url, id, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  });
+}

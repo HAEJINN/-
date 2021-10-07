@@ -5,13 +5,15 @@
         <div class="user-img"></div>
         <span>{{ follow.name }}</span>
       </div>
-      <div class="mvcollection bg-primary">컬렉션</div>
+      <div class="mvcollection bg-primary" @click="mvcollection">컬렉션</div>
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 import "../../../styles/mypage.scss";
+
 export default defineComponent({
   name: "followitem",
   props: {
@@ -20,8 +22,15 @@ export default defineComponent({
     },
   },
   setup(props) {
+    console.log(props.follow.id);
+    const router = useRouter();
     const mvcollection = () => {
-      // alert(props.follow.id);
+      router.push({
+        name: "feed",
+        params: {
+          user_id: props.follow.id,
+        },
+      });
     };
 
     return {

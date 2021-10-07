@@ -32,10 +32,10 @@ export default defineComponent({
     onBeforeMount(() => {
       const userinfo = JSON.parse(localStorage.getItem("userInfo"));
       store
-        .dispatch("root/request_followers", userinfo.id)
+        .dispatch("root/request_followings", userinfo.id)
         .then((response) => {
           followings.value = response.data;
-          // console.log(followings.value);
+          console.log(followings.value);
         })
         .catch((error) => {
           console.error(error);

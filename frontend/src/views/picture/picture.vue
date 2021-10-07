@@ -47,7 +47,8 @@
               src="../../assets/Najakhwa_logo_red.png"
               fit="contain"
               :ratio="1"
-              class="picture-najakhwa-logo"
+              class="picture-najakhwa-logo q-ml-sm"
+              @click="mvuserCollection"
             ></q-img>
           </q-btn>
         </div>
@@ -119,6 +120,14 @@ export default defineComponent({
         alert("구매를 취소하였습니다.");
       }
     };
+    const mvuserCollection = () => {
+      router.push({
+        name: "feed",
+        params: {
+          user_id: props.collection.userId,
+        },
+      });
+    };
     return {
       slide: ref(1),
       fullscreen: ref(false),
@@ -126,6 +135,7 @@ export default defineComponent({
       state,
 
       buyItem,
+      mvuserCollection,
 
       onBeforeMount,
     };

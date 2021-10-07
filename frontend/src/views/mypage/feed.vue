@@ -15,7 +15,20 @@
             <div class="text-h6">{{ state.followings }}</div>
           </div>
         </div>
-        <div class="follow-btn">팔로우</div>
+        <q-btn
+          v-if="user_id != state.myId && !state.followable"
+          class="follow-btn"
+          @click="following"
+        >
+          팔로우
+        </q-btn>
+        <q-btn
+          v-if="user_id != state.myId && state.followable"
+          class="follow-btn"
+          disable
+        >
+          팔로우완료
+        </q-btn>
       </div>
     </div>
     <div class="bg-accent q-py-lg q-mb-sm text-h4">
@@ -30,7 +43,7 @@
 </template>
 <script>
 import "../../styles/mypage.scss";
-import { defineComponent, onBeforeMount, reactive } from "vue";
+import { defineComponent, onBeforeMount, reactive, ref } from "vue";
 import Picture from "../mypage/components/picture.vue";
 import store from "../../lib/store";
 
@@ -47,9 +60,10 @@ export default defineComponent({
       user: {},
       followings: "",
       followers: "",
+      myId: JSON.parse(localStorage.getItem("userInfo")).id,
+      followable: ref(false),
     });
     onBeforeMount(() => {
-      console.log(props.user_id);
       store
         .dispatch("root/request_userinfo_byid", props.user_id)
         .then((response) => {
@@ -70,10 +84,43 @@ export default defineComponent({
         .catch((error) => {
           console.log(error);
         });
+
+      const data = {
+        id: props.user_id,
+        jwtToken: JSON.parse(localStorage.getItem("userInfo")).jwtToken,
+      };
+      store
+        .dispatch("root/request_followable", data)
+        .then((response) => {
+          console.log(response);
+          state.followable = response.data;
+          console.log(state.followable);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     });
+
+    const following = () => {
+      const data = {
+        id: props.user_id,
+        jwtToken: JSON.parse(localStorage.getItem("userInfo")).jwtToken,
+      };
+      store
+        .dispatch("root/request_following", data)
+        .then((response) => {
+          console.log(response);
+          alert("팔로우 성공");
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("팔로우 실패");
+        });
+    };
     return {
       state,
       onBeforeMount,
+      following,
     };
   },
 });

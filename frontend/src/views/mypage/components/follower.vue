@@ -35,7 +35,7 @@ export default defineComponent({
         .dispatch("root/request_followers", userinfo.id)
         .then((response) => {
           followers.value = response.data;
-          // console.log(followers.value);
+          console.log(followers.value);
         })
         .catch((error) => {
           console.error(error);
