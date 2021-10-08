@@ -13,8 +13,32 @@
 * 사진 등록 및 판매 
 * 팔로우/팔로잉
 
-# 시스템 아키텍처 
+# 사용한 기술 스택
+## [ 프론트 엔드 ]
+
+* Vue3
+* JavaScript 
+* TypeScript
+* Quasar
+
+##  [ 백엔드 ] 
+* JDK 11
+* SpringBoot 2.5.4
+* Swagger 2.9.2
+* google.guava 30.0  
+* web3J 4.5.11
+
+# 구성요소 
+
+## [시스템 아키텍처] 
 
 ![슬라이드1](https://user-images.githubusercontent.com/50267433/136487827-09ba784c-c46c-4222-aeda-af2944cfc2a8.PNG)
 
-# 
+## [ ERD ] 
+![Image Pasted at 2021-10-8 11-36](https://user-images.githubusercontent.com/50267433/136489521-8dc85321-9999-4319-9cbf-7e9e4e45d2e2.png)
+
+## [ 와이어 프레임 ]   
+
+![image](https://user-images.githubusercontent.com/50267433/136489793-930675e5-56b4-46dc-b466-c999ca26a981.png)
+
+
